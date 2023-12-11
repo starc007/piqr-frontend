@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Raleway", sans-serif;
+  /* font-family: "Manrope", sans-serif; */
+  /* font-family: "Clash Display", sans-serif; */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  --primary: #6a41df;
+  @apply text-dark;
+}
+
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+#editor-text a {
+  @apply !text-gray-500 underline;
+}
+
+#editor-text a:hover {
+  @apply !text-blue-800 underline;
+}
+
+#editor-text1 a {
+  @apply underline;
+}
+
+.hover__effect svg {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover__effect:hover svg {
+  transform: translateY(-2px);
+}
+
+.rainbow-gradient {
+  background: linear-gradient(
+    147.08deg,
+    #ffffff 2.2%,
+    rgba(233, 204, 255, 0.42) 23.1%,
+    rgba(251, 247, 213, 0.43) 35.05%,
+    rgba(246, 225, 255, 0.46) 42.1%,
+    rgba(143, 201, 255, 0.45) 55.22%,
+    rgba(255, 255, 255, 0.75) 66.95%,
+    rgba(243, 216, 255, 0.87) 80.2%,
+    #c6f8e5 100.08%,
+    #ffffff 100.09%
+  );
+}
+
+.div__height {
+  height: calc(100vh - 3rem);
+}
+.blur__effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.hide__scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.hide__scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.buttonCustom {
+  /* --font-color: #323232; */
+  /* --bg-color: #fff; */
+  --main-color: #121212;
+  /* border-radius: 5px; */
+  /* border: 2px solid var(--main-color); */
+  /* background-color: var(--bg-color); */
+  box-shadow: -2px 3px var(--main-color);
+  /* font-size: 17px; */
+  /* font-weight: 600; */
+  /* color: var(--font-color); */
+  /* cursor: pointer; */
+  transition: all 0.2s ease-in-out;
+}
+
+.buttonCustom:active {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+
+.buttonCustom:hover {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+
+.divShadowStyle {
+  box-shadow: -3px 4px rgba(0, 0, 0, 1);
+  transition: all 0.2s ease-in-out;
+}
+
+.divShadowStyle:hover {
+  box-shadow: 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(3px, 3px);
+}
+
+.divShadowStyle:active {
+  box-shadow: 0px 0px rgba(0, 0, 0, 1);
+  transform: translate(3px, 3px);
+}
+
+.cardShadowStyle {
+  box-shadow: -3px 4px rgba(0, 0, 0, 1);
+}
+
+.cardShadowStyle2 {
+  box-shadow: -7px 7px #fd8c61;
+}
+
+.modalShadowStyle {
+  box-shadow: -4px 5px rgba(0, 0, 0, 1);
+}
+
+/* /Tooltip */
+
+[class*="react-tooltip__place-top"] > .arrow {
+  transform: none !important;
+}
+
+.linesvg {
+  background-image: url("/line.svg");
+  background-position: 50% 250%;
+  background-repeat: no-repeat;
+  background-size: 20.9375rem;
+  /* background-attachment: scroll; */
+  margin-bottom: -2.5rem;
+  margin-left: -5rem;
+  margin-right: -5rem;
+  padding-bottom: 2.5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  display: inline-block;
+  overflow: visible;
+}
+
+@media screen and (max-width: 767px) {
+  .linesvg {
+    background-position: 50% 75%;
+    background-size: 11.875rem;
+  }
+}
+
+.line2svg {
+  background-image: url("/line2.svg");
+  background-position: 50% 120%;
+  background-repeat: no-repeat;
+  background-size: 16.5625rem;
+  margin-bottom: -3rem;
+  margin-left: -5rem;
+  margin-right: -5rem;
+  padding-bottom: 4rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  display: inline-block;
+}
+
+@media screen and (max-width: 767px) {
+  .line2svg {
+    background-position: 50% 40%;
+    background-size: 9rem;
+  }
+}
+
+.slide-track {
+  animation: scroll 15s linear infinite;
+}
+
+.slide {
+  display: grid;
+  place-items: center;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(calc(-150px * 10));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  @keyframes scroll {
+    0% {
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(calc(-80px * 10));
+    }
+  }
+}

@@ -1,0 +1,256 @@
+export declare global {
+  interface DefaultResponse {
+    msg: string;
+    success?: boolean;
+  }
+
+  interface AuthState {
+    isLoggedIn: boolean;
+  }
+
+  interface User {
+    email?: string;
+    isVerified?: boolean;
+    role?: string;
+    isEmailVerified?: boolean;
+    firstTime?: boolean;
+    _id?: string;
+  }
+
+  interface EndorseTypeResponse {
+    _id?: string;
+    user?: ProfileResponse | null;
+    message?: string;
+    endorseTo?: string;
+  }
+
+  interface UserRes {
+    count: number;
+    profile: ProfileResponse;
+    endorsements: EndorseTypeResponse[];
+  }
+
+  interface ProfileResponse {
+    _id: string;
+    user: string;
+    name: string;
+    username?: string;
+    avatar: string;
+    title?: string;
+    bio?: string;
+    skills: string[];
+    availableFor: string[];
+    category?: string[];
+    location?: {
+      country: string;
+      city: string;
+    };
+    publicId?: string;
+    endorsements: EndorseTypeResponse[];
+    likes: string[];
+    email: string;
+    isVerified: boolean;
+    role: string;
+    firstTime: boolean;
+    savedBy: string[];
+    count: number;
+    folowId: {
+      _id?: string;
+      followers?: string[];
+      following?: string[];
+    };
+  }
+
+  interface UpdateUserProps {
+    name?: string;
+    avatar?: string;
+    username?: string;
+    bio?: string;
+    title?: string;
+    skills?: string[];
+    availableFor?: string[];
+    category?: string[];
+    location?: {
+      country: string;
+      city: string;
+    };
+  }
+  interface WorkExperienceType {
+    companyName: string;
+    position: string;
+    description: string;
+    from: string;
+    to: string;
+    current: boolean;
+    location: string;
+    _id?: string;
+    user?: string;
+  }
+  interface EducationType {
+    _id?: string;
+    user?: string;
+    schoolName: string;
+    degree: string;
+    fieldOfStudy: string;
+    from: string;
+    to: string;
+    current: boolean;
+  }
+
+  interface SocialsType {
+    twitter?: string;
+    instagram?: string;
+    linkedin?: string;
+    behance?: string;
+    dribble?: string;
+    website?: string;
+    youtube?: string;
+    github?: string;
+    medium?: string;
+    fueler?: string;
+  }
+
+  interface SocialsResponse extends SocialsType {
+    _id: string;
+    user: string;
+    updatedAt: string;
+    createdAt: string;
+  }
+
+  interface ActivityType {
+    title: string;
+    description: string;
+    collaborators: ProfileResponse[];
+    date: string;
+    link: string;
+  }
+
+  interface ActivityItemResponse extends ActivityType {
+    _id: string;
+    createdAt: string;
+    updatedAt: string;
+    user: string;
+  }
+
+  interface EndorseType {
+    _id?: string;
+    user?: string;
+    message: string;
+    endorseTo: string;
+  }
+
+  interface MessageType {
+    message: string;
+    uid: string;
+  }
+
+  interface UserResponse {
+    profile: ProfileResponse;
+    education: (EducationType & { _id: string })[];
+    experience: WorkExperienceType[];
+    activities: ActivityItemResponse[];
+    socials: SocialsResponse;
+    followers?: {
+      followers?: string[];
+      following?: string[];
+    };
+  }
+
+  interface MessageListResponse {
+    _id: string;
+    user1: string;
+    user2: string;
+    profile1: ProfileResponse;
+    profile2: ProfileResponse;
+    messageDataId: string;
+    createdAt: number;
+    updatedAt: number;
+    readBy: string | null;
+    sender: string | null;
+    msgResp?: MessageResponse;
+    isJobProposal: boolean;
+  }
+
+  interface MessageResponse {
+    _id?: string;
+    message: string;
+    timestamp: number;
+    sender: User | string;
+  }
+
+  interface CategoryProp {
+    category?: string;
+    page: number;
+    city?: string;
+    offering?: string;
+  }
+
+  interface CommentResponse {
+    _id: string | number;
+    user: ProfileResponse;
+    msg: string;
+    date: number;
+    replies: CommentResponse[];
+  }
+
+  interface IdeaResponse {
+    _id?: string;
+    title: string;
+    description: string;
+    user: ProfileResponse;
+    upvotes: string[];
+    downvotes: string[];
+    count: number;
+    // comments: CommentResponse[];
+    tags: string[];
+    lookingFor: string[];
+    url: string;
+    createdAt: number;
+    updatedAt: number;
+    imgUrl: string[];
+  }
+
+  interface IdeaProps {
+    description: string;
+    tags: string[];
+    imageToPost?: string[];
+  }
+
+  interface ApplicationProps {
+    _id?: string;
+    appliedBy?: ProfileResponse | string;
+    proposal?: string;
+    status?: string;
+    appliedOn?: string;
+  }
+  interface OpportunityProps {
+    _id?: string;
+    user?: ProfileResponse;
+    title: string;
+    description: string;
+    skills: string[];
+    budget: string;
+    contractType: string;
+    payType: string;
+    duration: string;
+    createdAt?: string;
+    applicantId?: {
+      _id?: string;
+      applicants?: ApplicationProps[];
+    };
+  }
+
+  interface INotificationResponse {
+    _id?: string;
+    sender: ProfileResponse[];
+    receiver: string;
+    content: string;
+    type: string;
+    read?: boolean;
+    link?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    isNew?: boolean;
+    postId?: string;
+  }
+}
