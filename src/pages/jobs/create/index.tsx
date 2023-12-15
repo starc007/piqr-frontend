@@ -21,11 +21,12 @@ const projectType = [
 ];
 
 const Paytype = [
+  { label: "Annually", value: "Annually" },
+  { label: "Monthly", value: "Monthly" },
+  { label: "Weekly", value: "Weekly" },
   { label: "Fixed", value: "Fixed" },
   { label: "Negotiable", value: "Negotiable" },
   { label: "Hourly", value: "Hourly" },
-  { label: "Monthly", value: "Monthly" },
-  { label: "Weekly", value: "Weekly" },
 ];
 
 const CreateOpportunity = () => {
@@ -43,8 +44,10 @@ const CreateOpportunity = () => {
     skills: [],
     payType: "",
     budget: "",
-    duration: "",
     contractType: "",
+    workLocation: "remote",
+    recieveApplicationsVia: "sanchar",
+    externalLink: "",
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,14 +56,17 @@ const CreateOpportunity = () => {
       formData.title === "" ||
       formData.description === "" ||
       formData.skills.length === 0 ||
-      formData.payType === "" ||
-      formData.budget === "" ||
-      formData.contractType === ""
+      formData.contractType === "" ||
+      !formData.workLocation ||
+      formData.recieveApplicationsVia === undefined ||
+      (formData.recieveApplicationsVia === "website" &&
+        formData.externalLink === "")
     ) {
       toast.error("Please fill all the required fields");
       return;
     }
     setLoading(true);
+    console.log(formData);
     createOpportunity(formData, router).then(() => {
       setLoading(false);
     });
@@ -90,6 +96,16 @@ const CreateOpportunity = () => {
               setFormData({ ...formData, title: e.target.value })
             }
           />
+          <Select
+            label="Job Type"
+            placeholder="Select Opportunity Type"
+            isRequired
+            options={projectType}
+            onChange={(e: any) =>
+              setFormData({ ...formData, contractType: e.value })
+            }
+          />
+
           {/* <div className="flex md:flex-row flex-col gap-4">
             
 
@@ -102,15 +118,13 @@ const CreateOpportunity = () => {
               }
             />
           </div> */}
-          <Input
+          {/* <Input
             label="Company Name"
             placeholder="Enter company name"
-            isRequired
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
-          />
-
+          /> */}
           <Select
             label="Work Location"
             placeholder="Select Location"
@@ -120,11 +134,10 @@ const CreateOpportunity = () => {
               { label: "Office", value: "office" },
               { label: "Hybrid", value: "hybrid" },
             ]}
-            // onChange={(e: any) =>
-            //   setFormData({ ...formData, location: e.value })
-            // }
+            onChange={(e: any) =>
+              setFormData({ ...formData, workLocation: e.value })
+            }
           />
-
           <TextArea
             label="Job Description"
             placeholder="Enter Detailed job description (add relevant details, links...)"
@@ -148,15 +161,6 @@ const CreateOpportunity = () => {
               setFormData({ ...formData, skills: e.map((i: any) => i.value) })
             }
           />
-          <Select
-            label="Job Type"
-            placeholder="Select Opportunity Type"
-            isRequired
-            options={projectType}
-            onChange={(e: any) =>
-              setFormData({ ...formData, contractType: e.value })
-            }
-          />
           <div className="flex flex-col space-y-4">
             <p className="font-medium text-gray-600">
               How would you like to receive applications?
@@ -170,27 +174,20 @@ const CreateOpportunity = () => {
                   { label: "Sanchar ", value: "sanchar" },
                   { label: "External Website", value: "website" },
                 ]}
-                // onChange={(e: any) =>
-                //   setFormData({ ...formData, applicationType: e.value })
-                // }
+                defaultValue={{ label: "Sanchar", value: "sanchar" } as any}
+                onChange={(e: any) =>
+                  setFormData({ ...formData, recieveApplicationsVia: e.value })
+                }
               />
-
-              <Input
-                label="Email"
-                placeholder="Enter Email"
-                isRequired
-                // onChange={(e) =>
-                //   setFormData({ ...formData, email: e.target.value })
-                // }
-              />
-
-              <Input
-                label="Website"
-                placeholder="Enter Website"
-                // onChange={(e) =>
-                //   setFormData({ ...formData, website: e.target.value })
-                // }
-              />
+              {formData.recieveApplicationsVia === "website" && (
+                <Input
+                  label="Website"
+                  placeholder="Enter Website"
+                  onChange={(e) =>
+                    setFormData({ ...formData, externalLink: e.target.value })
+                  }
+                />
+              )}
             </div>
           </div>
           <div className="flex flex-col space-y-4">
@@ -201,30 +198,20 @@ const CreateOpportunity = () => {
               <Input
                 label="Pay Range (in Rupay)"
                 placeholder="100k - 200k"
-                // isRequired
                 onChange={(e) =>
                   setFormData({ ...formData, budget: e.target.value })
                 }
               />
               <Select
-                label="Pay Type"
+                label="Pay Type "
                 placeholder="Select Pay Type"
-                isRequired
                 options={Paytype}
                 onChange={(e: any) =>
                   setFormData({ ...formData, payType: e.value })
                 }
               />
             </div>
-            {/* <Input
-              label="Project Timeline (for contract/freelance)"
-              placeholder="e.g. 5 days / 1 week / 3-4 days"
-              onChange={(e) =>
-                setFormData({ ...formData, duration: e.target.value })
-              }
-            /> */}
           </div>
-
           <CustomButton
             type="submit"
             variant="primaryNoOutline"

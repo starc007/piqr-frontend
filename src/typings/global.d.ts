@@ -232,8 +232,11 @@ export declare global {
     budget: string;
     contractType: string;
     payType: string;
-    duration: string;
+    duration?: string;
     createdAt?: string;
+    workLocation?: "remote" | "office" | "hybrid";
+    recieveApplicationsVia?: "sanchar" | "website";
+    externalLink?: string;
     applicantId?: {
       _id?: string;
       applicants?: ApplicationProps[];
