@@ -136,9 +136,6 @@ const OpportunityCard = ({
             </div>
           </div>
 
-          <p className="text-xs text-gray-500 mt-3 truncate">
-            {item?.description}
-          </p>
           <div className="flex flex-col mt-4">
             <p className="text-sm">Skills Required:</p>
             <div className="flex flex-wrap gap-2 mt-2">
@@ -172,6 +169,10 @@ const OpportunityCard = ({
               disabled={isApplied}
               onClick={() => {
                 if (!isLoggedIn) return toast.error("Please login first!!");
+
+                if (typeof item?.externalLink === "string") {
+                  return window.open(item?.externalLink, "_blank");
+                }
                 if (profilePercent < 90) {
                   return toast.error(
                     "Please complete your profile first (90%)"
