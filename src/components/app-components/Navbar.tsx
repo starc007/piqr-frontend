@@ -173,7 +173,8 @@ const Navbar = ({
             href={isLoggedIn ? "/feed?tab=new" : "/"}
             className="sm:text-2xl text-xl font-bold"
           >
-            <Image src={logo} className="w-2/3" alt="logo" />
+            {/* <Image src={logo} className="w-2/3" alt="logo" /> */}
+            Piqr
           </Link>
         ) : !isMobile ? (
           <p className="text-xl font-semibold px-5">{subTitle}</p>
@@ -182,7 +183,8 @@ const Navbar = ({
             href={isLoggedIn ? "/feed?tab=new" : "/"}
             className="text-xl font-semibold lg:px-5 px-2"
           >
-            <Image src={logo} className="w-24" alt="logo" />
+            {/* <Image src={logo} className="w-24" alt="logo" /> */}
+            Piqr
           </Link>
         )}
       </div>

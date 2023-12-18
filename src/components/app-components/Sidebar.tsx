@@ -153,8 +153,14 @@ const Sidebar = () => {
     <div className="flex flex-col justify-between w-full h-full mt-4">
       <div className="flex lg:flex-col flex-row justify-between lg:px-0  font-poppins w-full">
         <div className="lg:flex w-full hidden mt-2">
-          <Link href={isLoggedIn ? "/feed?tab=new" : "/"}>
+          {/* <Link href={isLoggedIn ? "/feed?tab=new" : "/"}>
             <Image src={logo} className="w-2/3" alt="logo" />
+          </Link> */}
+          <Link
+            href={isLoggedIn ? "/feed?tab=new" : "/"}
+            className="text-4xl font-bold"
+          >
+            Piqr
           </Link>
         </div>
         <div className="lg:py-8 py-2 lg:space-y-4 flex lg:flex-col flex-row justify-between blur__effect lg:px-0 px-6  font-poppins w-full">
