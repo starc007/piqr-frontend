@@ -65,8 +65,9 @@ const Login = () => {
       </Head>
       <div className="flex">
         <div className="lg:w-1/2 w-full flex flex-col h-screen p-5">
-          <Link href="/">
-            <Image src={logo} className="w-36" alt="logo" />
+          <Link href="/" className="text-4xl font-bold">
+            {/* <Image src={logo} className="w-36" alt="logo" /> */}
+            Piqr
           </Link>
           <div className="w-full flex items-center justify-center div__height">
             <div className="flex flex-col items-center md:w-2/3 w-full">

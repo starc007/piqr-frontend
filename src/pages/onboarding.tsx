@@ -213,8 +213,9 @@ const Onboarding = () => {
       <div className="flex">
         <div className="lg:w-1/2 w-full flex flex-col h-screen p-5">
           <div className="flex items-center justify-between">
-            <Link href="/onboarding">
-              <Image src={logo} className="w-36" alt="logo" />
+            <Link href="/onboarding" className="text-4xl font-bold">
+              {/* <Image src={logo} className="w-36" alt="logo" /> */}
+              Piqr
             </Link>
           </div>
           <div className="w-full flex  justify-center div__height  font-poppins text-sm">
