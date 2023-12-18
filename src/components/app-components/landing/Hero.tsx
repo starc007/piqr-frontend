@@ -17,12 +17,12 @@ const Hero = () => {
       {/* </div> */}
       <div className="container mx-auto">
         <div className="flex justify-between text-dark">
-          {/* <Link href="/" className="text-3xl font-bold">
-            Sanchar
-          </Link> */}
-          <Link href="/">
-            <Image src={logo} className="w-36" alt="logo" />
+          <Link href="/" className="text-4xl font-bold">
+            Piqr
           </Link>
+          {/* <Link href="/">
+            <Image src={logo} className="w-36" alt="logo" />
+          </Link> */}
           <Link
             href="/login"
             className="relative before:shadow-lg flex h-11 w-24 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
@@ -59,7 +59,7 @@ const Hero = () => {
                 className="relative before:shadow-lg flex h-12 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
               >
                 <span className="relative text-base font-semibold text-white">
-                  Join Sanchar
+                  Join Piqr
                 </span>
               </Link>
             </div>

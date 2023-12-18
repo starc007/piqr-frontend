@@ -73,7 +73,7 @@ const CampfireHomePage = () => {
   return (
     <Layout>
       <Head>
-        <title>Share Something Interesting | Sanchar</title>
+        <title>Share Something Interesting | Piqr</title>
         <meta
           name="description"
           content="Share your ideas with the world. Get feedback and collaborate with other like minded people. Find your next co-founder."
@@ -82,7 +82,7 @@ const CampfireHomePage = () => {
           name="keywords"
           content="Talent, Networking, Founders, hackathon partners, students, monetize, network"
         />
-        <meta name="author" content="Sanchar" />
+        <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className="flex min-h-screen w-full">

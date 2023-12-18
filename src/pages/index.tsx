@@ -42,16 +42,16 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>A New Age Professional Network | Sanchar</title>
+        <title>A New Age Professional Network | Piqr</title>
         <meta
           name="description"
-          content="Sanchar is a new age professional network for freelancers, founders, students, and professionals. Join Sanchar today and experience the future of networking."
+          content="Piqr is a new age professional network for freelancers, founders, students, and professionals. Join Piqr today and experience the future of networking."
         />
         <meta
           name="keywords"
-          content="Sanchar, Talent, Networking, Founders, hackathon partners, students,comission free, social, network, discover freelancers,Jobs"
+          content="Piqr, Talent, Networking, Founders, hackathon partners, students,comission free, social, network, discover freelancers,Jobs"
         />
-        <meta name="author" content="Sanchar" />
+        <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
       </Head>
@@ -63,7 +63,7 @@ const Home = () => {
           </p>
           <h2 className="md:text-4xl text-3xl font-bold text-center max-w-2xl mt-6">
             Professionals from Top <span className="line2svg">companies</span>{" "}
-            have joined Sanchar
+            have joined Piqr
           </h2>
         </div>
         <div className="mt-10 flex overflow-x-hidden">
@@ -114,8 +114,7 @@ const Home = () => {
       {/* Testimonials */}
       <section className="max-w-screen-xl mx-auto flex flex-col justify-center p-4 py-20 overflow-x-auto">
         <h2 className="font-semibold text-3xl md:text-4xl">
-          What people who love <span className="text-secondary">Sanchar</span>{" "}
-          say!
+          What people who love <span className="text-secondary">Piqr</span> say!
         </h2>
         <Testimonials />
       </section>
@@ -134,7 +133,7 @@ const Home = () => {
           onClick={() => router.push("/login")}
           cls="w-44 h-14 mt-8 font-semibold"
         >
-          Join Sanchar
+          Join Piqr
         </Button>
       </section>
       <Footer />

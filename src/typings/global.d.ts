@@ -235,7 +235,7 @@ export declare global {
     duration?: string;
     createdAt?: string;
     workLocation?: "remote" | "office" | "hybrid";
-    recieveApplicationsVia?: "sanchar" | "website";
+    recieveApplicationsVia?: "piqr" | "website";
     externalLink?: string;
     applicantId?: {
       _id?: string;

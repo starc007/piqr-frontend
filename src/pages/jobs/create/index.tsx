@@ -46,7 +46,7 @@ const CreateOpportunity = () => {
     budget: "",
     contractType: "",
     workLocation: "remote",
-    recieveApplicationsVia: "sanchar",
+    recieveApplicationsVia: "piqr",
     externalLink: "",
   });
 
@@ -73,7 +73,7 @@ const CreateOpportunity = () => {
   };
 
   return (
-    <PrivateLayout title="Post Opportunity | Sanchar">
+    <PrivateLayout title="Post Opportunity | Piqr">
       <div className="px-4 lg:px-12 mb-20 font-poppins w-full mx-auto flex flex-col min-h-screen border-r">
         <button
           onClick={() => {
@@ -171,10 +171,10 @@ const CreateOpportunity = () => {
                 placeholder="Select.."
                 isRequired
                 options={[
-                  { label: "Sanchar ", value: "sanchar" },
+                  { label: "Piqr ", value: "piqr" },
                   { label: "External Website", value: "website" },
                 ]}
-                defaultValue={{ label: "Sanchar", value: "sanchar" } as any}
+                defaultValue={{ label: "Piqr", value: "piqr" } as any}
                 onChange={(e: any) =>
                   setFormData({ ...formData, recieveApplicationsVia: e.value })
                 }

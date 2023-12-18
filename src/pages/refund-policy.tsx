@@ -18,14 +18,14 @@ const RefundPolicyPage = () => {
             Cancellation and Refund Policy for
             <Link href={"/"} className="font-medium text-primary">
               {" "}
-              sanchar.xyz{" "}
+              piqr.xyz{" "}
             </Link>
           </p>
           <p>
-            At Sanchar, we value the satisfaction and trust of our users. We
+            At Piqr, we value the satisfaction and trust of our users. We
             understand that circumstances may change, and sometimes cancellation
             or refund requests may arise. Below is our policy regarding
-            cancellations and refunds for the services provided on Sanchar.xyz:
+            cancellations and refunds for the services provided on Piqr.xyz:
           </p>
           <h2 className={styles?.subheading}>
             Paid 1:1 Sessions with Experts:
@@ -49,24 +49,24 @@ const RefundPolicyPage = () => {
             periodically for any changes.
           </p>
 
-          <p>Thank you for choosing Sanchar!</p>
+          <p>Thank you for choosing Piqr!</p>
           <p>
             Best regards,
             <br />
-            Sanchar Team
+            Piqr Team
           </p>
           <h2 className={styles?.subheading}>Contact Us</h2>
           <p>
             If you have any questions or concerns about our Privacy Policy,
             please contact us at{" "}
             <a
-              href="mailto:sunil@sanchar@xyz"
+              href="mailto:sunil@piqr@xyz"
               className="text-primary hover:underline underline-offset-4"
               target="_blank"
               rel="noreferrer"
             >
               {" "}
-              sunil@sanchar.xyz{" "}
+              saurabh@piqr.in{" "}
             </a>{" "}
             .
           </p>

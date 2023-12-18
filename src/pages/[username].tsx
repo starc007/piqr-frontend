@@ -121,21 +121,21 @@ const ProfilePage = () => {
   return (
     <Layout>
       <Head>
-        <title>{userDetailsByUsername?.profile?.name} Profile | Sanchar</title>
+        <title>{userDetailsByUsername?.profile?.name} Profile | Piqr</title>
 
         <meta name="description" content="A New Age Professional Network" />
         <meta
           name="keywords"
-          content="Sanchar, Developer, Developer Community, Developer Network, Developer Social Network, Developer Social Media, Developer Social Platform, Developer Social Media Platform, Developer Social Network Platform, Developer Social Media Network"
+          content="Piqr, Developer, Developer Community, Developer Network, Developer Social Network, Developer Social Media, Developer Social Platform, Developer Social Media Platform, Developer Social Network Platform, Developer Social Media Network"
         />
-        <meta name="author" content="Sanchar" />
+        <meta name="author" content="Piqr" />
         <meta name="robots" content="index, follow" />
         <meta name="language" content="English" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* og imagae */}
         <meta
           property="og:title"
-          content="Sanchar | A New Age Professional Network"
+          content="Piqr | A New Age Professional Network"
         />
         <meta property="og:type" content="website" />
         <meta
@@ -143,11 +143,11 @@ const ProfilePage = () => {
           content={
             userDetailsByUsername?.profile?.avatar
               ? userDetailsByUsername?.profile?.avatar
-              : "https://sanchar.xyz/logo.png"
+              : "https://piqr.xyz/logo.png"
           }
         />
-        <meta property="og:site_name" content="Sanchar" />
-        <meta property="og:description" content="Sanchar" />
+        <meta property="og:site_name" content="Piqr" />
+        <meta property="og:description" content="Piqr" />
       </Head>
       {loading && (
         <div className="mt-10 flex justify-center">

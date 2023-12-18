@@ -208,7 +208,7 @@ const Onboarding = () => {
   return (
     <>
       <Head>
-        <title>Onboarding | Sanchar</title>
+        <title>Onboarding | Piqr</title>
       </Head>
       <div className="flex">
         <div className="lg:w-1/2 w-full flex flex-col h-screen p-5">

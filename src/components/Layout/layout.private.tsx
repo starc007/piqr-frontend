@@ -26,7 +26,7 @@ const PrivateLayout: FC<
   return (
     <>
       <Head>
-        <title>{title} | Sanchar</title>
+        <title>{title} | Piqr</title>
       </Head>
       <Layout>{children}</Layout>
     </>

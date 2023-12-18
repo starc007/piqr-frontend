@@ -199,16 +199,16 @@ const Opp = () => {
   return (
     <Layout>
       <Head>
-        <title>Commission Free Opportunities | Sanchar</title>
+        <title>Commission Free Opportunities | Piqr</title>
         <meta
           name="description"
-          content="Find commission free opportunities on Sanchar. Get access to opportunities based on your skills and interests."
+          content="Find commission free opportunities on Piqr. Get access to opportunities based on your skills and interests."
         />
         <meta
           name="keywords"
           content="jobs, gigs, opportunities, free, commission free,"
         />
-        <meta name="author" content="Sanchar" />
+        <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className="py-4 px-4 lg:px-10 mb-16 font-poppins min-h-screen border-r">

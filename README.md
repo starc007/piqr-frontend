@@ -1,4 +1,4 @@
-# Sanchar Frontend
+# Piqr Frontend
 
 ### IMPORTANT :
 

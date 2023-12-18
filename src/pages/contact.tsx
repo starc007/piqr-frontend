@@ -12,7 +12,7 @@ const ContactPage = () => {
 
   const contactDetails = {
     phoneNo: "6367193683",
-    email: "sunil@sanchar.xyz",
+    email: "saurabh@piqr.in",
   };
   return (
     <>

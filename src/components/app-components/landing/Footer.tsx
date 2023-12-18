@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-screen-xl mx-auto flex flex-col p-4">
         <div className="grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
           <div className="md:col-span-2 space-y-4">
-            <p className="font-bold text-2xl">Sanchar</p>
+            <p className="font-bold text-2xl">Piqr</p>
             <p className="text-neutral-400 max-w-sm">
               Empowering Professionals, Connecting Possiblities
             </p>
@@ -44,14 +44,14 @@ const Footer = () => {
           <div className="col-span-1 space-y-4">
             <p className="font-bold ">SOCIALS</p>
             <Link
-              href="https://twitter.com/sanchar_hq"
+              href="https://twitter.com/piqr_hq"
               target="_blank"
               className="block text-neutral-400 hover:text-gray-100"
             >
               Twitter
             </Link>
             <Link
-              href="https://instagram.com/sanchar_hq"
+              href="https://instagram.com/piqr_hq"
               target="_blank"
               className="block text-neutral-400 hover:text-gray-100"
             >
@@ -88,7 +88,7 @@ const Footer = () => {
         </div>
         <hr className="border-[#262626] my-8" />
         <p className="text-center">
-          All rights reserved. Sanchar © 2023. Made with ❤️ in Bharat.
+          All rights reserved. Piqr © 2023. Made with ❤️ in Bharat.
         </p>
       </div>
     </footer>

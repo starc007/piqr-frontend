@@ -18,14 +18,14 @@ interface Props {
 }
 
 const ReferToFriend: FC<Props> = ({ text, oppId, isOpen, closeModal }) => {
-  const url = `www.sanchar.xyz/jobs?type=open&id=${oppId}`;
+  const url = `www.piqr.xyz/jobs?type=open&id=${oppId}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(url);
     toast.success("Link copied to clipboard");
   };
 
-  const txt = `Hey,\nI just found this opportunity on Sanchar 😉. Apply now!! @sanchar_hq`;
+  const txt = `Hey,\nI just found this opportunity on Piqr 😉. Apply now!! @piqr_hq`;
 
   return (
     <Modal isOpen={isOpen} closeModal={closeModal} title="Refer" cls="max-w-lg">

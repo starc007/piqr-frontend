@@ -186,9 +186,7 @@ const Explore = () => {
   return (
     <Layout>
       <Head>
-        <title>
-          Discover and Collaborate with best Professionals | Sanchar
-        </title>
+        <title>Discover and Collaborate with best Professionals | Piqr</title>
         <meta
           name="description"
           content="Discover & Collaborate with the best Professionals around the world"
@@ -197,12 +195,12 @@ const Explore = () => {
           name="keywords"
           content="Talent, Networking, Founders, hackathon partners, students, monetize, network, social media, social network, jobs"
         />
-        <meta name="author" content="Sanchar" />
+        <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#000000" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="apple-mobile-web-app-title" content="Sanchar" />
+        <meta name="apple-mobile-web-app-title" content="Piqr" />
       </Head>
 
       <div className="w-full font-poppins border-r min-h-screen">

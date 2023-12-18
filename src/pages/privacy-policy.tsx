@@ -18,7 +18,7 @@ const PrivacyPolicyPage = () => {
             At{" "}
             <Link href={"/"} className="font-medium text-primary">
               {" "}
-              sanchar.xyz{" "}
+              piqr.xyz{" "}
             </Link>
             , we are committed to protecting your privacy and ensuring that your
             personal information is handled in a safe and responsible way. This
@@ -100,13 +100,13 @@ const PrivacyPolicyPage = () => {
             If you have any questions or concerns about our Privacy Policy,
             please contact us at{" "}
             <a
-              href="mailto:sunil@sanchar@xyz"
+              href="mailto:sunil@piqr@xyz"
               className="text-primary hover:underline underline-offset-4"
               target="_blank"
               rel="noreferrer"
             >
               {" "}
-              sunil@sanchar.xyz{" "}
+              saurabh@piqr.in{" "}
             </a>{" "}
             .
           </p>

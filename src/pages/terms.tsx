@@ -15,20 +15,20 @@ const TermsPage = () => {
         <div className="space-y-4 p-4 md:p-0 text-gray-600">
           <h1 className={styles?.heading}>Terms & Conditions</h1>
           <p>
-            Welcome to Sanchar! Please read these terms and conditions carefully
+            Welcome to Piqr! Please read these terms and conditions carefully
             before using the{" "}
             <Link href={"/"} className="font-medium text-primary">
-              sanchar.xyz{" "}
+              piqr.xyz{" "}
             </Link>
-            website and its services. By accessing or using Sanchar, you agree
-            to be bound by these terms and conditions.
+            website and its services. By accessing or using Piqr, you agree to
+            be bound by these terms and conditions.
           </p>
           <h6 className={styles?.subheading}>Monetization of Skills: </h6>
 
           <ul className="list-disc list-inside">
             <li>
-              Sanchar provides tools and features that enable experts to
-              monetize their skills by offering 1:1 paid sessions.{" "}
+              Piqr provides tools and features that enable experts to monetize
+              their skills by offering 1:1 paid sessions.{" "}
             </li>
 
             <li>
@@ -37,8 +37,8 @@ const TermsPage = () => {
             </li>
             <li>
               {" "}
-              Sanchar is not responsible for any disputes or issues that may
-              arise between users during paid sessions.
+              Piqr is not responsible for any disputes or issues that may arise
+              between users during paid sessions.
             </li>
           </ul>
 
@@ -48,15 +48,15 @@ const TermsPage = () => {
 
           <ul className="list-disc list-inside">
             <li>
-              Sanchar is designed to assist young professionals in building
-              their professional identity.
+              Piqr is designed to assist young professionals in building their
+              professional identity.
             </li>
 
             <li>
               Users can showcase their skills, accomplishments, and experiences
-              as proof of work. Sanchar also allows users to receive
-              endorsements from other professionals to enhance their credibility
-              and reputation.
+              as proof of work. Piqr also allows users to receive endorsements
+              from other professionals to enhance their credibility and
+              reputation.
             </li>
             <li>
               Users are responsible for ensuring the accuracy and authenticity
@@ -70,7 +70,7 @@ const TermsPage = () => {
 
           <ul className="list-disc list-inside">
             <li>
-              Sanchar aims to help young professionals connect with like-minded
+              Piqr aims to help young professionals connect with like-minded
               individuals, including potential co-founders, collaborators,
               mentors, and industry peers.
             </li>
@@ -80,7 +80,7 @@ const TermsPage = () => {
               skills, interests, and location.
             </li>
             <li>
-              Sanchar does not guarantee the availability or suitability of any
+              Piqr does not guarantee the availability or suitability of any
               specific individual for collaboration or partnership.
             </li>
           </ul>
@@ -89,15 +89,15 @@ const TermsPage = () => {
 
           <ul className="list-disc list-inside">
             <li>
-              Sanchar provides a platform for young professionals to explore
+              Piqr provides a platform for young professionals to explore
               various opportunities such as full-time jobs, freelance work,
               internships, and other career-related openings.
             </li>
 
             <li>
-              Users can browse and apply for these opportunities; however,
-              Sanchar does not guarantee the availability, suitability, or
-              outcome of any specific opportunity.
+              Users can browse and apply for these opportunities; however, Piqr
+              does not guarantee the availability, suitability, or outcome of
+              any specific opportunity.
             </li>
             <li>
               Users are responsible for their interactions and agreements with
@@ -109,7 +109,7 @@ const TermsPage = () => {
 
           <ul className="list-disc list-inside">
             <li>
-              Users must be at least 18 years old to use Sanchar and create an
+              Users must be at least 18 years old to use Piqr and create an
               account.
             </li>
 
@@ -119,35 +119,35 @@ const TermsPage = () => {
               account.
             </li>
             <li>
-              Sanchar reserves the right to modify, suspend, or terminate any
-              part of the services at any time without prior notice.
+              Piqr reserves the right to modify, suspend, or terminate any part
+              of the services at any time without prior notice.
             </li>
             <li>
-              Sanchar reserves the right to modify, suspend, or terminate any
-              part of the services at any time without prior notice.
+              Piqr reserves the right to modify, suspend, or terminate any part
+              of the services at any time without prior notice.
             </li>
             <li>
               Users are responsible for complying with all applicable laws and
-              regulations while using Sanchar.
+              regulations while using Piqr.
             </li>
           </ul>
 
           <p>
-            By using Sanchar, you acknowledge and agree to comply with these
-            terms and conditions. If you do not agree with any part of these
-            terms, please refrain from using Sanchar.
+            By using Piqr, you acknowledge and agree to comply with these terms
+            and conditions. If you do not agree with any part of these terms,
+            please refrain from using Piqr.
           </p>
           <p>
             If you have any questions or concerns about our Privacy Policy,
             please contact us at{" "}
             <a
-              href="mailto:sunil@sanchar@xyz"
+              href="mailto:sunil@piqr@xyz"
               className="text-primary hover:underline underline-offset-4"
               target="_blank"
               rel="noreferrer"
             >
               {" "}
-              sunil@sanchar.xyz{" "}
+              saurabh@piqr.in{" "}
             </a>{" "}
             .
           </p>

@@ -103,7 +103,7 @@ const CampfirePostPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Feed | Sanchar </title>
+        <title>Feed | Piqr </title>
         <meta
           name="description"
           content="Discover & Collaborate with the best talent around the world"
@@ -112,12 +112,12 @@ const CampfirePostPage = () => {
           name="keywords"
           content="Talent, Networking, Founders, hackathon partners, students, monetize, network"
         />
-        <meta name="author" content="Sanchar" />
+        <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#000000" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="apple-mobile-web-app-title" content="Sanchar" />
+        <meta name="apple-mobile-web-app-title" content="Piqr" />
       </Head>
       {loading ? (
         <div className="flex justify-center mt-20">

@@ -58,7 +58,7 @@ const MyNetwork = () => {
   }, [dataToRender, validType]);
 
   return (
-    <PrivateLayout title="My Network | Sanchar">
+    <PrivateLayout title="My Network | Piqr">
       {loading ? (
         <div className="flex justify-center mt-10">
           <Loader col="text-dark" />

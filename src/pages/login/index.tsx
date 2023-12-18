@@ -14,7 +14,7 @@ const Login = () => {
   const prod = process.env.NODE_ENV === "production";
 
   const urlToOpen = prod
-    ? "https://api.sanchar.xyz/api/v1/auth/google"
+    ? "https://api.piqr.xyz/api/v1/auth/google"
     : "http://localhost:6969/api/v1/auth/google";
 
   const { isLoggedIn, user, loginLoading, checkSession } = useAppBoundStore(
@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Login | Sanchar</title>
+        <title>Login | Piqr</title>
       </Head>
       <div className="flex">
         <div className="lg:w-1/2 w-full flex flex-col h-screen p-5">
@@ -71,7 +71,7 @@ const Login = () => {
           <div className="w-full flex items-center justify-center div__height">
             <div className="flex flex-col items-center md:w-2/3 w-full">
               <p className="text-4xl text-center mt-2 text-gray-600 font-semibold ">
-                Register/Login to Sanchar
+                Register/Login to Piqr
               </p>
               <p className="mt-4 text-gray-500 text-center">
                 & Collaborate with best talent.

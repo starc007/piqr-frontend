@@ -41,7 +41,7 @@ const HowItWorks = () => {
     <div className="flex flex-col items-center container mx-auto">
       <h2 className="md:text-5xl text-4xl font-bold max-w-2xl text-center">
         Empower your <span className="line2svg">Professional</span> life with
-        Sanchar
+        Piqr
       </h2>
       <div className="flex lg:flex-row flex-wrap flex-col justify-center gap-8 mt-16 w-full">
         {data?.map((item) => (
