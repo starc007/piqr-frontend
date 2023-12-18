@@ -18,7 +18,7 @@ const PrivacyPolicyPage = () => {
             At{" "}
             <Link href={"/"} className="font-medium text-primary">
               {" "}
-              piqr.xyz{" "}
+              piqr.in{" "}
             </Link>
             , we are committed to protecting your privacy and ensuring that your
             personal information is handled in a safe and responsible way. This

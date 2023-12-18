@@ -11,15 +11,15 @@ import { toast } from "react-hot-toast";
 
 const ShareContent = ({ name, _id }: { name: string; _id: string }) => {
   const textToPost = `${name} Posted on Piqr`;
-  const footerText = `\n\nJoin Piqr now to get more posts from ${name} https://piqr.xyz`;
+  const footerText = `\n\nJoin Piqr now to get more posts from ${name} https://piqr.in`;
 
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${textToPost}&url=https://piqr.xyz/feed/${_id} ${footerText}`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${textToPost}&url=https://piqr.in/feed/${_id} ${footerText}`;
 
-  //www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fpiqr.xyz%2Ffeed%2F650ece508bf00506237d5032&mini=true
-  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite?url=https://piqr.xyz/feed/${_id}&mini=true`;
+  //www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fpiqr.in%2Ffeed%2F650ece508bf00506237d5032&mini=true
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite?url=https://piqr.in/feed/${_id}&mini=true`;
 
   const copyLink = () => {
-    navigator.clipboard.writeText(`https://piqr.xyz/feed/${_id}`);
+    navigator.clipboard.writeText(`https://piqr.in/feed/${_id}`);
     toast.success("Link copied");
   };
 

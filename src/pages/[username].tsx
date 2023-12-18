@@ -143,7 +143,7 @@ const ProfilePage = () => {
           content={
             userDetailsByUsername?.profile?.avatar
               ? userDetailsByUsername?.profile?.avatar
-              : "https://piqr.xyz/logo.png"
+              : "https://piqr.in/logo.png"
           }
         />
         <meta property="og:site_name" content="Piqr" />

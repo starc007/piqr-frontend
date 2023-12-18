@@ -18,7 +18,7 @@ const TermsPage = () => {
             Welcome to Piqr! Please read these terms and conditions carefully
             before using the{" "}
             <Link href={"/"} className="font-medium text-primary">
-              piqr.xyz{" "}
+              piqr.in{" "}
             </Link>
             website and its services. By accessing or using Piqr, you agree to
             be bound by these terms and conditions.

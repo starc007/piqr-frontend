@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ReferToFriend: FC<Props> = ({ text, oppId, isOpen, closeModal }) => {
-  const url = `www.piqr.xyz/jobs?type=open&id=${oppId}`;
+  const url = `www.piqr.in/jobs?type=open&id=${oppId}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(url);

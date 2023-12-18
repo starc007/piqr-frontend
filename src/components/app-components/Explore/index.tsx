@@ -38,7 +38,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
   const isFollowing = item?.folowId?.followers?.includes(user?._id!);
 
   const copyProfile = (username: string) => {
-    const url = `https://www.piqr.xyz/${username}`;
+    const url = `https://www.piqr.in/${username}`;
     navigator.clipboard.writeText(url);
     toast.success("Profile link Copied");
   };

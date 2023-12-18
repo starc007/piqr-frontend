@@ -19,7 +19,7 @@ interface Props {
 }
 
 const ShareModal: FC<Props> = ({ text, postId, isOpen, closeModal }) => {
-  const url = `https://piqr.xyz/feed/${postId}`;
+  const url = `https://piqr.in/feed/${postId}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(url);

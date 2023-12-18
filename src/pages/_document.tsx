@@ -12,7 +12,7 @@ export default function Document() {
           rel="stylesheet"
         />
         <meta property="og:image" content="/ogImage.png" />
-        <meta property="og:url" content="https://piqr.xyz" />
+        <meta property="og:url" content="https://piqr.in" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@piqr_hq" />
         <meta name="twitter:creator" content="@piqr_hq" />

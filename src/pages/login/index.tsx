@@ -14,7 +14,7 @@ const Login = () => {
   const prod = process.env.NODE_ENV === "production";
 
   const urlToOpen = prod
-    ? "https://api.piqr.xyz/api/v1/auth/google"
+    ? "https://api.piqr.in/api/v1/auth/google"
     : "http://localhost:6969/api/v1/auth/google";
 
   const { isLoggedIn, user, loginLoading, checkSession } = useAppBoundStore(

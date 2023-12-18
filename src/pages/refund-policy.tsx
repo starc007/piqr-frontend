@@ -18,14 +18,14 @@ const RefundPolicyPage = () => {
             Cancellation and Refund Policy for
             <Link href={"/"} className="font-medium text-primary">
               {" "}
-              piqr.xyz{" "}
+              piqr.in{" "}
             </Link>
           </p>
           <p>
             At Piqr, we value the satisfaction and trust of our users. We
             understand that circumstances may change, and sometimes cancellation
             or refund requests may arise. Below is our policy regarding
-            cancellations and refunds for the services provided on Piqr.xyz:
+            cancellations and refunds for the services provided on piqr.in:
           </p>
           <h2 className={styles?.subheading}>
             Paid 1:1 Sessions with Experts:
