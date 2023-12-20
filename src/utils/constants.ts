@@ -308,3 +308,5 @@ export const SOCIAL_LINKS = [
   "youtube",
   "behance",
 ];
+
+export const NOT_ALLOWED_PEOPLE = ["643e4c2f09a534cc9da1478a"];

@@ -26,6 +26,7 @@ import {
 import { toast } from "react-hot-toast";
 import type { StateCreator } from "zustand";
 import type { AppState } from "../mainStore";
+import { NOT_ALLOWED_PEOPLE } from "@utils";
 
 export interface UserState {
   allUsers: ProfileResponse[];
@@ -145,7 +146,9 @@ export const createUserSlice: StateCreator<AppState, [], [], UserState> = (
               : [...res?.data?.users!];
 
           const filterUser = newuser?.filter(
-            (user) => user?.firstTime === false
+            (user) =>
+              user?.firstTime === false &&
+              NOT_ALLOWED_PEOPLE.includes(user._id) === false
           );
 
           set({
