@@ -11,7 +11,7 @@ const ContactPage = () => {
   };
 
   const contactDetails = {
-    phoneNo: "6367193683",
+    phoneNo: "9458001779",
     email: "saurabh@piqr.in",
   };
   return (
@@ -31,14 +31,14 @@ const ContactPage = () => {
                 {contactDetails.email}
               </a>
             </div>
-            <div className={styles.card}>
+            {/* <div className={styles.card}>
               <h6 className={styles.subheading}>Address</h6>
               <address className={styles.text}>
                 PLOT NO. 18 KHASRA 735/2/1 ,<br />
                 JHALAMAND, JODHPUR , <br />
                 RJ 342005 IN
               </address>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
