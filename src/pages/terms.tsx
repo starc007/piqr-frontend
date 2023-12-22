@@ -10,7 +10,7 @@ const TermsPage = () => {
   };
   return (
     <>
-      <Navbar />
+      <Navbar isHero />
       <div className="max-w-screen-xl mx-auto py-20">
         <div className="space-y-4 p-4 md:p-0 text-gray-600">
           <h1 className={styles?.heading}>Terms & Conditions</h1>

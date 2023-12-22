@@ -17,27 +17,27 @@ import { useEffect, useRef, useState } from "react";
 const c = Object.values(companies);
 
 const Home = () => {
-  const [profiles, setProfiles] = useState([]);
-  const initialLoad = useRef(true);
+  // const [profiles, setProfiles] = useState([]);
+  // const initialLoad = useRef(true);
   const router = useRouter();
 
-  const loadProfiles = async () => {
-    try {
-      const res = await __getTopUsersToShow();
-      if (res.success) {
-        setProfiles(res.data as any);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const loadProfiles = async () => {
+  //   try {
+  //     const res = await __getTopUsersToShow();
+  //     if (res.success) {
+  //       setProfiles(res.data as any);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (initialLoad.current) {
-      initialLoad.current = false;
-      loadProfiles();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (initialLoad.current) {
+  //     initialLoad.current = false;
+  //     loadProfiles();
+  //   }
+  // }, []);
 
   return (
     <>
@@ -91,9 +91,9 @@ const Home = () => {
         <HowItWorks />
       </section>
 
-      <section className="bg-dark lg:py-0 py-16 px-4 lg:px-0 overflow-hidden">
-        <div className="max-w-screen-xl mx-auto flex justify-between items-center lg:flex-row flex-col gap-6">
-          <div className="flex flex-col lg:w-1/2 w-full">
+      <section className="bg-dark  py-16 px-4 lg:px-0 overflow-hidden">
+        <div className="max-w-screen-xl mx-auto flex justify-center items-center lg:flex-row flex-col gap-6">
+          <div className="flex flex-col w-full">
             <p className="font-semibold flex justify-center items-center rounded-full w-36 h-8 text-sm bg-secondary">
               Best Professionals
             </p>
@@ -103,7 +103,7 @@ const Home = () => {
               fields.
             </h2>
           </div>
-          <ShowProfile profiles={profiles} />
+          {/* <ShowProfile profiles={profiles} /> */}
         </div>
       </section>
 

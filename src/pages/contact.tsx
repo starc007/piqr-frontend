@@ -1,4 +1,3 @@
-import { Layout } from "@components";
 import Navbar from "@components/app-components/Navbar";
 import Footer from "@components/app-components/landing/Footer";
 
@@ -16,13 +15,13 @@ const ContactPage = () => {
   };
   return (
     <>
-      <Navbar />
+      <Navbar isHero />
       <div className="max-w-screen-xl mx-auto py-20">
         <div className="pt-9 p-4">
           <h1 className={styles.heading}>{"Let's"} Connect!</h1>
           <div className="mt-8 grid md:grid-cols-2 gap-8">
             <div className={styles.card}>
-              <h6 className={styles.subheading}>React Out</h6>
+              <h6 className={styles.subheading}>Reach Out</h6>
               <p className={styles.text}>+91 {contactDetails.phoneNo}</p>
               <a
                 className={`${styles.text} text-primary`}

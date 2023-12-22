@@ -163,8 +163,8 @@ const Navbar = ({
   return (
     <nav
       className={`flex w-full items-center justify-between z-20 sticky top-0 h-16 blur__effect mx-auto px-2 ${
-        isHero ? "container rounded-full w-full" : "rounded-none"
-      } ${pathname === "/" ? "mt-3" : "mt-0 border-b border-r"}
+        isHero ? "container w-full" : "rounded-none"
+      } ${pathname === "/" ? "mt-3" : "mt-0 "}
       `}
     >
       <div className="flex items-center gap-3">
