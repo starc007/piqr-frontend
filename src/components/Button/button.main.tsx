@@ -5,7 +5,7 @@ import { Loader } from "@components";
 import { ButtonProps } from "./typings";
 
 const cmnCls =
-  "relative flex justify-center disabled:opacity-70 items-center focus:outline-none before:absolute before:inset-0 before:rounded-full  before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95";
+  "flex justify-center disabled:opacity-60 items-center focus:outline-none rounded-full";
 
 const Button: FC<ButtonProps> = ({
   children,
@@ -17,19 +17,15 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const style = {
-    primary: `${cmnCls} before:bg-primary text-white ${cls} `,
-    secondary: `${cmnCls} before:bg-secondary text-white ${cls} `,
-    default: `${cmnCls} ${cls} before:bg-dark`,
-    tertiary: `${cmnCls} bg-white text-primary ${cls} `,
-    primaryNoOutline: `${cmnCls} bg-primary text-white ${cls} `,
+    primary: `${cmnCls} bg-primary text-white ${cls} `,
+    secondary: `${cmnCls} bg-dark text-white ${cls} `,
+    default: `${cmnCls} ${cls} text-dark bg-gray-100`,
+    tertiary: `${cmnCls} ${cls}`,
+    primaryNoOutline: `${cmnCls} bg-primary text-white ${cls}`,
   };
   return (
     <button {...props} disabled={disabled} className={style[variant]}>
-      {isLoading ? (
-        <Loader col={loaderColor} />
-      ) : (
-        <span className="relative text-white">{children}</span>
-      )}
+      {isLoading ? <Loader col={loaderColor} /> : children}
     </button>
   );
 };

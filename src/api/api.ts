@@ -258,7 +258,6 @@ export const __createIdea = (
 export const __getIdeas = (
   params: {
     page: number;
-    filter: string;
   },
   config?: AxiosRequestConfig
 ): Promise<
@@ -266,12 +265,7 @@ export const __getIdeas = (
     totalPages: number;
     ideas: IdeaResponse[];
   }>
-> =>
-  getFetch(
-    `/posts?page=${params.page}&type=${params.filter}`,
-    undefined,
-    config
-  );
+> => getFetch(`/posts?page=${params.page}`, undefined, config);
 
 export const __getIdeasByUser = (
   params: {

@@ -1,5 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { ArrowSVG, DeleteSVG, MessageSVG, ShareSVG } from "@assets/index";
+import {
+  ArrowSVG,
+  CommenetSVG,
+  DeleteSVG,
+  MessageSVG,
+  ShareSVG,
+} from "@assets/index";
 import {
   Button,
   CustomButton,
@@ -135,9 +141,9 @@ const CampfirePostPage = () => {
                 // console.log(path);
                 // router.push(path as string, undefined, { scroll: false });
               }}
-              className="font-semibold text-primary flex items-center gap-1 border-b w-full h-16 px-4 text-lg sticky top-0 bg-white"
+              className="font-medium text-primary flex items-center gap-1 border-b w-full h-16 px-4 text-lg sticky top-0 bg-white"
             >
-              <ArrowSVG className="-rotate-90 w-6" /> go back
+              <ArrowSVG className="-rotate-90 w-6" /> Post
             </button>
 
             <div className=" space-y-4 p-4 md:p-5  mb-6 border-b">
@@ -221,6 +227,39 @@ const CampfirePostPage = () => {
                 </div>
               )}
               <div className="flex justify-between md:gap-4 gap-2 flex-wrap">
+                <Button
+                  onClick={() => {
+                    if (!isLoggedIn)
+                      return toast.error("Please login to comment");
+
+                    commentRef.current?.focus();
+                  }}
+                  cls="w-10 h-10 font-semibold hover:bg-gray-100 !rounded-full"
+                  data-tooltip-id="post-tooltip"
+                  data-tooltip-content="Comment"
+                  variant="tertiary"
+                >
+                  <CommenetSVG className="sm:w-7 w-6 text-gray-600" />
+                </Button>
+
+                {selectedPost?.user?._id !== user?._id || !isLoggedIn ? (
+                  <>
+                    <Button
+                      onClick={() => {
+                        if (!isLoggedIn)
+                          return toast.error("Please login to message");
+                        setSendMessageModal(true);
+                      }}
+                      cls="px-2 h-9 font-semibold hover:bg-gray-100 rounded-full md:text-sm text-xs"
+                      data-tooltip-id="postId-tooltip"
+                      data-tooltip-content="Message"
+                      variant="tertiary"
+                    >
+                      <MessageSVG className="w-6 text-gray-500" />
+                    </Button>
+                  </>
+                ) : null}
+
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => {
@@ -247,28 +286,12 @@ const CampfirePostPage = () => {
                   >
                     <ArrowSVG className="w-5" />
                   </button>
-                  {/* <p className="text-center"> {selectedPost?.count} </p> */}
+
                   <p className="text-center">
                     {" "}
                     {selectedPost?.upvotes?.length || 0}{" "}
                   </p>
                 </div>
-                {selectedPost?.user?._id !== user?._id || !isLoggedIn ? (
-                  <>
-                    <CustomButton
-                      onClick={() => {
-                        if (!isLoggedIn)
-                          return toast.error("Please login to message");
-                        setSendMessageModal(true);
-                      }}
-                      cls="px-2 h-9 font-semibold hover:bg-gray-200/70 rounded-full md:text-sm text-xs"
-                      data-tooltip-id="postId-tooltip"
-                      data-tooltip-content="Message"
-                    >
-                      <MessageSVG className="w-6" />
-                    </CustomButton>
-                  </>
-                ) : null}
 
                 <ShareContent
                   name={selectedPost?.user?.name!}
@@ -296,12 +319,12 @@ const CampfirePostPage = () => {
                       className="rounded-full object-cover md:w-10 md:h-10 h-9 w-9"
                     />
                   </Link>
-                  <div className="w-3/4">
+                  <div className="w-4/5">
                     <TextArea
                       placeholder="Post your reply..."
                       value={commentAdd}
                       onChange={(e) => setCommentAdd(e.target.value)}
-                      cls="w-full resize-none border-none placeholder:text-gray-500 px-0"
+                      cls="w-full resize-none border-none placeholder:text-gray-500 !px-1"
                       ref={commentRef}
                       rows={1}
                     />

@@ -29,20 +29,19 @@ const MeetNewPeople: React.FC<MeetNewPeopleProps> = ({ showNavbar = true }) => {
   }));
 
   React.useEffect(() => {
-    if (isLoggedIn && firstTime.current) {
+    if (firstTime.current) {
       getNewUserDailyToMeet().then(() => {
         firstTime.current = false;
       });
     }
-  }, [isLoggedIn, getNewUserDailyToMeet]);
+  }, [getNewUserDailyToMeet]);
 
   const userId = user?._id;
 
   return (
     <div className="lg:block hidden w-1/2 border-r">
-      {!isMobile && showNavbar && <Navbar />}
-      {isLoggedIn ? (
-        <div className="sticky top-16 font-poppins">
+      {/* {isLoggedIn ? (
+        <div className="sticky top-0">
           <p className="border-b p-3">
             <span className="font-semibold text-primary">
               Today&apos;s 4 New People{" "}
@@ -58,13 +57,25 @@ const MeetNewPeople: React.FC<MeetNewPeopleProps> = ({ showNavbar = true }) => {
           </div>
         </div>
       ) : (
-        <div className="sticky top-16 font-poppins text-center p-4 text-lg font-medium border-b">
-          <Link href="/login" className="text-primary mr-2">
-            LOGIN
-          </Link>
-          <p>to meet best talent everyday</p>
+        <div className="p-4 sticky top-0">
+          <div className="p-4 text-lg font-medium rounded-xl bg-gray-100">
+            <Link href="/login" className="text-primary mr-2">
+              LOGIN
+            </Link>
+            <p>to meet best talent everyday</p>
+          </div>
         </div>
-      )}
+      )} */}
+      <div className="sticky top-0">
+        <p className="border-b p-3 font-medium">Meet new people daily 🎉</p>
+        <div className="flex flex-col  ">
+          {(dailyNewUsers || []).length > 0 &&
+            dailyNewUsers
+              ?.filter((us) => us._id !== userId)
+              ?.slice(0, 4)
+              .map((user) => <RecommedPeople key={user._id} {...user} />)}
+        </div>
+      </div>
     </div>
   );
 };

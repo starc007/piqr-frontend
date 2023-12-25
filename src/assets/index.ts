@@ -19,7 +19,6 @@ import FilterSVG from "./svg/filter.svg";
 import CameraSVG from "./svg/camera.svg";
 import PlusCircleSVG from "./svg/plus_circle.svg";
 import LinkTilted from "./svg/link_tilted.svg";
-import LogoutSVG from "./svg/logout.svg";
 import UsersSVG from "./svg/users.svg";
 import EditSVG from "./svg/edit1.svg";
 import DeleteSVG from "./svg/delete.svg";
@@ -62,7 +61,12 @@ import ReportSVG from "./svg/report.svg";
 import AvatarSVG from "./svg/avatar.svg";
 import TimeSVG from "./svg/time.svg";
 
+import logoutIcon from "./icons/logout.png";
+import viewIcon from "./icons/view.png";
+
 export {
+  viewIcon,
+  logoutIcon,
   logo,
   TimeSVG,
   SaveSVG,
@@ -108,7 +112,6 @@ export {
   CameraSVG,
   PlusCircleSVG,
   LinkTilted,
-  LogoutSVG,
   UsersSVG,
   EditSVG,
   DeleteSVG,

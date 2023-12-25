@@ -245,8 +245,8 @@ const AddProfile = () => {
             onClick={handleSubmit}
             isLoading={loading}
             disabled={loading || !isChanged}
-            variant="primary"
-            cls="w-32 h-10 text-sm rounded-lg flex"
+            variant="secondary"
+            cls="w-32 h-10 text-sm flex"
           >
             Save changes
           </Button>

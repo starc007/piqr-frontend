@@ -8,11 +8,11 @@ import {
   DropdownProps,
 } from "./typings";
 
-const Dropdown = ({ children }: DropdownProps) => {
+const Dropdown = ({ children, cls }: DropdownProps) => {
   return (
     <Menu
       as="div"
-      className="relative flex items-center justify-center text-left"
+      className={`relative flex items-center justify-center text-left ${cls}`}
     >
       {children}
     </Menu>
@@ -21,10 +21,7 @@ const Dropdown = ({ children }: DropdownProps) => {
 
 const DropdownButton = ({ children, cls, ...props }: DropdownButtonProps) => {
   return (
-    <Menu.Button
-      className={`hover:bg-gray-100 transition duration-300 p-2 rounded-full ${cls}`}
-      {...props}
-    >
+    <Menu.Button className={`transition duration-300 ${cls}`} {...props}>
       {children}
     </Menu.Button>
   );
@@ -47,7 +44,7 @@ const DropdownContent = ({
       leaveTo="transform opacity-0 scale-95"
     >
       <Menu.Items
-        className={`absolute text-gray-700 font-medium  border-none right-0 mt-4 z-10 top-6 origin-top-right rounded-md bg-white shadow-xl ring-1 ring-gray-300 focus:outline-none ${cls}`}
+        className={`absolute text-gray-700 font-medium  border-none right-0 origin-top-right rounded-md ring-1 ring-gray-200 focus:outline-none ${cls}`}
       >
         {children}
       </Menu.Items>

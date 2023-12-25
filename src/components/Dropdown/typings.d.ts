@@ -1,5 +1,6 @@
 export type DropdownProps = {
   children: React.ReactNode;
+  cls?: string;
 };
 
 export type DropdownButtonProps = {

@@ -209,10 +209,10 @@ const Explore = () => {
             {navTabs.map((item) => {
               if (item.id === 2 && !isLoggedIn) return null;
               return (
-                <CustomButton
+                <Button
                   key={item.id}
-                  cls={`font-medium text-sm gap-1 px-4 h-10 rounded-lg transition duration-300 ${
-                    type === item.slug && "bg-gray-100"
+                  cls={`font-medium text-sm gap-1 px-4 h-10 rounded-full transition duration-300 ${
+                    type === item.slug ? "bg-gray-100" : "bg-transparent"
                   }`}
                   onClick={() => {
                     router.push({
@@ -224,11 +224,11 @@ const Explore = () => {
                 >
                   {item.icon}
                   {item.name}
-                </CustomButton>
+                </Button>
               );
             })}
           </div>
-          <div className="lg:flex hidden w-1/2">{!isMobile && <Navbar />}</div>
+          {/* <div className="lg:flex hidden w-1/2">{!isMobile && <Navbar />}</div> */}
         </div>
         <div className="flex gap-5 max-w-7xl mx-auto md:px-6 lg:px-12 px-3 pt-5 pb-10 ">
           {type === "saved" && isLoggedIn ? (
@@ -259,9 +259,11 @@ const Explore = () => {
               <div className="flex justify-between mt-5">
                 <div className="flex flex-wrap gap-3">
                   {filterCategories.map((category) => (
-                    <CustomButton
-                      cls={`border text-xs font-medium rounded-xl  px-3 h-9 text-dark/90 hover:bg-gray-100 transition duration-300 ease-out ${
-                        categoryObj.category === category.value && "bg-gray-100"
+                    <Button
+                      cls={`border text-xs font-medium !rounded-full  px-3 h-9 text-dark/90 hover:bg-gray-100 transition duration-300 ease-out ${
+                        categoryObj.category === category.value
+                          ? "bg-gray-100"
+                          : "bg-transparent"
                       }`}
                       key={category.id}
                       onClick={() => {
@@ -281,7 +283,7 @@ const Explore = () => {
                       }}
                     >
                       {category.name}
-                    </CustomButton>
+                    </Button>
                   ))}
                 </div>
                 {isLoggedIn ? <FilterOptions /> : null}

@@ -201,13 +201,14 @@ export declare global {
     upvotes: string[];
     downvotes: string[];
     count: number;
-    // comments: CommentResponse[];
+
     tags: string[];
     lookingFor: string[];
     url: string;
     createdAt: number;
     updatedAt: number;
     imgUrl: string[];
+    commentsCount: number;
   }
 
   interface IdeaProps {

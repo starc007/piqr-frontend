@@ -10,20 +10,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        monaSans: ["var(--font-monaSans)"],
+      },
+
       colors: {
         // primary: "#2efb79", //green
         // primary: "#00DFA2",
         primary: "#2E98FB",
         secondary: "#2efb79",
-        // secondary: "#FFC124",
-        // secondary: "#FD8C61",
-        // tertiary: "#CE65FF",
         dark: "#121212",
-        // yellow: "#FFB320",
-        // dark: "#0D1619",
-        // primBlue: "#2E98FB",
         lightYellow: "#FEE0AA",
-        // lightGray: "#FAFAFA",
         lightGray: "#F8F7F3",
         lightGray2: "#E4E2DE",
         secondGray: "#ECECEC",

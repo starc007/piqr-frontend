@@ -21,7 +21,7 @@ const Feed = dynamic(() => import("@components/app-components/Feed"), {
 });
 
 const skillCls =
-  "py-1.5 px-4 text-sm font-medium text-gray-800 border border-gray-200 duration-200 ease-out rounded-full hover:border-secondary cursor-pointer";
+  "py-1.5 px-4 text-sm font-medium text-gray-800 border border-gray-200 duration-200 ease-out rounded-full cursor-pointer";
 
 const tabCmnClass =
   "flex items-center justify-center focus:outline-none text-sm text-gray-700 gap-2 pb-3 w-full text-center border-b ui-selected:border-primary ui-selected:fill-primary  ui-selected:text-primary font-semibold";

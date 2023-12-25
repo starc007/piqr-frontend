@@ -1,22 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  Link,
-  Dropdown,
-  DropdownButton,
-  DropdownContent,
-  DropdownItem,
-  Button,
-  Image,
-  CustomButton,
-} from "@components";
+import { Link, Button } from "@components";
 import { useAppBoundStore } from "@store";
-import { useCallback, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useRouter } from "next/router";
 import useAnalyticsEventTracker from "@hooks/useAnalyticsEventTracker";
 
-import { SocketSDK } from "src/services/socketController";
 import { useMediaQuery } from "src/utils/useMediaQuery";
-import { logo } from "@assets/index";
+import ProfileDropdown from "./ProfileDropdown";
 
 const Navbar = ({
   isHero = false,
@@ -31,7 +21,6 @@ const Navbar = ({
   const {
     isLoggedIn,
     user,
-    logout,
     checkSession,
     loginLoading,
     getMessageList,
@@ -51,7 +40,6 @@ const Navbar = ({
   } = useAppBoundStore((state) => ({
     isLoggedIn: state.isLoggedIn,
     user: state.user,
-    logout: state.logout,
     checkSession: state.checkSession,
     loginLoading: state.loginLoading,
     getMessageList: state.getMessageList,
@@ -72,97 +60,13 @@ const Navbar = ({
 
   const router = useRouter();
 
-  const url = router.pathname;
-
-  useEffect(() => {
-    if (!isLoggedIn && loginLoading) checkSession();
-
-    if (user?.firstTime) {
-      router.push("/onboarding");
-    }
-
-    if (isLoggedIn && initialLoad.current) {
-      initialLoad.current = false;
-      if (isLoggedIn && url === "/") {
-        router.push("/feed?tab=new");
-      }
-
-      if (!isUserDetailsFetched) {
-        setNotificationsLoading(true);
-        Promise.all([
-          getUser(),
-          getMessageList(),
-          getFollowersFollowingIds(),
-          fetchNotifications(0),
-        ])
-          .then(() => {
-            setIsUserDetailsFetched(true);
-            setNotificationsLoading(false);
-          })
-          .catch(() => {
-            setNotificationsLoading(false);
-          });
-      }
-    }
-
-    // if (url !== "/user/inbox" && selectedChat !== null) {
-    //   setSelectedChat(null);
-    // }
-  }, [isLoggedIn, loginLoading, user, url]);
-
-  const isSocketConnected = SocketSDK.isConnected();
-
-  useEffect(() => {
-    if (user && !isSocketConnected) {
-      const renderSocket = async () => {
-        await SocketSDK.init();
-      };
-      renderSocket();
-    }
-  }, [user, isSocketConnected]);
-
-  const recieveResponse = useCallback(
-    (data: MessageListResponse) => {
-      if (selectedChat?.id === data.messageDataId) {
-        let fileteredList = messageList?.filter((item) => {
-          if (item?.messageDataId !== data.messageDataId) {
-            return item;
-          }
-        });
-        setMessageList([data, ...fileteredList!]);
-        setUserMessages(data?.msgResp!);
-        if (data?.readBy?.toString() !== user?._id?.toString()) {
-          updateReadBy(data?.messageDataId!).then(() => {});
-        }
-      } else {
-        const isAlreadyNotified = notifications?.find((item) => {
-          if (item?._id === data._id) {
-            return item;
-          }
-        });
-        if (!isAlreadyNotified) {
-          const newData = [data, ...notifications!];
-          setNotifications(newData);
-        }
-      }
-    },
-    [selectedChat]
-  );
-
-  useEffect(() => {
-    if (isSocketConnected) {
-      SocketSDK.listenNotification();
-      SocketSDK.listenNewMessage(recieveResponse);
-    }
-  }, [isSocketConnected, recieveResponse]);
-
   const pathname = router.pathname;
 
   const gaEvents = useAnalyticsEventTracker("Navbar");
 
   return (
     <nav
-      className={`flex w-full items-center justify-between z-20 sticky top-0 h-16 blur__effect mx-auto px-2 ${
+      className={`flex w-full items-center justify-between z-20 lg:border-none border sticky top-0 h-16 blur__effect mx-auto px-2 ${
         isHero ? "container w-full" : "rounded-none"
       } ${pathname === "/" ? "mt-3" : "mt-0 "}
       `}
@@ -170,7 +74,7 @@ const Navbar = ({
       <div className="flex items-center gap-3">
         {isHero ? (
           <Link
-            href={isLoggedIn ? "/feed?tab=new" : "/"}
+            href={isLoggedIn ? "/feed" : "/"}
             className="sm:text-2xl text-xl font-bold"
           >
             {/* <Image src={logo} className="w-2/3" alt="logo" /> */}
@@ -180,7 +84,7 @@ const Navbar = ({
           <p className="text-xl font-semibold px-5">{subTitle}</p>
         ) : (
           <Link
-            href={isLoggedIn ? "/feed?tab=new" : "/"}
+            href={isLoggedIn ? "/feed" : "/"}
             className="text-xl font-semibold lg:px-5 px-2"
           >
             {/* <Image src={logo} className="w-24" alt="logo" /> */}
@@ -201,53 +105,28 @@ const Navbar = ({
                 Post a Job
               </Button>
             ) : null}
-            <Dropdown>
-              <DropdownButton>
+            <ProfileDropdown
+              extraCls="w-40 py-2 mt-4 z-10 top-6 bg-white shadow-xl"
+              btnChildren={
                 <img
                   className="rounded-full border w-7 h-7 object-cover object-center"
                   src={user?.avatar}
                   alt=""
                 />
-              </DropdownButton>
-              <DropdownContent cls="w-40 py-2">
-                <DropdownItem
-                  className="hover:bg-gray-100 w-full"
-                  onClick={() => router.push("/user/profile")}
-                >
-                  <span className="text-sm">Edit Profile</span>
-                </DropdownItem>
-                <DropdownItem
-                  className="hover:bg-gray-100"
-                  onClick={() => router.push(`/${user?.username}`)}
-                >
-                  <span className="text-sm">View Profile</span>
-                </DropdownItem>
-                <DropdownItem>
-                  <Button
-                    onClick={() => {
-                      logout().then(() => router.push("/login"));
-                      gaEvents("logout_cta", "click_logout");
-                    }}
-                    cls="w-full text-sm h-9"
-                    variant="primary"
-                  >
-                    Logout
-                  </Button>
-                </DropdownItem>
-              </DropdownContent>
-            </Dropdown>
+              }
+            />
           </>
         ) : (
-          <CustomButton
+          <Button
             variant="secondary"
-            cls="md:w-24 w-20 md:h-10 h-8 font-semibold"
+            cls="md:w-24 w-20 md:h-10 h-9"
             onClick={() => {
               router.push("/login");
               gaEvents("login_cta", "click_login");
             }}
           >
             Login
-          </CustomButton>
+          </Button>
         )}
       </div>
     </nav>

@@ -94,10 +94,10 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
             </CustomButton>
           ) : null}
           <Dropdown>
-            <DropdownButton cls="border rounded-full h-10 w-10">
+            <DropdownButton cls="border rounded-full h-10 w-10 flex justify-center items-center">
               <ShareSVG className="w-5" />
             </DropdownButton>
-            <DropdownContent cls="w-40 mt-6 h-10 text-sm flex justify-center items-center">
+            <DropdownContent cls="w-40 mt-6 h-10 text-sm flex justify-center items-center z-10 top-6 bg-white shadow-xl">
               <DropdownItem
                 onClick={() => copyProfile(item.username as string)}
               >

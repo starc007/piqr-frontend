@@ -13,7 +13,7 @@ import {
   locationIcon,
   pinIcon,
 } from "@assets/index";
-import { CustomButton, Link, CustomTooltip } from "@components";
+import { CustomButton, Link, CustomTooltip, Button } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { formatURL } from "@utils";
 import Image from "next/image";
@@ -112,7 +112,7 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
     : [];
 
   return (
-    <div className="rounded-2xl p-4 flex flex-col gap-3 sm:border  border-gray-200 lg:w-80 w-full h-min md:sticky md:top-20">
+    <div className="rounded-2xl p-4 flex flex-col gap-3 sm:border  border-gray-200 lg:w-80 w-full h-min md:sticky md:top-10">
       <CustomTooltip id="msg-tooltip" />
       {/* Profile Picture */}
       <div className="flex justify-center">
@@ -136,7 +136,9 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
       </div>
       <div className="flex flex-col items-center">
         <div className="flex items-center justify-center gap-2 text-sm text-gray-800 font-medium">
-          <CustomButton
+          <Button
+            disabled={!isLoggedIn}
+            variant="tertiary"
             onClick={() =>
               router.replace(
                 `/network/${userDetailsByUsername?.profile?._id}?type=following`
@@ -144,15 +146,17 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
             }
           >
             {followData.following?.length} following
-          </CustomButton>
+          </Button>
           ·
-          <CustomButton
+          <Button
+            variant="tertiary"
+            disabled={!isLoggedIn}
             onClick={() =>
               router.replace(`/network/${userDetailsByUsername?.profile?._id}`)
             }
           >
             {followData.followers?.length} followers
-          </CustomButton>
+          </Button>
         </div>
       </div>
       <hr className="my-2" />
@@ -171,7 +175,8 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
       ) : null}
       {user?._id !== userDetailsByUsername?.profile?._id ? (
         <div className="border-t pt-4 mt-2 w-full flex justify-center items-center gap-5">
-          <CustomButton
+          <Button
+            variant="tertiary"
             data-tooltip-id="msg-tooltip"
             data-tooltip-content="Message"
             onClick={() =>
@@ -180,17 +185,15 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
             cls={`border font-medium rounded-full h-11 w-11 gap-2 hover:bg-gray-100`}
           >
             <MessageSVG className="w-5" />
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             onClick={() => {
               isLoggedIn ? FollowUnfollow() : toast.error("Please login!");
             }}
             cls={`rounded-full group font-medium h-11 text-sm w-40 transition duration-300 ${
-              isFollowing
-                ? "bg-dark/10  hover:text-red-500 hover:bg-red-100"
-                : "bg-dark  text-white hover:bg-dark/80"
+              isFollowing ? "hover:text-red-500 hover:bg-red-100" : ""
             }`}
-            variant="default"
+            variant={isFollowing ? "default" : "secondary"}
           >
             <span className={isFollowing ? "group-hover:hidden block" : ""}>
               {isFollowing ? "Following" : "+ Follow"}
@@ -198,7 +201,7 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
             {isFollowing ? (
               <span className="group-hover:block hidden">Unfollow</span>
             ) : null}
-          </CustomButton>
+          </Button>
         </div>
       ) : null}
       <hr className="my-2" />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, CustomButton, Image } from "@components";
+import { Link, CustomButton, Image, Button } from "@components";
 import LoginBackground from "@appComp/LoginBackground";
 
 import { GoogleSVG, logo } from "@assets";
@@ -32,7 +32,7 @@ const Login = () => {
       if (user?.firstTime) {
         router.push("/onboarding");
       } else {
-        router.push("/feed?tab=new");
+        router.push("/feed");
       }
     }
     if (!isLoggedIn && !loginLoading) {
@@ -77,7 +77,7 @@ const Login = () => {
               <p className="mt-4 text-gray-500 text-center">
                 & Collaborate with best talent.
               </p>
-              <CustomButton
+              <Button
                 onClick={() => {
                   setLoading(true);
                   gaEvents("sign_in_with_google", "click_sign_in_with_google");
@@ -90,7 +90,7 @@ const Login = () => {
                 cls="h-14 mt-8 md:text-lg font-medium gap-2 md:w-96 px-6 w-72"
               >
                 <GoogleSVG /> Sign in with Google
-              </CustomButton>
+              </Button>
             </div>
           </div>
         </div>

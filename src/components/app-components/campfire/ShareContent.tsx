@@ -26,9 +26,9 @@ const ShareContent = ({ name, _id }: { name: string; _id: string }) => {
   return (
     <Dropdown>
       <DropdownButton cls="z-0">
-        <ShareSVG className="sm:w-6 w-5" />
+        <ShareSVG className="w-5 text-gray-500 hover:text-primary" />
       </DropdownButton>
-      <DropdownContent cls="w-36 py-2">
+      <DropdownContent cls="w-36 py-2 mt-4 z-10 top-6 bg-white shadow-xl">
         <DropdownItem className="hover:bg-gray-100 w-full text-sm ">
           <Link
             href={twitterUrl}

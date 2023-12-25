@@ -112,12 +112,12 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="max-w-screen-xl mx-auto flex flex-col justify-center p-4 py-20 overflow-x-auto">
+      {/* <section className="max-w-screen-xl mx-auto flex flex-col justify-center p-4 py-20 overflow-x-auto">
         <h2 className="font-semibold text-3xl md:text-4xl">
           What people who love <span className="text-secondary">Piqr</span> say!
         </h2>
         <Testimonials />
-      </section>
+      </section> */}
 
       <section className=" bg-lightGray px-4 md:px-0 py-40 flex flex-col items-center justify-center relative">
         <div className="absolute -top-20 right-0 md:block hidden">

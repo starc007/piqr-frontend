@@ -1,15 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { MessageSVG } from "@assets/index";
 import { CustomButton, CustomTooltip, Link } from "@components";
 import React from "react";
-import SendMessageModal from "../Explore/SendMessageModal";
+
 import { toast } from "react-hot-toast";
 import { useAppBoundStore } from "@store/mainStore";
 
 const RecommedPeople = (props: ProfileResponse) => {
   const item = props;
-
-  const [sendMessageModal, setSendMessageModal] = React.useState(false);
 
   const { isLoggedIn, user, unfollowUser, followUser } = useAppBoundStore(
     (state) => ({
@@ -23,7 +20,7 @@ const RecommedPeople = (props: ProfileResponse) => {
   const isFollowing = item?.folowId?.followers?.includes(user?._id!);
 
   return (
-    <div className=" p-4 border-b">
+    <div className="p-4">
       <CustomTooltip id="tool-tip" />
       <div className="flex justify-between">
         <div className="w-4/5">
@@ -43,7 +40,7 @@ const RecommedPeople = (props: ProfileResponse) => {
           </div>
         </div>
         <div className="flex gap-2">
-          <CustomButton
+          {/* <CustomButton
             data-tooltip-id="tool-tip"
             data-tooltip-content="Message"
             onClick={() => {
@@ -55,7 +52,7 @@ const RecommedPeople = (props: ProfileResponse) => {
             cls={`rounded-full border h-9 w-9 text-sm bg-gray-100 text-dark`}
           >
             <MessageSVG className="w-5" />
-          </CustomButton>
+          </CustomButton> */}
           <CustomButton
             onClick={() => {
               // isLoggedIn ? FollowUnfollow() : toast.error("Please login!");
@@ -83,14 +80,6 @@ const RecommedPeople = (props: ProfileResponse) => {
           </CustomButton>
         </div>
       </div>
-      {sendMessageModal && (
-        <SendMessageModal
-          isOpen={sendMessageModal}
-          closeModal={() => setSendMessageModal(false)}
-          name={item.name}
-          userId={item._id}
-        />
-      )}
     </div>
   );
 };

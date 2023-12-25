@@ -2,12 +2,40 @@ import "@styles/globals.css";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
+import localFont from "next/font/local";
+
+const MonaSans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/MonaSans-Regular.ttf",
+      style: "normal",
+      weight: "400",
+    },
+    {
+      path: "../../public/fonts/MonaSans-Bold.ttf",
+      style: "bold",
+      weight: "700",
+    },
+    {
+      path: "../../public/fonts/MonaSans-Medium.ttf",
+      style: "medium",
+      weight: "500",
+    },
+
+    {
+      path: "../../public/fonts/MonaSans-Light.ttf",
+      style: "light",
+      weight: "300",
+    },
+  ],
+  variable: "--font-monaSans",
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const prod = process.env.NODE_ENV === "production";
 
   return (
-    <>
+    <main className={MonaSans.variable}>
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-R39XVX2RVZ"
@@ -28,6 +56,6 @@ export default function App({ Component, pageProps }: AppProps) {
         containerClassName="text-sm text-gray-700 font-medium font-poppins"
       />
       <Component {...pageProps} />
-    </>
+    </main>
   );
 }

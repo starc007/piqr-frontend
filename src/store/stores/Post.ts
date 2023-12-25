@@ -31,7 +31,7 @@ export interface IPostStore {
   commentReplies: {
     [key: string]: CommentResponse[];
   };
-  getAllPosts: (page: number, filter: string) => Promise<void>;
+  getAllPosts: (page: number) => Promise<void>;
   createNewPost: (params: FormData) => Promise<void>;
   getPostsByUser: (page: number, userId: string) => Promise<void>;
   getPostById: (id: string) => Promise<void>;
@@ -72,9 +72,9 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
   get
 ) => ({
   ...initialPostState,
-  getAllPosts: async (page, filter) => {
+  getAllPosts: async (page) => {
     try {
-      const response = await __getIdeas({ page, filter });
+      const response = await __getIdeas({ page });
       if (response.success) {
         const { allPosts } = get();
         const posts =

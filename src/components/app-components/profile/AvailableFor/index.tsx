@@ -29,13 +29,13 @@ const AvailableFor = () => {
             {item}
           </p>
         ))}
-        <CustomButton
-          variant="primaryNoOutline"
-          cls="px-4 py-1.5 text-sm gap-1"
+        <Button
+          variant="primary"
+          cls="px-4 py-2 text-sm gap-1"
           onClick={openSkillnAvailableForModal}
         >
           <PlusCircleSVG /> Add Tag
-        </CustomButton>
+        </Button>
       </div>
     </div>
   );

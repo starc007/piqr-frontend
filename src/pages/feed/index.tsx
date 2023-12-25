@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Layout } from "@components";
+import { Button, Layout } from "@components";
 import Head from "next/head";
 import NewCampFirePostModal from "@components/app-components/campfire/NewCampFirePostModal";
 import { useEffect, useState } from "react";
@@ -8,12 +8,6 @@ import { EditSVG } from "@assets/index";
 import { useRouter } from "next/router";
 import MeetNewPeople from "@components/app-components/MeetNewPeople";
 import Feed from "@components/app-components/Feed";
-
-const quickSort = [
-  { name: "Everyone", slug: "new", id: 1, isPrivate: false },
-  { name: "Following", slug: "following", id: 3, isPrivate: true },
-  { name: "Highlight", slug: "top", id: 2, isPrivate: false },
-];
 
 const tabs = ["new", "top", "following"];
 
@@ -25,49 +19,39 @@ const CampfireHomePage = () => {
 
   const { tab } = router.query;
 
-  const {
-    getAllPosts,
-    allPosts,
-    isLoggedIn,
-    totalPostPages,
-    user,
-    resetPosts,
-  } = useAppBoundStore((state) => ({
-    getAllPosts: state.getAllPosts,
-    allPosts: state.allPosts,
-    isLoggedIn: state.isLoggedIn,
-    totalPostPages: state.totalPostPages,
-    user: state.user,
-    resetPosts: state.resetPosts,
-  }));
+  const { getAllPosts, allPosts, isLoggedIn, totalPostPages, user } =
+    useAppBoundStore((state) => ({
+      getAllPosts: state.getAllPosts,
+      allPosts: state.allPosts,
+      isLoggedIn: state.isLoggedIn,
+      totalPostPages: state.totalPostPages,
+      user: state.user,
+    }));
 
   const isValidTab = tab && tabs.includes(tab as string);
 
   useEffect(() => {
     if (router.isReady) {
-      if (tab && isValidTab) {
-        setLoading(true);
-        getAllPosts(0, tab as string).then(() => setLoading(false));
-      }
-      if (!tab || !isValidTab) {
-        setLoading(true);
-        router.push({
-          pathname: "/feed",
-          query: { tab: "new" },
-        });
-        getAllPosts(0, "new").then(() => setLoading(false));
-      }
+      setLoading(true);
+      // if (tab && isValidTab) {
+      //   setLoading(true);
+      //   getAllPosts(0, tab as string).then(() => setLoading(false));
+      // }
+      // if (!tab || !isValidTab) {
+      //   setLoading(true);
+      //   router.push({
+      //     pathname: "/feed",
+      //     // query: { tab: "new" },
+      //   });
+      //   getAllPosts(0, "new").then(() => setLoading(false));
+      // }
+      getAllPosts(0).then(() => setLoading(false));
     }
-  }, [tab, getAllPosts, isValidTab, router]);
+  }, [getAllPosts, router]);
 
   const nextPost = async (page: number) => {
-    if (tab && isValidTab) {
-      setLoading(true);
-      await getAllPosts(page, tab as string).then(() => setLoading(false));
-    } else {
-      setLoading(true);
-      await getAllPosts(page, "new").then(() => setLoading(false));
-    }
+    setLoading(true);
+    await getAllPosts(page).then(() => setLoading(false));
   };
 
   return (
@@ -87,60 +71,34 @@ const CampfireHomePage = () => {
       </Head>
       <div className="flex min-h-screen w-full">
         <div className="flex flex-col lg:w-3/4 border-r">
-          <div className="flex justify-center items-center gap-2 px-3 h-16 border-b sticky top-0 blur__effect z-10">
-            {quickSort?.map((item) => {
-              if (!isLoggedIn && item.isPrivate) {
-                return null;
-              }
-              return (
-                <button
-                  onClick={() => {
-                    if (tab === item.slug.toLowerCase()) return;
-                    resetPosts();
-                    setPage(0);
-                    router.push(`/feed?tab=${item.slug.toLowerCase()}`);
-                  }}
-                  key={item.slug}
-                  className={`flex items-center sm:text-sm text-xs px-4 gap-2 hover:bg-primary/10 hover:text-primary py-2 rounded-full ${
-                    tab === item.slug ? "bg-primary/10 text-primary" : ""
-                  }
-                        ${
-                          tab === undefined &&
-                          item.slug === "new" &&
-                          "bg-primary/10 text-primary"
-                        }
-                      `}
-                >
-                  <span className="font-semibold font-sans">{item.name}</span>
-                </button>
-              );
-            })}
-          </div>
           {isLoggedIn && (
             <div
               onClick={() => setNewPostModal(true)}
-              className="lg:px-4 px-3 py-4 w-full flex flex-row justify-between lg:items-center gap-3 font-medium lg:text-sm text-xs border-b cursor-pointer"
+              className="lg:px-4 px-3 pt-6 pb-4 w-full flex items-center gap-3 font-medium lg:text-sm text-xs border-b cursor-pointer"
             >
-              <div className="flex items-center w-3/4">
+              <div className="flex items-center w-full">
                 <img
                   src={user?.avatar!}
-                  className="rounded-full h-12 w-12 object-cover object-center"
+                  className="rounded-full md:h-12 md:w-12 w-10 h-10 object-cover object-center"
                   alt="avatar"
                 />
                 <div className="flex flex-col ml-3 w-[calc(100%-3rem)]">
-                  <p className="text-left text-gray-800 font-semibold">
+                  <p className="text-left text-gray-800 font-medium">
                     Hey {user?.name}
                   </p>
                   <p className="text-left text-gray-400">
-                    Share your ideas, opportunities, learnings, cool projects,
-                    etc....
+                    What's on your mind?
                   </p>
                 </div>
               </div>
-              <button className="flex justify-center items-center lg:h-10 h-9 md:w-20 w-20 lg:mt-0 mt-3  rounded-full bg-primary text-white">
+              {/* <button className="flex justify-center items-center lg:h-9 h-9 md:w-20 w-20 lg:mt-0 mt-3  rounded-lg bg-primary text-white">
                 <EditSVG className="w-4" />
-                <span className="font-semibold pl-2 text-sm">Post</span>
-              </button>
+                <span className="font-medium pl-2 text-sm">Post</span>
+              </button> */}
+              <Button cls="lg:h-10 h-9 w-24">
+                <EditSVG className="w-4" />
+                <span className="font-medium pl-2 text-sm">Post</span>
+              </Button>
             </div>
           )}
           <Feed
@@ -153,7 +111,7 @@ const CampfireHomePage = () => {
             setNewPostModal={setNewPostModal}
           />
         </div>
-        <MeetNewPeople showNavbar />
+        <MeetNewPeople showNavbar={false} />
       </div>
 
       {isLoggedIn && newPostModal && (

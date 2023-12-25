@@ -1,5 +1,5 @@
 import { PlusCircleSVG } from "@assets";
-import { CustomButton, Link } from "@components";
+import { Button, CustomButton, Link } from "@components";
 import { useAppBoundStore } from "@store";
 import { SOCIAL_LINKS } from "@utils";
 
@@ -28,13 +28,13 @@ const Socials = () => {
               )
           )}
 
-        <CustomButton
-          variant="primaryNoOutline"
+        <Button
+          variant="primary"
           cls="px-4 py-2 text-sm gap-1"
           onClick={openAddLinkModal}
         >
           <PlusCircleSVG /> Add
-        </CustomButton>
+        </Button>
       </div>
     </div>
   );

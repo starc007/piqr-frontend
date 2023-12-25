@@ -12,27 +12,27 @@ const data = [
   },
   {
     id: 2,
-    title: "Commission free Opportunities",
+    title: "Apply for jobs curated for you",
     description:
-      "Get commission free opportunities based on your skills and interests",
+      "Apply for jobs and get hired by the best companies in the world",
     img: f2,
     url: "/jobs?type=all",
   },
   {
     id: 3,
-    title: "Connect and Collaborate ",
+    title: "Discover and Connect ",
     description:
-      "Network and collaborate effortlessly with the best professional, opening doors ",
+      "Discover, connect and collaborate with the best minds in your city",
     img: f3,
     url: "/explore?type=all",
   },
   {
     id: 4,
-    title: "Community and Content",
+    title: "Share your ideas",
     description:
-      "Get Access of rich array of educational and informational content while interacting with a supportive community.",
+      "Share your ideas, start a discussion, get feedback and grow together",
     img: f4,
-    url: "/feed?tab=new",
+    url: "/feed",
   },
 ];
 

@@ -153,7 +153,7 @@ const Onboarding = () => {
   useEffect(() => {
     if (isLoggedIn && user) {
       if (!user?.firstTime) {
-        router.push("/feed?tab=new");
+        router.push("/feed");
       }
     }
     if (!isLoggedIn && !loginLoading) {
