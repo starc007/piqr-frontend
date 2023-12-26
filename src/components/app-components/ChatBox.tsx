@@ -16,7 +16,7 @@ const ChatBox: FC<Props> = ({ userId }) => {
   }, [userMessages]);
 
   return (
-    <div className="overflow-y-auto hide__scrollbar h-[60vh] md:h-[70vh] space-y-4 w-full px-6 pb-10 md:pt-4 pt-8">
+    <div className="overflow-y-auto hide__scrollbar h-[70vh] space-y-4 w-full px-6 pb-10 md:pt-4 pt-8">
       {userMessages?.map((item) =>
         item.sender === user?.user || item?.sender === user?._id ? (
           <div key={item?._id} className="flex flex-col items-end">

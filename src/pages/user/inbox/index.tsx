@@ -146,10 +146,11 @@ const InboxPage = () => {
   const filteredNotifications = notifications?.filter(
     (item) => item.isJobProposal === true
   );
+  // lg:h-[calc(100vh-4rem)] h-[calc(100vh-6rem)]
 
   return (
     <PrivateLayout title="Inbox">
-      <div className="font-poppins w-full lg:h-[calc(100vh-4rem)] h-[calc(100vh-6rem)] border-r divide-x flex lg:flex-row flex-col">
+      <div className="py-3 w-full h-screen border-r divide-x flex lg:flex-row flex-col">
         <div
           className={`lg:flex flex-col lg:w-1/3 overflow-y-auto ${
             selectedChat?.id != null ? "hidden" : "flex"
