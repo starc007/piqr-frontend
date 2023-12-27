@@ -116,7 +116,7 @@ const Comment = ({
     <div className="flex flex-col gap-x-4 border-b md:px-4 px-3 mt-4">
       <div className="font-medium flex justify-between items-center gap-2 text-sm">
         <Link className="flex items-center gap-2" href={`/${username}`}>
-          <img
+          <Image
             src={pfp}
             alt={"profile-pic"}
             className="rounded-full object-cover w-9 h-9"
@@ -142,7 +142,7 @@ const Comment = ({
             className="border rounded-xl p-2 hover:bg-gray-100 transition-all duration-300"
           >
             <Image
-              src={deleteIcon}
+              src={deleteIcon.src}
               alt={"delete"}
               className="w-4"
               onClick={() => {}}
@@ -229,7 +229,7 @@ const Comment = ({
                           className="flex items-center gap-2"
                           href={`/${reply?.user?.username}`}
                         >
-                          <img
+                          <Image
                             src={reply.user?.avatar}
                             alt={"profile-pic"}
                             className="rounded-full object-cover w-8 h-8"
@@ -265,7 +265,7 @@ const Comment = ({
                             className="border rounded-xl p-2 hover:bg-gray-100 transition-all duration-300"
                           >
                             <Image
-                              src={deleteIcon}
+                              src={deleteIcon.src}
                               alt={"delete"}
                               className="w-4"
                               onClick={() => {}}

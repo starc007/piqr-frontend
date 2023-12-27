@@ -7,6 +7,7 @@ import {
   DropdownButton,
   DropdownContent,
   DropdownItem,
+  Image,
   Link,
 } from "@components";
 import { FC, useState } from "react";
@@ -48,7 +49,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
       <CustomTooltip id="saveProfile" />
       <div className="flex justify-between ">
         <div className="flex items-center">
-          <img
+          <Image
             src={item.avatar}
             alt={item.name}
             className="rounded-lg md:w-11 md:h-11 w-10 h-10 object-cover object-center"
@@ -135,7 +136,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
                   href={`/${endorse.user?.username}`}
                   className={`w-7 h-7 ${i !== 0 && "-ml-3"}`}
                 >
-                  <img
+                  <Image
                     src={endorse.user?.avatar!}
                     alt={endorse.user?.name!}
                     className={`rounded-full w-full h-full object-center object-cover bg-white border`}

@@ -88,7 +88,7 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
           href={`/${item?.user?.username}`}
           className="flex items-center gap-3 sm:w-auto w-10 h-10"
         >
-          <img
+          <Image
             src={item?.user?.avatar!}
             alt={"profile-pic"}
             className="rounded-full object-cover w-10 h-10"
@@ -139,7 +139,7 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
                         )
                       }
                     >
-                      <Image src={deleteIcon} className="w-5" alt="del" />
+                      <Image src={deleteIcon.src} className="w-5" alt="del" />
                       Delete
                     </DropdownItem>
                   ) : null}
@@ -230,7 +230,7 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
             {item.imgUrl?.length > 0 ? (
               <div className="flex justify-center gap-2 overflow-hidden px-2 mt-2">
                 {item.imgUrl.slice(0, 2).map((img, i) => (
-                  <img
+                  <Image
                     src={img}
                     alt="img"
                     className={`object-contain object-center border rounded-lg sm:max-h-[500px] h-auto  ${
@@ -253,7 +253,7 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
                 id="imgEnlarge"
                 onClick={() => setEnlargeImage("")}
               >
-                <img
+                <Image
                   src={enlargeImage}
                   alt="img"
                   className="object-contain w-full h-full"

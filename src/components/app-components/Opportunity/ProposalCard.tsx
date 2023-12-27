@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CustomButton, Link } from "@components";
+import { CustomButton, Image, Link } from "@components";
 import React from "react";
 import ProposalViewModal from "./ProposalViewModal";
 
@@ -18,7 +18,7 @@ const ProposalCard = ({
     <>
       <div className="flex items-center justify-between gap-4 py-3 px-2">
         <div className="flex items-center gap-4">
-          <img
+          <Image
             src={appliedByDetails?.avatar}
             alt="profile"
             className="rounded-xl h-11 w-11"

@@ -71,7 +71,7 @@ const Home = () => {
             {c.map((item, i) => (
               <Image
                 key={i}
-                src={item}
+                src={item.src}
                 alt="company"
                 className="w-full h-10 slide"
               />
@@ -79,7 +79,7 @@ const Home = () => {
             {c.map((item, i) => (
               <Image
                 key={i}
-                src={item}
+                src={item.src}
                 alt="company"
                 className="w-full h-10 slide"
               />

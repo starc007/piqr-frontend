@@ -69,7 +69,7 @@ const Search = () => {
                 className="p-3 rounded-lg  hover:bg-gray-100 flex gap-4"
               >
                 {it?.avatar && (
-                  <img
+                  <Image
                     src={it?.avatar}
                     className="rounded-full aspect-square object-cover w-12 h-12"
                     alt={`avatar-${it?.username}`}

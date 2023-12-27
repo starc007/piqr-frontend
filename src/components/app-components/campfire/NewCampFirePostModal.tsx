@@ -116,7 +116,7 @@ const NewCampFirePostModal = ({ isOpen, closeModal }: Props) => {
             <div className="flex gap-4 h-56 w-max">
               {image?.map((item, index) => (
                 <div key={index} className="border w-56 h-full relative">
-                  <img
+                  <Image
                     src={
                       typeof item === "string"
                         ? item
@@ -132,7 +132,7 @@ const NewCampFirePostModal = ({ isOpen, closeModal }: Props) => {
                       setImage(filtered);
                     }}
                   >
-                    <Image src={deleteIcon} className="w-5" alt="del" />
+                    <Image src={deleteIcon.src} className="w-5" alt="del" />
                   </div>
                 </div>
               ))}

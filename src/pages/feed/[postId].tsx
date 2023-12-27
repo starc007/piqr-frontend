@@ -152,7 +152,7 @@ const CampfirePostPage = () => {
                   href={`/${selectedPost?.user?.username}`}
                   className="flex items-center gap-3"
                 >
-                  <img
+                  <Image
                     src={selectedPost?.user?.avatar!}
                     alt={"profile-pic"}
                     className="rounded-full object-cover w-10 h-10"
@@ -191,7 +191,7 @@ const CampfirePostPage = () => {
               {selectedPost!?.imgUrl?.length > 0 ? (
                 <div className="flex justify-center gap-2 overflow-hidden  p-2">
                   {selectedPost?.imgUrl.slice(0, 2).map((img, i) => (
-                    <img
+                    <Image
                       src={img}
                       alt="img"
                       className={`object-contain object-center cursor-pointer sm:max-h-[500px] h-auto border rounded-lg ${
@@ -212,7 +212,7 @@ const CampfirePostPage = () => {
                   onClick={() => setEnlargeImage("")}
                 >
                   <div className="h-screen">
-                    <img
+                    <Image
                       src={enlargeImage}
                       alt="img"
                       className="object-contain object-center max-w-screen-xl max-h-[80vh]"
@@ -313,7 +313,7 @@ const CampfirePostPage = () => {
                     href={`/${user?.username}`}
                     className="md:w-10 md:h-10 h-9 w-9"
                   >
-                    <img
+                    <Image
                       src={user?.avatar!}
                       alt={"profile-pic"}
                       className="rounded-full object-cover md:w-10 md:h-10 h-9 w-9"
@@ -375,7 +375,7 @@ const CampfirePostPage = () => {
             <Navbar />
             <div className="flex flex-col items-center px-3 py-5 border-b sticky top-16">
               <div className="flex flex-col items-center">
-                <img
+                <Image
                   src={selectedPost?.user?.avatar!}
                   alt={"profile-pic"}
                   className="rounded-lg object-cover w-20 h-20 border"

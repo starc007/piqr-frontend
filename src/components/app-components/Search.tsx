@@ -73,7 +73,7 @@ const Search = () => {
               className="p-3 rounded-lg text-sm  hover:bg-gray-100 flex items-center gap-4"
             >
               {it?.avatar && (
-                <img
+                <Image
                   src={it?.avatar}
                   className="rounded-full aspect-square object-cover"
                   height={40}
@@ -84,14 +84,6 @@ const Search = () => {
               <div>
                 <div className="font-medium flex items-center gap-1">
                   {it?.name}{" "}
-                  {/* {it?.isVerified && (
-                    // <img
-                    //   src={VerifiedSVG.src}
-                    //   alt="Verified"
-                    //   className="w-4 h-4"
-                    // />
-                    <VerifiedSVG />
-                  )} */}
                 </div>
 
                 <p className="text-gray-500 text-xs">@{it?.username}</p>

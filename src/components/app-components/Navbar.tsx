@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Link, Button } from "@components";
+import { Link, Button, Image } from "@components";
 import { useAppBoundStore } from "@store";
 import { useRef } from "react";
 import { useRouter } from "next/router";
@@ -108,7 +108,7 @@ const Navbar = ({
             <ProfileDropdown
               extraCls="w-40 py-2 mt-4 z-10 top-6 bg-white shadow-xl"
               btnChildren={
-                <img
+                <Image
                   className="rounded-full border w-7 h-7 object-cover object-center"
                   src={user?.avatar}
                   alt=""

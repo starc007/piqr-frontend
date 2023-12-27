@@ -49,7 +49,7 @@ const HowItWorks = () => {
             key={item.id}
             className="bg-lightGray rounded-[2.5rem] lg:w-1/3 w-full py-10 px-12"
           >
-            <Image src={item.img} alt="img" className="w-64" />
+            <Image src={item.img.src} alt="img" className="w-64" />
             <div className="md:text-left text-center mt-2">
               <p className="md:text-4xl text-4xl font-bold">{item.title}</p>
               <p className="mt-3 font-medium">{item.description}</p>

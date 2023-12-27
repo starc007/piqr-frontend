@@ -1,8 +1,6 @@
 import { Image, Link } from "@components";
 import React from "react";
 
-type Props = {};
-
 const EndorsementItem: React.FC<EndorseTypeResponse> = ({ message, user }) => {
   return (
     <Link
@@ -10,10 +8,10 @@ const EndorsementItem: React.FC<EndorseTypeResponse> = ({ message, user }) => {
       className="flex flex-col  border border-gray-200 p-4 gap-4 rounded-2xl hover:bg-gray-50 duration-200 ease-out"
     >
       <div className="flex items-center gap-2">
-        <img
+        <Image
           className="rounded-full h-10 w-10 overflow-hidden aspect-square object-cover object-center border"
           src={user?.avatar!}
-          alt="profile-picture"
+          alt={user?.name!}
         />
         <div>
           <p className="font-medium">{user?.name}</p>

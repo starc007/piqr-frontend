@@ -88,10 +88,10 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
         <div className="flex flex-col">
           {data.type !== NOTIFICATION_TYPES.UPVOTE ? (
             <>
-              <img
+              <Image
                 className="rounded-full border object-contain object-center w-8 h-8"
                 src={data?.sender[0].avatar}
-                alt=""
+                alt={data?.sender[0].name}
               />
               <div className="">
                 <p className="text-sm mt-2">
@@ -106,13 +106,13 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
             <>
               <div className="flex">
                 {data?.sender.slice(0, 4).map((it, i) => (
-                  <img
+                  <Image
                     key={it._id}
                     className={`rounded-full border object-contain object-center bg-white w-8 h-8 ${
                       i !== 0 ? "-ml-2" : ""
                     }`}
                     src={it.avatar}
-                    alt=""
+                    alt={it.name}
                   />
                 ))}
               </div>

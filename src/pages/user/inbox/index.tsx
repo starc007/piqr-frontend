@@ -6,6 +6,7 @@ import {
   PrivateLayout,
   Loader,
   TextArea,
+  Image,
 } from "@components";
 import ChatBox from "@components/app-components/ChatBox";
 import useAnalyticsEventTracker from "@hooks/useAnalyticsEventTracker";
@@ -209,13 +210,17 @@ const InboxPage = () => {
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      <img
+                      <Image
                         src={
                           item?.profile1?._id === user?._id
                             ? item?.profile2?.avatar
                             : item?.profile1?.avatar
                         }
-                        alt="pfp"
+                        alt={
+                          item?.profile1?._id === user?._id
+                            ? item?.profile2?.name
+                            : item?.profile1?.name
+                        }
                         className="rounded-full border w-10 h-10 bg-gray-200 object-center object-cover"
                       />
                       <div className="font-medium text-left text-gray-600 ">

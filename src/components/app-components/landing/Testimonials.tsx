@@ -51,7 +51,7 @@ const TestimonialItem: React.FC<TestimonailItemProps> = ({ name, message }) => {
       <div className="gap-4">
         <div className="flex items-center gap-3 mb-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={`https://api.dicebear.com/6.x/identicon/svg?seed=${name}`}
             alt=""
             className="w-8 h-8 rounded-full"

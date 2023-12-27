@@ -50,7 +50,12 @@ const PositionItem: React.FC<
             </p>
           </div>
           <div className="flex items-center gap-1 md:mt-0 mt-1">
-            <Image src={locationIcon} alt="location" width={13} height={13} />{" "}
+            <Image
+              src={locationIcon.src}
+              alt="location"
+              width={13}
+              height={13}
+            />{" "}
             <p className="text-gray-500 text-xs font-medium">{location}</p>
           </div>
         </div>

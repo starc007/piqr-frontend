@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CustomButton, CustomTooltip, Link } from "@components";
+import { CustomButton, CustomTooltip, Image, Link } from "@components";
 import React from "react";
 
 import { toast } from "react-hot-toast";
@@ -25,9 +25,9 @@ const RecommedPeople = (props: ProfileResponse) => {
       <div className="flex justify-between">
         <div className="w-4/5">
           <div className="flex items-center">
-            <img
+            <Image
               src={item.avatar}
-              alt="avatar"
+              alt={item.name}
               className="w-10 h-10 rounded-full"
             />
             <Link href={`/${item.username}`} className="ml-2 cursor-pointer">
@@ -40,19 +40,6 @@ const RecommedPeople = (props: ProfileResponse) => {
           </div>
         </div>
         <div className="flex gap-2">
-          {/* <CustomButton
-            data-tooltip-id="tool-tip"
-            data-tooltip-content="Message"
-            onClick={() => {
-              isLoggedIn
-                ? setSendMessageModal(true)
-                : toast.error("Please login to collaborate!");
-            }}
-            variant="default"
-            cls={`rounded-full border h-9 w-9 text-sm bg-gray-100 text-dark`}
-          >
-            <MessageSVG className="w-5" />
-          </CustomButton> */}
           <CustomButton
             onClick={() => {
               // isLoggedIn ? FollowUnfollow() : toast.error("Please login!");

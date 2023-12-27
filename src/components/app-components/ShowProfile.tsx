@@ -23,7 +23,7 @@ const ShowProfile: FC<Props> = ({ profiles }) => {
             href={`/${profile.username}`}
             className={cmnStyle}
           >
-            <img
+            <Image
               src={profile.avatar}
               alt={profile.username}
               className="rounded-full w-full h-full object-cover object-center"
@@ -38,7 +38,7 @@ const ShowProfile: FC<Props> = ({ profiles }) => {
             href={`/${profile.username}`}
             className={cmnStyle}
           >
-            <img
+            <Image
               src={profile.avatar}
               alt={profile.username}
               className="rounded-full w-full h-full object-cover object-center"
@@ -53,7 +53,7 @@ const ShowProfile: FC<Props> = ({ profiles }) => {
             href={`/${profile.username}`}
             className={cmnStyle}
           >
-            <img
+            <Image
               src={profile.avatar}
               alt={profile.username}
               className="rounded-full w-full h-full object-cover object-center"

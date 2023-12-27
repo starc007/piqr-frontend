@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, Layout } from "@components";
+import { Button, Image, Layout } from "@components";
 import Head from "next/head";
 import NewCampFirePostModal from "@components/app-components/campfire/NewCampFirePostModal";
 import { useEffect, useState } from "react";
@@ -77,7 +77,7 @@ const CampfireHomePage = () => {
               className="lg:px-4 px-3 pt-6 pb-4 w-full flex items-center gap-3 font-medium lg:text-sm text-xs border-b cursor-pointer"
             >
               <div className="flex items-center w-full">
-                <img
+                <Image
                   src={user?.avatar!}
                   className="rounded-full md:h-12 md:w-12 w-10 h-10 object-cover object-center"
                   alt="avatar"

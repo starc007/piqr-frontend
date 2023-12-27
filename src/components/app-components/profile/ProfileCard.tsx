@@ -116,9 +116,9 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
       <CustomTooltip id="msg-tooltip" />
       {/* Profile Picture */}
       <div className="flex justify-center">
-        <img
+        <Image
           className="rounded-full sm:w-40 sm:h-40 w-28 h-28  object-cover object-center"
-          src={userDetailsByUsername?.profile?.avatar}
+          src={userDetailsByUsername?.profile?.avatar as string}
           alt="profile-picture"
         />
       </div>
@@ -161,14 +161,14 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
       </div>
       <hr className="my-2" />
       <div className="flex items-center gap-2 w-full">
-        <Image src={pinIcon} alt="pin" width={18} height={18} />
+        <Image src={pinIcon.src} alt="pin" width={18} height={18} />
         <p className="text-sm w-11/12">
           {userDetailsByUsername?.profile?.title}
         </p>
       </div>
       {userDetailsByUsername?.profile?.location?.city ? (
         <p className="flex items-center gap-2 text-gray-600 font-medium text-sm">
-          <Image src={locationIcon} alt="location" width={18} height={18} />{" "}
+          <Image src={locationIcon.src} alt="location" width={18} height={18} />{" "}
           {userDetailsByUsername?.profile?.location?.city} ,{" "}
           {userDetailsByUsername?.profile?.location?.country}
         </p>

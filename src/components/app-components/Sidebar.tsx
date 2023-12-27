@@ -263,7 +263,7 @@ const Sidebar = () => {
             extraCls="w-full py-2 bottom-full"
             btnChildren={
               <div className="flex w-full mb-7 border border-gray-200 rounded-xl py-2 px-3">
-                <img
+                <Image
                   src={user?.avatar!}
                   className="rounded-full h-10 w-10 object-cover object-center"
                   alt="avatar"

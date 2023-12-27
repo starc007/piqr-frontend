@@ -5,6 +5,7 @@ import {
   DropdownContent,
   DropdownItem,
   Button,
+  Image,
 } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
@@ -43,7 +44,7 @@ const ProfileDropdown: FC<Props> = ({
           className="hover:bg-gray-100 flex items-center"
           onClick={() => router.push(`/${user?.username}`)}
         >
-          <img src={viewIcon.src} alt="view" className="w-5 mr-2" />
+          <Image src={viewIcon.src} alt="view" className="w-5 mr-2" />
           <span className="text-sm">View Profile</span>
         </DropdownItem>
         <DropdownItem
@@ -52,7 +53,7 @@ const ProfileDropdown: FC<Props> = ({
             logout().then(() => router.push("/login"));
           }}
         >
-          <img src={logoutIcon.src} alt="view" className="w-5 mr-2" />
+          <Image src={logoutIcon.src} alt="view" className="w-5 mr-2" />
           <span className="text-sm">Logout</span>
         </DropdownItem>
       </DropdownContent>

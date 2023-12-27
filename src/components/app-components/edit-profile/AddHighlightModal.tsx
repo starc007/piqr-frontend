@@ -204,7 +204,7 @@ const AddHighlightModal = () => {
               }}
               formatOptionLabel={(option) => (
                 <div className="flex items-center">
-                  <img
+                  <Image
                     className="w-6 h-6 rounded-full"
                     src={option.image}
                     alt="profile"

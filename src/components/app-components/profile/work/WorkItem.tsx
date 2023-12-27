@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { DeleteSVG, EditSVG, ExternalLinkSVG } from "@assets";
-import { Button, Link } from "@components";
+import { Button, Image, Link } from "@components";
 import { useAppBoundStore } from "@store";
 import React from "react";
 import { toast } from "react-hot-toast";
@@ -96,7 +96,7 @@ const WorkItem: React.FC<
                 key={id}
                 className={`${id == 0 ? " " : "-ml-4"}`}
               >
-                <img
+                <Image
                   className="object-center object-cover rounded-full w-6 h-6"
                   src={item.avatar}
                   alt=""

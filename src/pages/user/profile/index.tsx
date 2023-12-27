@@ -254,7 +254,7 @@ const AddProfile = () => {
         <div className="flex flex-col lg:flex-row gap-4 mt-5 ">
           <div className="flex flex-col gap-3 lg:border-r lg:pr-8 border-gray-300 lg:w-1/4 w-full ">
             <div className="w-full flex justify-center">
-              <img
+              <Image
                 className="rounded-xl overflow-hidden h-40 w-40 aspect-square object-center object-cover"
                 src={
                   imageToUpload
@@ -356,7 +356,7 @@ const AddProfile = () => {
                   }}
                 />
                 <Image
-                  src={locationIcon}
+                  src={locationIcon.src}
                   alt="location-icon"
                   height={18}
                   width={18}

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { ArrowSVG } from "@assets/index";
-import { CustomButton, Link, Loader } from "@components";
+import { CustomButton, Image, Link, Loader } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -71,7 +71,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
         <div className="lg:w-2/3 w-full flex flex-col lg:px-6 py-6 h-min">
           <div className="flex justify-between mb-4">
             <Link href={`/${item?.user?.username}`} className="flex gap-4">
-              <img
+              <Image
                 src={item?.user?.avatar}
                 alt="profile"
                 className="rounded-xl h-11 w-11 object-cover object-center"

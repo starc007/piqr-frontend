@@ -44,7 +44,7 @@ const OpportunityCard = ({
         <div className="bg-gray-100 rounded-3xl p-4">
           <div className="flex justify-between mb-4">
             <Link href={`/${item?.user?.username}`} className="flex gap-4">
-              <img
+              <Image
                 src={item?.user?.avatar}
                 alt="profile"
                 className="rounded-xl h-11 w-11 object-cover object-center"
@@ -74,7 +74,7 @@ const OpportunityCard = ({
                   })
                 }
               >
-                <Image src={deleteIcon} className="w-6" alt="del" />
+                <Image src={deleteIcon.src} className="w-6" alt="del" />
               </CustomButton>
             )}
           </div>

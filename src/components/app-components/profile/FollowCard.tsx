@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, CustomButton } from "@components";
+import { Button, CustomButton, Image } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
 import React, { FC, memo, use } from "react";
@@ -43,7 +43,7 @@ const FollowCard: FC<Props> = ({ name, username, avatar, title, id }) => {
         }}
         className="flex items-center cursor-pointer"
       >
-        <img
+        <Image
           className="rounded-full sm:w-10 sm:h-10 w-9 h-9  object-cover object-center"
           src={avatar}
           alt="profile-picture"
