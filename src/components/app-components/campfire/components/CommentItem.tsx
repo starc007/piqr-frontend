@@ -133,7 +133,7 @@ const CommentItem: FC<Props> = ({
           </div>
         ) : null}
       </div>
-      {/* Comment */}
+      {/* Comment here we gi*/}
       <div className="flex flex-col gap-1 w-full mt-1">
         <p
           className="text-dark text-sm whitespace-pre-line break-all md:break-normal"
