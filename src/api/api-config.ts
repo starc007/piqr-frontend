@@ -3,9 +3,8 @@
 // Or just specify it directly like this:
 const API_URL_LOCAL = "http://localhost:6969/api/v1";
 // const API_URL_PROD = "https://apis.piqr.in/api/v1";
-const API_URL_PROD = "https://api.piqr.in/api/v1";
-// const API_URL_PROD = "https://api-test.piqr.in/api/v1";
-// const API_URL_LOCAL = "http://143.110.184.27:6969/api/v1";
+// const API_URL_PROD = "https://api.piqr.in/api/v1";
+const API_URL_PROD = "https://api-test.piqr.in/api/v1";
 
 const API_URL =
   process.env.NODE_ENV === "production" ? API_URL_PROD : API_URL_LOCAL;
