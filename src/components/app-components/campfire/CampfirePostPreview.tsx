@@ -201,7 +201,6 @@ const CampfirePostPreview = ({
                 setSelectPost(item);
                 router.push(`/feed/${item?._id}`, undefined, {
                   scroll: false,
-                  shallow: true,
                 });
               }}
               className={`text-gray-900  md:text-[15px] text-sm whitespace-pre-line break-all md:break-normal font-sans ${

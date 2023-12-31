@@ -2,14 +2,12 @@
 import { Button, Image, Layout } from "@components";
 import Head from "next/head";
 import NewCampFirePostModal from "@components/app-components/campfire/NewCampFirePostModal";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppBoundStore } from "@store/mainStore";
 import { EditSVG } from "@assets/index";
 import { useRouter } from "next/router";
 import MeetNewPeople from "@components/app-components/MeetNewPeople";
 import Feed from "@components/app-components/Feed";
-
-const tabs = ["new", "top", "following"];
 
 const CampfireHomePage = () => {
   const [newPostModal, setNewPostModal] = useState(false);
@@ -17,35 +15,31 @@ const CampfireHomePage = () => {
   const [page, setPage] = useState(0);
   const router = useRouter();
 
-  const { tab } = router.query;
-
-  const { getAllPosts, allPosts, isLoggedIn, totalPostPages, user } =
-    useAppBoundStore((state) => ({
-      getAllPosts: state.getAllPosts,
-      allPosts: state.allPosts,
-      isLoggedIn: state.isLoggedIn,
-      totalPostPages: state.totalPostPages,
-      user: state.user,
-    }));
-
-  // const isValidTab = tab && tabs.includes(tab as string);
+  const {
+    getAllPosts,
+    allPosts,
+    isLoggedIn,
+    totalPostPages,
+    user,
+    initialPostLoading,
+    setInitialPostLoading,
+  } = useAppBoundStore((state) => ({
+    getAllPosts: state.getAllPosts,
+    allPosts: state.allPosts,
+    isLoggedIn: state.isLoggedIn,
+    totalPostPages: state.totalPostPages,
+    user: state.user,
+    initialPostLoading: state.initialPostLoading,
+    setInitialPostLoading: state.setInitialPostLoading,
+  }));
 
   useEffect(() => {
-    if (router.isReady) {
+    if (router.isReady && initialPostLoading) {
       setLoading(true);
-      // if (tab && isValidTab) {
-      //   setLoading(true);
-      //   getAllPosts(0, tab as string).then(() => setLoading(false));
-      // }
-      // if (!tab || !isValidTab) {
-      //   setLoading(true);
-      //   router.push({
-      //     pathname: "/feed",
-      //     // query: { tab: "new" },
-      //   });
-      //   getAllPosts(0, "new").then(() => setLoading(false));
-      // }
-      getAllPosts(0).then(() => setLoading(false));
+      getAllPosts(0).then(() => {
+        setLoading(false);
+        setInitialPostLoading(false);
+      });
     }
   }, [getAllPosts, router]);
 

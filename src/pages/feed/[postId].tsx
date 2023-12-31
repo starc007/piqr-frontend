@@ -34,7 +34,6 @@ const CampfirePostPage = () => {
     selectedPostComment: state.selectedPostComment,
     getAllComments: state.getAllComments,
     getPostById: state.getPostById,
-
     isLoggedIn: state.isLoggedIn,
   }));
 
@@ -56,6 +55,17 @@ const CampfirePostPage = () => {
       ]);
     }
   }, [postId]);
+
+  const loadNextPage = async () => {
+    setPage(page + 1);
+    const obj = {
+      postId,
+      page: page + 1,
+    };
+    setCommentLoading(true);
+    await getAllComments(obj);
+    setCommentLoading(false);
+  };
 
   return (
     <Layout>
@@ -87,10 +97,6 @@ const CampfirePostPage = () => {
             <Button
               onClick={() => {
                 router.back();
-                // window.history.back();
-                //scroll to same position
-                // console.log(path);
-                // router.push(path as string, undefined, { scroll: false });
               }}
               variant="tertiary"
               cls="font-medium gap-1 w-24 h-12 px-4"
@@ -108,11 +114,7 @@ const CampfirePostPage = () => {
                   />
                 </div>
               ) : null}
-              {commentLoading ? (
-                <div className="flex justify-center mt-10">
-                  <Loader col="text-gray-800" />
-                </div>
-              ) : null}
+
               <div className="mt-4 px-4">
                 <p className=" text-sm font-medium mb-4">Comments</p>
                 {!commentLoading &&
@@ -134,6 +136,29 @@ const CampfirePostPage = () => {
                     No comments yet{" "}
                   </div>
                 )}
+
+                {commentLoading ? (
+                  <div className="flex justify-center mt-10">
+                    <Loader col="text-gray-800" />
+                  </div>
+                ) : null}
+
+                {selectedPost?.commentsCount >
+                selectedPostComment?.comments?.length! ? (
+                  <div className="flex justify-center mt-4">
+                    <Button
+                      isLoading={false}
+                      variant="tertiary"
+                      disabled={commentLoading}
+                      cls="w-28 text-sm h-10 font-medium hover:underline"
+                      onClick={() => {
+                        loadNextPage();
+                      }}
+                    >
+                      Load More
+                    </Button>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>

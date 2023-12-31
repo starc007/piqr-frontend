@@ -20,6 +20,7 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "html2canvas": "^1.4.1",
+    "mixpanel-browser": "^2.48.1",
     "moment": "^2.29.4",
     "next": "13.2.4",
     "next-share": "^0.20.0",

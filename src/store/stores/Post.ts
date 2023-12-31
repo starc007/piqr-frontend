@@ -28,8 +28,9 @@ export interface IPostStore {
   selectedPost: IdeaResponse | null;
   selectedPostComment: {
     comments: CommentResponse[];
-    toalCommentPages: number;
   };
+  initialPostLoading: boolean;
+  setInitialPostLoading: (value: boolean) => void;
   getAllPosts: (page: number) => Promise<void>;
   createNewPost: (params: FormData) => Promise<void>;
   getPostsByUser: (page: number, userId: string) => Promise<void>;
@@ -67,8 +68,8 @@ export const initialPostState = {
   selectedPost: null,
   selectedPostComment: {
     comments: [],
-    toalCommentPages: 0,
   },
+  initialPostLoading: true,
 };
 
 export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
@@ -76,6 +77,11 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
   get
 ) => ({
   ...initialPostState,
+  setInitialPostLoading: (value) => {
+    set({
+      initialPostLoading: value,
+    });
+  },
   getAllPosts: async (page) => {
     try {
       const response = await __getIdeas({ page });
@@ -166,7 +172,6 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
         set({
           selectedPostComment: {
             comments: [obj, ...selectedPostComment.comments],
-            toalCommentPages: selectedPostComment.toalCommentPages,
           },
         });
       } else {
@@ -180,10 +185,16 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
     try {
       const response = await __getAllComments(params);
       if (response.success) {
+        const { selectedPostComment } = get();
+
+        const cmt =
+          params.page > 0
+            ? [...selectedPostComment.comments, ...response.data?.comments!]
+            : response.data?.comments!;
+
         set({
           selectedPostComment: {
-            comments: response?.data?.comments!,
-            toalCommentPages: response?.data?.totalPages!,
+            comments: cmt,
           },
         });
       } else {
@@ -217,7 +228,6 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
         set({
           selectedPostComment: {
             comments: selectedPostComment.comments,
-            toalCommentPages: selectedPostComment.toalCommentPages,
           },
         });
       } else {

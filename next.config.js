@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const bucketName = "nextjs-aws-image-optimization";
+// const bucketName = "nextjs-aws-image-optimization";
 
 const nextConfig = {
   reactStrictMode: false,

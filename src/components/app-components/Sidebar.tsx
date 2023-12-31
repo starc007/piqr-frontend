@@ -1,20 +1,15 @@
 import {
   DiscoverSVG,
-  EditSVG,
   FeedSVG,
-  GroupSVG,
   InboxSVG,
   JobSVG,
   NotificationSVG,
-  logo,
 } from "@assets/index";
 import { useAppBoundStore } from "@store";
-import React, { useEffect, useMemo, useState } from "react";
-import { Button, CustomButton, Image, Link } from "..";
+import React, { useEffect, useState } from "react";
+import { Link } from "..";
 import { useRouter } from "next/router";
-import FloatingProfileProgress from "./FloatingProfileProgress";
-import ProfileDropdown from "./ProfileDropdown";
-import NewCampFirePostModal from "./campfire/NewCampFirePostModal";
+// import FloatingProfileProgress from "./FloatingProfileProgress";
 
 const SideMenu = [
   {
@@ -101,23 +96,7 @@ const data = [
 ];
 
 const Sidebar = () => {
-  const [theme, setTheme] = useState("light");
-  const [newPostModal, setNewPostModal] = useState(false);
-
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (theme) {
-      setTheme(theme);
-    }
-    if (theme === "dark") {
-      document.documentElement.classList.add("piqr-dark");
-      // change background color
-      document.documentElement.style.setProperty("background-color", "#1d1d1d");
-    } else {
-      document.documentElement.classList.remove("piqr-dark");
-      document.documentElement.style.setProperty("background-color", "#fff");
-    }
-  }, [theme]);
+  // const [newPostModal, setNewPostModal] = useState(false);
 
   const {
     user,
@@ -170,17 +149,6 @@ const Sidebar = () => {
       return acc;
     }, 0);
   }, [allNotifications]);
-
-  const toggleTheme = () => {
-    //set theme to local storage
-    if (theme === "dark") {
-      localStorage.setItem("sv2theme", "light");
-      setTheme("light");
-    } else {
-      localStorage.setItem("sv2theme", "dark");
-      setTheme("dark");
-    }
-  };
 
   return (
     // <div className="flex flex-col justify-between w-full h-full">

@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import { createThemes } from "tw-colors";
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -15,8 +17,6 @@ module.exports = {
       },
 
       colors: {
-        // primary: "#2efb79", //green
-        // primary: "#00DFA2",
         primary: "#2E98FB",
         secondary: "#2efb79",
         dark: "#121212",
