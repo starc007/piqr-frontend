@@ -281,7 +281,7 @@ export const CHAT_CONST = {
   NOTIFICATION_RECIEVED: "NOTIFICATION_RECIEVED",
 };
 
-export const API_ENDPOINT_PROD = "https://api-test.piqr.in/";
+export const API_ENDPOINT_PROD = "https://api-test.piqr.in";
 // export const API_ENDPOINT_PROD = "https://api.piqr.in/";
 export const API_ENDPOINT_DEV = "http://localhost:6969";
 
