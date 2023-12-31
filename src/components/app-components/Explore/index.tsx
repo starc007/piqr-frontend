@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { BookmarkSVG, MessageSVG, ShareSVG, VerifiedSVG } from "@assets";
 import {
+  Button,
   CustomButton,
   CustomTooltip,
   Dropdown,
@@ -45,7 +46,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
   };
 
   return (
-    <div className="border border-gray-300 rounded-3xl md:px-5 py-4 px-3 flex flex-col transition duration-300 w-full font-poppins">
+    <div className="border border-gray-300 rounded-xl md:px-5 py-4 px-3 flex flex-col transition duration-300 w-full font-poppins">
       <CustomTooltip id="saveProfile" />
       <div className="flex justify-between ">
         <div className="flex items-center">
@@ -74,25 +75,60 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
         </div>
         <div className="flex items-center gap-3">
           {!isSameUser ? (
-            <CustomButton
+            // <div
+            //   data-tooltip-id="saveProfile"
+            //   data-tooltip-content={isSavedUser ? "Unsave" : "Save"}
+            //   // cls="transition duration-300"
+            //   onClick={() => {
+            //     setToggleState(!toggleState);
+            //     // isLoggedIn
+            //     //   ? saveUser(item._id!, !isSavedUser).then(() =>
+            //     //       console.log("saved")
+            //     //     )
+            //     //   : toast.error("Please login to save");
+            //   }}
+            //   className="ui-bookmark"
+            //   // variant="tertiary"
+            // >
+            //   <input type="checkbox" />
+            //   <div className="bookmark">
+            //     {/* <BookmarkSVG
+            //       className={`w-5 hover:fill-black ${
+            //         isSavedUser ? "fill-black" : "fill-none"
+            //       }`}
+            //     /> */}
+            //     <svg viewBox="0 0 32 32">
+            //       <g>
+            //         <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+            //       </g>
+            //     </svg>
+            //   </div>
+            // </div>
+            <label
+              className="ui-bookmark"
               data-tooltip-id="saveProfile"
               data-tooltip-content={isSavedUser ? "Unsave" : "Save"}
-              cls="transition duration-300"
-              onClick={() => {
-                setToggleState(!toggleState);
-                isLoggedIn
-                  ? saveUser(item._id!, !isSavedUser).then(() =>
-                      console.log("saved")
-                    )
-                  : toast.error("Please login to save");
-              }}
             >
-              <BookmarkSVG
-                className={`w-5 hover:fill-black ${
-                  isSavedUser ? "fill-black" : "fill-none"
-                }`}
+              <input
+                type="checkbox"
+                checked={isSavedUser}
+                onChange={() => {
+                  // setToggleState(!toggleState);
+                  isLoggedIn
+                    ? saveUser(item._id!, !isSavedUser).then(() =>
+                        console.log("saved")
+                      )
+                    : toast.error("Please login to save");
+                }}
               />
-            </CustomButton>
+              <div className="bookmark">
+                <svg viewBox="0 0 32 32">
+                  <g>
+                    <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                  </g>
+                </svg>
+              </div>
+            </label>
           ) : null}
           <Dropdown>
             <DropdownButton cls="border rounded-full h-10 w-10 flex justify-center items-center">
@@ -138,7 +174,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
                 >
                   <Image
                     src={endorse.user?.avatar!}
-                    alt={endorse.user?.name!}
+                    alt={endorse.user?.username!}
                     className={`rounded-full w-full h-full object-center object-cover bg-white border`}
                   />
                 </Link>
@@ -156,33 +192,31 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
       {!isSameUser ? (
         <div className="border-t pt-4 mt-2 w-full flex items-center justify-center space-x-4 text-sm ">
           {!isFollowing ? (
-            <CustomButton
+            <Button
               onClick={() => {
                 isLoggedIn
                   ? followUser(item._id!).then(() => console.log("followed"))
                   : toast.error("Please login!");
               }}
-              cls={`rounded-full bg-dark hover:bg-dark/80 text-white font-medium h-11 w-2/5`}
-              variant="default"
+              cls={`rounded-xl hover:bg-dark/80 font-medium h-11 w-2/5`}
+              variant="secondary"
             >
-              + Follow
-            </CustomButton>
+              Follow
+            </Button>
           ) : null}
           {/* ${!isFollowing ? "w-2/5" : "w-3/4"} */}
-          <CustomButton
+          <Button
             onClick={() => {
               isLoggedIn
                 ? setSendMessageModal(true)
                 : toast.error("Please login to collaborate!");
             }}
             variant="default"
-            cls={`rounded-full border border-dark h-11 ${
-              !isFollowing ? "w-2/5" : "w-3/4"
-            }`}
+            cls={`rounded-xl border h-11 ${!isFollowing ? "w-2/5" : "w-3/4"}`}
           >
             <MessageSVG className="text-dark w-5" />
             <span className="ml-2 font-medium">Get in Touch</span>
-          </CustomButton>
+          </Button>
         </div>
       ) : null}
       <SendMessageModal

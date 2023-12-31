@@ -23,7 +23,8 @@ module.exports = {
         lightYellow: "#FEE0AA",
         lightGray: "#F8F7F3",
         lightGray2: "#E4E2DE",
-        secondGray: "#ECECEC",
+        // secondGray: "#F6F9F9",
+        secondGray: "#F2F2F2",
       },
       animation: {
         marquee: "marquee 10s linear infinite",

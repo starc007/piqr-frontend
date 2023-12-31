@@ -211,7 +211,7 @@ const Explore = () => {
               return (
                 <Button
                   key={item.id}
-                  cls={`font-medium text-sm gap-1 px-4 h-10 rounded-full transition duration-300 ${
+                  cls={`font-medium text-sm gap-1 px-4 h-10 rounded-lg transition duration-300 ${
                     type === item.slug ? "bg-gray-100" : "bg-transparent"
                   }`}
                   onClick={() => {
@@ -260,7 +260,7 @@ const Explore = () => {
                 <div className="flex flex-wrap gap-3">
                   {filterCategories.map((category) => (
                     <Button
-                      cls={`border text-xs font-medium !rounded-full  px-3 h-9 text-dark/90 hover:bg-gray-100 transition duration-300 ease-out ${
+                      cls={`border text-xs font-medium !rounded-lg  px-3 h-9 text-dark/90 hover:bg-gray-100 transition duration-300 ease-out ${
                         categoryObj.category === category.value
                           ? "bg-gray-100"
                           : "bg-transparent"
@@ -316,7 +316,7 @@ const Explore = () => {
                         {totalPages > page + 1 ? (
                           <Button
                             disabled={usersLoading}
-                            cls="w-28 text-sm h-10 font-medium mt-5"
+                            cls="w-28 text-sm h-10 font-medium mt-5 rounded-lg"
                             onClick={() => {
                               setPage(page + 1);
                               if (type) {

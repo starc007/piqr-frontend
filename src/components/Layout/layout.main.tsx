@@ -5,23 +5,18 @@ import Navbar from "@appComp/Navbar";
 import { useAppBoundStore } from "@store";
 import Sidebar from "@components/app-components/Sidebar";
 import { useRouter } from "next/router";
-import { useMediaQuery } from "src/utils/useMediaQuery";
 import { SocketSDK } from "src/services/socketController";
 
-const nameToShow = (name: string) => {
-  if (name.includes("user/inbox")) return "Inbox";
-  if (name.includes("feed")) return "Feed";
-  if (name.includes("explore")) return "Explore";
-  if (name.includes("jobs") || name.includes("jobs?*")) return "Jobs";
-  if (name.includes("notifications")) return "Notifications";
-};
+// const nameToShow = (name: string) => {
+//   if (name.includes("user/inbox")) return "Inbox";
+//   if (name.includes("feed")) return "Feed";
+//   if (name.includes("explore")) return "Explore";
+//   if (name.includes("jobs") || name.includes("jobs?*")) return "Jobs";
+//   if (name.includes("notifications")) return "Notifications";
+// };
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   const router = useRouter();
-  const isMobile = useMediaQuery("(max-width: 1006px)");
-
-  const isShowHeader =
-    router.pathname.includes("feed") || router.pathname.includes("explore");
 
   const initialLoad = useRef(true);
 
@@ -146,17 +141,18 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   }, [isSocketConnected, recieveResponse]);
 
   return (
-    <div className="max-w-screen-xl mx-auto">
-      <main className="w-full flex lg:h-screen overflow-hidden">
-        <div className="lg:w-72 w-full lg:static fixed bottom-0 left-0 z-20 lg:border-r lg:px-4">
+    <div className="max-w-screen-lg mx-auto">
+      <main className="w-full flex flex-col h-screen overflow-hidden">
+        <div
+          className={`${
+            isLoggedIn ? "md:w-96" : "md:w-60"
+          } w-full h-14 rounded-2xl md:bg-transparent bg-white fixed md:top-0 bottom-0 lg:left-[40%] md:left-[30%] z-50 flex justify-center`}
+        >
           <Sidebar />
         </div>
-        <div className="w-full overflow-y-auto hide__scrollbar">
-          {isMobile ? <Navbar subTitle={nameToShow(router.pathname)} /> : null}
 
-          {/* {!isShowHeader ? (
-            <Navbar subTitle={nameToShow(router.pathname)} />
-          ) : null} */}
+        <div className="w-full overflow-y-auto hide__scrollbar border-l min-h-screen">
+          <Navbar />
           {children}
         </div>
       </main>

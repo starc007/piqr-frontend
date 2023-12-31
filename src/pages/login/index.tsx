@@ -85,9 +85,9 @@ const Login = () => {
                 }}
                 isLoading={loading}
                 disabled={loading}
-                variant="secondary"
+                // variant="secondary"
                 loaderColor="text-gray-800"
-                cls="h-14 mt-8 md:text-lg font-medium gap-2 md:w-96 px-6 w-72"
+                cls="h-14 mt-8 md:text-lg font-medium gap-2 md:w-96 px-6 w-72 rounded-xl"
               >
                 <GoogleSVG /> Sign in with Google
               </Button>

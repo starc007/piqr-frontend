@@ -156,15 +156,15 @@ const NewCampFirePostModal = ({ isOpen, closeModal }: Props) => {
               onChange={handleImageChange}
             />{" "}
           </div>
-          <CustomButton
+          <Button
             type="submit"
             isLoading={loading}
-            variant="primaryNoOutline"
+            variant="primary"
             disabled={loading || !formData.description}
-            cls="w-24 h-11 rounded-full"
+            cls="w-24 h-11"
           >
             Post
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </Modal>

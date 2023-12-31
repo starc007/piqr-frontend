@@ -27,7 +27,7 @@ const SideMenu = [
   },
   {
     name: "Network",
-    icon: <DiscoverSVG className="w-6" />,
+    icon: <DiscoverSVG className="w-7" />,
     path: "/explore?type=all",
     slug: "/explore",
     id: 2,
@@ -183,108 +183,98 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col justify-between w-full h-full mt-4">
-      <div className="flex lg:flex-col flex-row justify-between lg:px-0 w-full">
-        <div className="lg:flex w-full hidden mt-2 lg:px-3">
+    // <div className="flex flex-col justify-between w-full h-full">
+
+    //   {/* <div className="flex flex-row justify-between w-full"> */}
+
+    //   {/* {isLoggedIn ? (
+    //       <Button
+    //         variant="secondary"
+    //         cls="w-full lg:flex hidden h-12 font-medium"
+    //         onClick={() => setNewPostModal(true)}
+    //       >
+    //         <EditSVG className="w-5" />
+    //         <span className="font-medium pl-3">Post</span>
+    //       </Button>
+    //     ) : (
+    //       <Button
+    //         variant="secondary"
+    //         cls="w-full lg:flex hidden h-12 font-medium"
+    //         onClick={() => router.push("/login")}
+    //       >
+    //         <span className="font-medium">Login</span>
+    //       </Button>
+    //     )} */}
+    //   {/* </div> */}
+    //   {/* {isLoggedIn && progress > 90 && (
+    //     <div className="w-full mt-7 py-4 lg:block hidden mb-5">
+    //       <FloatingProfileProgress data={dataTo} progress={progress} />
+    //     </div>
+    //   )} */}
+    //   {/* {isLoggedIn ? (
+    //     <div className="lg:flex hidden w-full">
+    //       <ProfileDropdown
+    //         dropdownMainCls="w-full"
+    //         extraCls="w-full py-2 bottom-full"
+    //         btnChildren={
+    //           <div className="flex w-full mb-7 border border-gray-200 rounded-xl py-2 px-3">
+    //             <Image
+    //               src={user?.avatar!}
+    //               className="rounded-full h-10 w-10 object-cover object-center"
+    //               alt="avatar"
+    //             />
+    //             <div className="flex flex-col items-start text-sm ml-1.5">
+    //               <span className="font-medium">{user?.name}</span>
+    //               <p className="text-gray-500 font-medium truncate w-32 text-left">
+    //                 {user?.title}
+    //               </p>
+    //             </div>
+    //           </div>
+    //         }
+    //       />
+    //     </div>
+    //   ) : null} */}
+
+    //   {/* // {isLoggedIn && newPostModal && (
+    //   //   <NewCampFirePostModal
+    //   //     isOpen={newPostModal}
+    //   //     closeModal={() => setNewPostModal(false)}
+    //   //   />
+    //   // )} */}
+    // </div>
+    <div className="flex flex-row justify-between px-6 w-full h-12 my-1 md:my-2">
+      {SideMenu.map((item) =>
+        !isLoggedIn && item.isPrivate ? null : (
           <Link
-            href={isLoggedIn ? "/feed" : "/"}
-            className="text-3xl font-semibold"
+            href={item.path}
+            className={`flex items-center justify-center hover:bg-dark/5 rounded-full h-11 w-11 relative transition-all duration-300 ${
+              pathname === item.slug || pathname.includes(item.path)
+                ? "text-dark bg-dark/5"
+                : "text-dark hover:text-dark/80"
+            }`}
+            key={item.id}
           >
-            Piqr
-          </Link>
-        </div>
-        <div className="lg:py-8 py-2 lg:space-y-3 flex lg:flex-col flex-row justify-between blur__effect lg:px-0 px-6 w-full">
-          {SideMenu.map((item) =>
-            !isLoggedIn && item.isPrivate ? null : (
-              <Link
-                href={item.path}
-                className={`flex items-center justify-between lg:px-4 lg:py-2.5 hover:bg-gray-100 rounded-full px-2 py-2 md:text-lg relative transition-all duration-300 ${
-                  pathname === item.slug || pathname.includes(item.path)
-                    ? "text-dark bg-gray-200 lg:bg-gray-100"
-                    : "text-gray-500 hover:text-dark"
+            <div className="flex items-center gap-2 fill-primary">
+              {item.icon}
+            </div>
+            {item.id === 5 && notifications?.length > 0 ? (
+              <span
+                className={`rounded-full w-5 h-5 flex justify-center items-center text-xs font-semibold md:relative absolute  md:top-0 -top-1 md:-right-1 -right-2 ${
+                  pathname === item.path || pathname.includes(item.path)
+                    ? "bg-dark text-white"
+                    : "bg-primary text-white"
                 }`}
-                key={item.id}
               >
-                <div className="flex items-center gap-2 fill-primary">
-                  {item.icon}
-                  <span className="font-medium lg:block hidden">
-                    {item.name}
-                  </span>
-                </div>
-                {item.id === 5 && notifications?.length > 0 ? (
-                  <span
-                    className={`rounded-full w-5 h-5 flex justify-center items-center text-xs font-semibold md:relative absolute  md:top-0 -top-1 md:-right-1 -right-2 ${
-                      pathname === item.path || pathname.includes(item.path)
-                        ? "bg-dark text-white"
-                        : "bg-primary text-white"
-                    }`}
-                  >
-                    {notifications?.length}
-                  </span>
-                ) : null}
-                {item.id === 3 && unreadNotificationsCount > 0 ? (
-                  <span className="bg-primary text-white  w-5 h-5 flex justify-center items-center rounded-full text-xs font-semibold absolute top-1 left-7">
-                    {unreadNotificationsCount}
-                  </span>
-                ) : null}
-              </Link>
-            )
-          )}
-        </div>
-
-        {isLoggedIn ? (
-          <Button
-            variant="secondary"
-            cls="w-full lg:flex hidden h-12 font-medium"
-            onClick={() => setNewPostModal(true)}
-          >
-            <EditSVG className="w-5" />
-            <span className="font-medium pl-3">Post</span>
-          </Button>
-        ) : (
-          <Button
-            variant="secondary"
-            cls="w-full lg:flex hidden h-12 font-medium"
-            onClick={() => router.push("/login")}
-          >
-            <span className="font-medium">Login</span>
-          </Button>
-        )}
-      </div>
-      {/* {isLoggedIn && progress > 90 && (
-        <div className="w-full mt-7 py-4 lg:block hidden mb-5">
-          <FloatingProfileProgress data={dataTo} progress={progress} />
-        </div>
-      )} */}
-      {isLoggedIn ? (
-        <div className="lg:flex hidden w-full">
-          <ProfileDropdown
-            dropdownMainCls="w-full"
-            extraCls="w-full py-2 bottom-full"
-            btnChildren={
-              <div className="flex w-full mb-7 border border-gray-200 rounded-xl py-2 px-3">
-                <Image
-                  src={user?.avatar!}
-                  className="rounded-full h-10 w-10 object-cover object-center"
-                  alt="avatar"
-                />
-                <div className="flex flex-col items-start text-sm ml-1.5">
-                  <span className="font-medium">{user?.name}</span>
-                  <p className="text-gray-500 font-medium truncate w-32 text-left">
-                    {user?.title}
-                  </p>
-                </div>
-              </div>
-            }
-          />
-        </div>
-      ) : null}
-
-      {isLoggedIn && newPostModal && (
-        <NewCampFirePostModal
-          isOpen={newPostModal}
-          closeModal={() => setNewPostModal(false)}
-        />
+                {notifications?.length}
+              </span>
+            ) : null}
+            {item.id === 3 && unreadNotificationsCount > 0 ? (
+              <span className="bg-primary text-white  w-5 h-5 flex justify-center items-center rounded-full text-xs font-semibold absolute top-1 left-7">
+                {unreadNotificationsCount}
+              </span>
+            ) : null}
+          </Link>
+        )
       )}
     </div>
   );

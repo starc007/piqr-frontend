@@ -66,18 +66,17 @@ const Navbar = ({
 
   return (
     <nav
-      className={`flex w-full items-center justify-between z-20 lg:border-none border sticky top-0 h-16 blur__effect mx-auto px-2 ${
+      className={`flex w-full items-center justify-between z-20 border-b border-r sticky top-0 h-16 blur__effect mx-auto px-2 py-3 ${
         isHero ? "container w-full" : "rounded-none"
       } ${pathname === "/" ? "mt-3" : "mt-0 "}
       `}
     >
       <div className="flex items-center gap-3">
-        {isHero ? (
+        {/* {isHero ? (
           <Link
             href={isLoggedIn ? "/feed" : "/"}
             className="sm:text-2xl text-xl font-bold"
           >
-            {/* <Image src={logo} className="w-2/3" alt="logo" /> */}
             Piqr
           </Link>
         ) : !isMobile ? (
@@ -87,10 +86,16 @@ const Navbar = ({
             href={isLoggedIn ? "/feed" : "/"}
             className="text-xl font-semibold lg:px-5 px-2"
           >
-            {/* <Image src={logo} className="w-24" alt="logo" /> */}
             Piqr
           </Link>
-        )}
+        )} */}
+        <Link
+          href={isLoggedIn ? "/feed" : "/"}
+          className="text-xl font-semibold lg:px-5 px-2"
+        >
+          {/* <Image src={logo} className="w-24" alt="logo" /> */}
+          Piqr
+        </Link>
       </div>
 
       <div className="flex items-center sm:space-x-5 space-x-4 font-poppins">
@@ -119,7 +124,7 @@ const Navbar = ({
         ) : (
           <Button
             variant="secondary"
-            cls="md:w-24 w-20 md:h-10 h-9"
+            cls="w-20 md:h-10 h-9 font-medium"
             onClick={() => {
               router.push("/login");
               gaEvents("login_cta", "click_login");

@@ -47,9 +47,9 @@ const Search = () => {
         <Input
           onChange={debounce((e: any) => getUsers(e.target.value), 700)}
           placeholder="Search name or username ..."
-          cls="h-14 !rounded-full placeholder:text-base"
+          cls="h-14 !rounded-xl placeholder:text-base"
         />
-        <div className="absolute right-2 rounded-full p-3 bg-gray-100">
+        <div className="absolute right-2 rounded-xl p-3 bg-gray-100">
           <SearchSVG className="text-dark w-5" />
         </div>
       </div>

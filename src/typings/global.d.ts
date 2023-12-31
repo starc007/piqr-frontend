@@ -185,12 +185,24 @@ export declare global {
     offering?: string;
   }
 
-  interface CommentResponse {
-    _id: string | number;
+  interface ReplyProps {
+    _id: string;
     user: ProfileResponse;
     msg: string;
-    date: number;
-    replies: CommentResponse[];
+    date: string;
+    upvotes: string[];
+    replyId?: string;
+    replyingToUsername?: string;
+  }
+
+  interface CommentResponse {
+    _id: string;
+    user: ProfileResponse;
+    msg: string;
+    date: string;
+    upvotes: string[];
+    firstTwoReplies: ReplyProps[];
+    repliesCount: number;
   }
 
   interface IdeaResponse {
@@ -200,8 +212,6 @@ export declare global {
     user: ProfileResponse;
     upvotes: string[];
     downvotes: string[];
-    count: number;
-
     tags: string[];
     lookingFor: string[];
     url: string;
@@ -256,5 +266,15 @@ export declare global {
     updatedAt?: string;
     isNew?: boolean;
     postId?: string;
+  }
+
+  interface ICommentState {
+    id: string;
+    shouldVisible: boolean;
+    isReply: boolean;
+    replyingTo?: {
+      username: string;
+      name: string;
+    };
   }
 }

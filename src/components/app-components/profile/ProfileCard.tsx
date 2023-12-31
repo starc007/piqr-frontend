@@ -13,18 +13,11 @@ import {
   locationIcon,
   pinIcon,
 } from "@assets/index";
-import { CustomButton, Link, CustomTooltip, Button } from "@components";
+import { Link, CustomTooltip, Button, Image } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { formatURL } from "@utils";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import React, {
-  Dispatch,
-  SetStateAction,
-  use,
-  useEffect,
-  useState,
-} from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 type Props = {
@@ -112,7 +105,7 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
     : [];
 
   return (
-    <div className="rounded-2xl p-4 flex flex-col gap-3 sm:border  border-gray-200 lg:w-80 w-full h-min md:sticky md:top-10">
+    <div className="rounded-2xl p-4 flex flex-col gap-3 sm:border  border-gray-200 lg:w-80 w-full h-min md:sticky md:top-20">
       <CustomTooltip id="msg-tooltip" />
       {/* Profile Picture */}
       <div className="flex justify-center">

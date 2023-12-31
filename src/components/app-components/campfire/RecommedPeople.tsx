@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CustomButton, CustomTooltip, Image, Link } from "@components";
+import { Button, CustomButton, CustomTooltip, Image, Link } from "@components";
 import React from "react";
 
 import { toast } from "react-hot-toast";
@@ -20,7 +20,7 @@ const RecommedPeople = (props: ProfileResponse) => {
   const isFollowing = item?.folowId?.followers?.includes(user?._id!);
 
   return (
-    <div className="p-4">
+    <div className="p-3">
       <CustomTooltip id="tool-tip" />
       <div className="flex justify-between">
         <div className="w-4/5">
@@ -28,7 +28,7 @@ const RecommedPeople = (props: ProfileResponse) => {
             <Image
               src={item.avatar}
               alt={item.name}
-              className="w-10 h-10 rounded-full"
+              className="w-10 h-10 rounded-full object-cover object-center"
             />
             <Link href={`/${item.username}`} className="ml-2 cursor-pointer">
               <p className="text-sm font-semibold">{item.name}</p>
@@ -40,7 +40,7 @@ const RecommedPeople = (props: ProfileResponse) => {
           </div>
         </div>
         <div className="flex gap-2">
-          <CustomButton
+          <Button
             onClick={() => {
               // isLoggedIn ? FollowUnfollow() : toast.error("Please login!");
               isLoggedIn
@@ -51,12 +51,12 @@ const RecommedPeople = (props: ProfileResponse) => {
                   : followUser(item._id!).then(() => console.log("followed"))
                 : toast.error("Please login!");
             }}
-            cls={`rounded-full group font-medium h-9 text-sm px-4 text-xs transition duration-300 ${
+            cls={`group font-medium h-9 text-sm px-4 transition duration-300 ${
               isFollowing
                 ? "bg-dark/10  hover:text-red-500 hover:bg-red-100"
                 : "bg-dark  text-white hover:bg-dark/80"
             }`}
-            variant="default"
+            variant="secondary"
           >
             <span className={isFollowing ? "group-hover:hidden block" : ""}>
               {isFollowing ? "Following" : "Follow"}
@@ -64,7 +64,7 @@ const RecommedPeople = (props: ProfileResponse) => {
             {isFollowing ? (
               <span className="group-hover:block hidden">Unfollow</span>
             ) : null}
-          </CustomButton>
+          </Button>
         </div>
       </div>
     </div>

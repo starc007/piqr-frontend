@@ -35,7 +35,7 @@ const Notifications: React.FC = () => {
 
   return (
     <PrivateLayout title="Notifications">
-      <div className="w-full flex">
+      <div className="w-full flex gap-5">
         <div className="lg:w-3/4 w-full border-r min-h-screen">
           <div className="w-full border-b p-2.5 pl-7">
             <p className={`bg-primary text-white ${cmnCls}`}>All</p>
@@ -79,7 +79,7 @@ const Notifications: React.FC = () => {
             </div>
           )}
         </div>
-        <MeetNewPeople showNavbar={false} />
+        <MeetNewPeople />
       </div>
     </PrivateLayout>
   );

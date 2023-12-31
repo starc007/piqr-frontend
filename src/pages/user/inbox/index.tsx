@@ -13,9 +13,7 @@ import useAnalyticsEventTracker from "@hooks/useAnalyticsEventTracker";
 import { useAppBoundStore } from "@store";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
-import { shallow } from "zustand/shallow";
 
-import { CHAT_CONST } from "@utils";
 import { ArrowSVG } from "@assets/index";
 import { SocketSDK } from "src/services/socketController";
 import useAutosizeTextArea from "@hooks/useAutosizeTextArea";
@@ -151,7 +149,7 @@ const InboxPage = () => {
 
   return (
     <PrivateLayout title="Inbox">
-      <div className="py-3 w-full h-screen border-r divide-x flex lg:flex-row flex-col">
+      <div className="w-full lg:h-[calc(100vh-4rem)] h-[calc(100vh-6rem)] border-r divide-x flex lg:flex-row flex-col">
         <div
           className={`lg:flex flex-col lg:w-1/3 overflow-y-auto ${
             selectedChat?.id != null ? "hidden" : "flex"
@@ -159,11 +157,11 @@ const InboxPage = () => {
         >
           {/* <div className="border-b p-4 font-bold text-xl">Inbox</div> */}
           <div className="flex w-full px-4 border-b py-2">
-            {["General", "Proposal"].map((item, i) => (
+            {["General", "Requests"].map((item, i) => (
               <button
                 key={i}
                 className={`w-1/2 h-11 font-medium transition-all duration-300 ${
-                  selectedTab === i ? "bg-gray-100 rounded-xl" : "text-gray-500"
+                  selectedTab === i ? "bg-gray-100 rounded-lg" : "text-gray-500"
                 }`}
                 onClick={() => {
                   setSelectedTab(i);

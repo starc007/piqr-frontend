@@ -63,7 +63,7 @@ const Feed: FC<Props> = ({
               isLoading={false}
               loaderColor="text-primary"
               disabled={loading}
-              cls="w-28 text-sm h-10 font-semibold"
+              cls="w-28 text-sm h-10 font-semibold rounded-lg"
               onClick={() => {
                 setPage(currentPage + 1);
                 nextPost(currentPage + 1);

@@ -8,7 +8,7 @@ import Works from "@appComp/profile/work";
 import Endorsements from "@appComp/profile/endorsements";
 import { useRouter } from "next/router";
 import { useAppBoundStore } from "@store/mainStore";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import SendMessageModal from "@components/app-components/Explore/SendMessageModal";
 
 import Head from "next/head";

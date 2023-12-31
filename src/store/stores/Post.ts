@@ -15,7 +15,9 @@ import {
   __getNotifications,
   __getReplies,
   __replyComment,
+  __upvoteComment,
   __upvoteIdea,
+  __upvoteReply,
 } from "@api";
 
 export interface IPostStore {
@@ -28,9 +30,6 @@ export interface IPostStore {
     comments: CommentResponse[];
     toalCommentPages: number;
   };
-  commentReplies: {
-    [key: string]: CommentResponse[];
-  };
   getAllPosts: (page: number) => Promise<void>;
   createNewPost: (params: FormData) => Promise<void>;
   getPostsByUser: (page: number, userId: string) => Promise<void>;
@@ -38,13 +37,14 @@ export interface IPostStore {
   commentOnPost: (params: { text: string; id: string }) => Promise<void>;
   getAllComments: (params: { postId: string; page: number }) => Promise<void>;
   setSelectPost: (post: IdeaResponse) => void;
-  replyOnComment: (params: { text: string; id: string }) => Promise<void>;
-  getReplies: (params: { commentId: string }) => Promise<void>;
+  replyOnComment: (params: {
+    text: string;
+    commentId: string;
+    replyId?: string;
+    replyingToUsername?: string;
+  }) => Promise<void>;
+  getReplies: (params: { commentId: string; page: number }) => Promise<void>;
   upvotePost: (
-    params: { id: string },
-    isSelectedPost?: boolean
-  ) => Promise<void>;
-  downvotePost: (
     params: { id: string },
     isSelectedPost?: boolean
   ) => Promise<void>;
@@ -52,6 +52,11 @@ export interface IPostStore {
   resetPosts: () => void;
   deleteComment: (params: { id: string }) => Promise<void>;
   deleteReply: (params: { id: string; replyId: string }) => Promise<void>;
+  upvoteReplyComment: (params: {
+    commentId: string;
+    replyId?: string;
+    isReply: boolean;
+  }) => Promise<void>;
 }
 
 export const initialPostState = {
@@ -64,7 +69,6 @@ export const initialPostState = {
     comments: [],
     toalCommentPages: 0,
   },
-  commentReplies: {},
 };
 
 export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
@@ -158,7 +162,6 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
         const obj = {
           ...response.data!,
           user: user!,
-          date: Date.now(),
         };
         set({
           selectedPostComment: {
@@ -199,28 +202,22 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
     try {
       const response = await __replyComment(params);
       if (response.success) {
-        const { user, selectedPostComment, commentReplies } = get();
+        const { selectedPostComment, user } = get();
         const comment = selectedPostComment.comments.find(
-          (c) => c._id === params.id
+          (c) => c._id === params.commentId
         );
         const obj = {
           ...response.data!,
           user: user!,
-          date: Date.now(),
         };
-        comment!.replies.push(response?.data?._id as any);
-        const index = selectedPostComment.comments.findIndex(
-          (c) => c._id === params.id
-        );
-        selectedPostComment.comments[index] = comment!;
+        //pust it to the first index
+        comment!.firstTwoReplies.push(obj);
+        comment!.repliesCount = (comment?.repliesCount || 0) + 1;
+
         set({
           selectedPostComment: {
             comments: selectedPostComment.comments,
             toalCommentPages: selectedPostComment.toalCommentPages,
-          },
-          commentReplies: {
-            ...commentReplies,
-            [params.id]: [obj, ...commentReplies[params.id]],
           },
         });
       } else {
@@ -234,11 +231,21 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
     try {
       const response = await __getReplies(params);
       if (response.success) {
-        const { commentReplies } = get();
+        const { selectedPostComment } = get();
+
+        const comment = selectedPostComment.comments.find(
+          (c) => c._id === params.commentId
+        );
+
+        comment!.firstTwoReplies = [
+          ...comment!.firstTwoReplies,
+          ...response.data?.replies!,
+        ];
+
         set({
-          commentReplies: {
-            ...commentReplies,
-            [params.commentId]: response.data!,
+          selectedPostComment: {
+            ...selectedPostComment,
+            comments: selectedPostComment.comments,
           },
         });
       } else {
@@ -253,34 +260,10 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
       const { allPosts, user, selectedPost, userPosts } = get();
       const post = allPosts.find((p) => p._id === params.id);
       const userPost = userPosts.find((p) => p._id === params.id);
-      // if (!isSelectedPost) {
-      //   // if (post?.upvotes?.includes(user?._id!)) {
-      //   //   post!.upvotes = post!.upvotes.filter((id) => id !== user?._id!);
-      //   //   // post.count = post.count - 1;
-      //   // } else {
-      //   //   post!.upvotes.push(user?._id!);
-      //   // }
-      //   // set({
-      //   //   allPosts: [...allPosts],
-      //   // });
-
-      // } else {
-      //   if (selectedPost?.upvotes?.includes(user?._id!)) {
-      //     selectedPost!.upvotes = selectedPost!.upvotes.filter(
-      //       (id) => id !== user?._id!
-      //     );
-      //   } else {
-      //     selectedPost!.upvotes.push(user?._id!);
-      //   }
-      //   set({
-      //     selectedPost: selectedPost!,
-      //   });
-      // }
 
       if (post) {
         if (post?.upvotes?.includes(user?._id!)) {
           post!.upvotes = post!.upvotes.filter((id) => id !== user?._id!);
-          post.count = post.count - 1;
         } else {
           post!.upvotes.push(user?._id!);
         }
@@ -320,7 +303,6 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
         if (post) {
           if (post?.upvotes?.includes(user?._id!)) {
             post!.upvotes = post!.upvotes.filter((id) => id !== user?._id!);
-            post.count = post.count + 1;
           } else {
             post!.upvotes.push(user?._id!);
           }
@@ -359,98 +341,7 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
       console.log(error);
     }
   },
-  downvotePost: async (params, isSelectedPost = false) => {
-    try {
-      const { allPosts, user, selectedPost } = get();
-      const post = allPosts.find((p) => p._id === params.id);
-      if (!isSelectedPost) {
-        if (post?.downvotes?.includes(user?._id!)) {
-          post!.downvotes = post!.downvotes.filter((id) => id !== user?._id!);
-          post.count = post.count + 1;
-        } else {
-          post!.downvotes.push(user?._id!);
-          post!.count = post!.count - 1;
-          if (post?.upvotes?.includes(user?._id!)) {
-            post!.count = post!.count - 1;
-            post!.upvotes = post!.upvotes.filter((id) => id !== user?._id!);
-          }
-        }
 
-        set({
-          allPosts: [...allPosts],
-        });
-      } else {
-        if (selectedPost?.downvotes?.includes(user?._id!)) {
-          selectedPost!.downvotes = selectedPost!.downvotes.filter(
-            (id) => id !== user?._id!
-          );
-          selectedPost!.count = selectedPost!.count + 1;
-        } else {
-          selectedPost!.downvotes.push(user?._id!);
-          selectedPost!.count = selectedPost!.count - 1;
-          if (selectedPost?.upvotes?.includes(user?._id!)) {
-            selectedPost!.count = selectedPost!.count - 1;
-            selectedPost!.upvotes = selectedPost!.upvotes.filter(
-              (id) => id !== user?._id!
-            );
-          }
-        }
-
-        set({
-          selectedPost: selectedPost!,
-        });
-      }
-      const response = await __downvoteIdea(params);
-      if (response.success) {
-      } else {
-        if (!selectedPost) {
-          set({
-            allPosts: allPosts.map((p) => {
-              if (p._id === params.id) {
-                if (post?.downvotes.includes(user?._id!)) {
-                  post!.downvotes = post!.downvotes.filter(
-                    (id) => id !== user?._id!
-                  );
-                  post!.count = post!.count + 1;
-                } else {
-                  post!.downvotes.push(user?._id!);
-                  post!.count = post!.count - 1;
-                  if (post?.upvotes.includes(user?._id!)) {
-                    post!.count = post!.count - 1;
-                    post!.upvotes = post!.upvotes.filter(
-                      (id) => id !== user?._id!
-                    );
-                  }
-                }
-
-                return post!;
-              }
-              return p;
-            }),
-          });
-        } else {
-          set({
-            selectedPost: {
-              ...selectedPost!,
-              upvotes: selectedPost?.upvotes.filter(
-                (id) => id !== user?._id!
-              ) as string[],
-              downvotes: selectedPost?.downvotes.filter(
-                (id) => id !== user?._id!
-              ) as string[],
-              count: selectedPost?.downvotes.includes(user?._id!)
-                ? selectedPost?.count! + 1
-                : selectedPost?.upvotes.includes(user?._id!)
-                ? selectedPost?.count! - 2
-                : selectedPost?.count! - 1,
-            },
-          });
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  },
   deleteIdea: async (params) => {
     try {
       const { userPosts, allPosts } = get();
@@ -497,20 +388,115 @@ export const createPostSlice: StateCreator<AppState, [], [], IPostStore> = (
   },
   deleteReply: async (params) => {
     try {
-      const { commentReplies } = get();
+      const { selectedPostComment } = get();
       const response = await __deleteReply(params);
       if (response.success) {
-        const newObj = {
-          ...commentReplies!,
-          [params.id]: commentReplies![params.id].filter(
-            (r) => r._id !== params.replyId
-          ),
-        };
+        const comment = selectedPostComment.comments.find(
+          (c) => c._id === params.id
+        );
+        comment!.firstTwoReplies = comment!.firstTwoReplies.filter(
+          (r) => r._id !== params.replyId
+        );
+        comment!.repliesCount = (comment?.repliesCount || 0) - 1;
+
         set({
-          commentReplies: newObj,
+          selectedPostComment: {
+            ...selectedPostComment!,
+            comments: selectedPostComment?.comments,
+          },
         });
       } else {
         console.log(response.msg);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  upvoteReplyComment: async (params) => {
+    try {
+      const isReply = params.isReply;
+
+      const { selectedPostComment, user } = get();
+
+      if (!isReply) {
+        const comment = selectedPostComment.comments.find(
+          (c) => c._id === params.commentId
+        );
+        if (comment?.upvotes?.includes(user?._id!)) {
+          comment!.upvotes = comment!.upvotes.filter((id) => id !== user?._id!);
+        } else {
+          comment!.upvotes.push(user?._id!);
+        }
+      } else {
+        const comment = selectedPostComment.comments.find(
+          (c) => c._id === params.commentId
+        );
+        const reply = comment?.firstTwoReplies.find(
+          (r) => r._id === params.replyId
+        );
+
+        if (typeof reply?.upvotes === "undefined") reply!.upvotes = [];
+
+        if (reply?.upvotes?.includes(user?._id!)) {
+          reply!.upvotes = reply!.upvotes.filter((id) => id !== user?._id!);
+        } else {
+          reply!.upvotes.push(user?._id!);
+        }
+      }
+      set({
+        selectedPostComment: {
+          ...selectedPostComment!,
+          comments: selectedPostComment?.comments,
+        },
+      });
+
+      if (isReply) {
+        const res = await __upvoteReply({
+          id: params.replyId as string,
+        });
+
+        if (!res.success) {
+          const comment = selectedPostComment.comments.find(
+            (c) => c._id === params.commentId
+          );
+          const reply = comment?.firstTwoReplies.find(
+            (r) => r._id === params.replyId
+          );
+          if (reply?.upvotes?.includes(user?._id!)) {
+            reply!.upvotes = reply!.upvotes.filter((id) => id !== user?._id!);
+          } else {
+            reply!.upvotes.push(user?._id!);
+          }
+          set({
+            selectedPostComment: {
+              ...selectedPostComment!,
+              comments: selectedPostComment?.comments,
+            },
+          });
+        }
+      } else {
+        const res = await __upvoteComment({
+          id: params.commentId,
+        });
+
+        if (!res.success) {
+          const comment = selectedPostComment.comments.find(
+            (c) => c._id === params.commentId
+          );
+          if (comment?.upvotes?.includes(user?._id!)) {
+            comment!.upvotes = comment!.upvotes.filter(
+              (id) => id !== user?._id!
+            );
+          } else {
+            comment!.upvotes.push(user?._id!);
+          }
+          set({
+            selectedPostComment: {
+              ...selectedPostComment!,
+              comments: selectedPostComment?.comments,
+            },
+          });
+        }
       }
     } catch (error) {
       console.log(error);

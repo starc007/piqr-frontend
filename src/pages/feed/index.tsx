@@ -28,7 +28,7 @@ const CampfireHomePage = () => {
       user: state.user,
     }));
 
-  const isValidTab = tab && tabs.includes(tab as string);
+  // const isValidTab = tab && tabs.includes(tab as string);
 
   useEffect(() => {
     if (router.isReady) {
@@ -69,8 +69,8 @@ const CampfireHomePage = () => {
         <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className="flex min-h-screen w-full">
-        <div className="flex flex-col lg:w-3/4 border-r">
+      <div className="flex min-h-screen w-full gap-5">
+        <div className="flex flex-col lg:w-3/4  w-full">
           {isLoggedIn && (
             <div
               onClick={() => setNewPostModal(true)}
@@ -91,11 +91,7 @@ const CampfireHomePage = () => {
                   </p>
                 </div>
               </div>
-              {/* <button className="flex justify-center items-center lg:h-9 h-9 md:w-20 w-20 lg:mt-0 mt-3  rounded-lg bg-primary text-white">
-                <EditSVG className="w-4" />
-                <span className="font-medium pl-2 text-sm">Post</span>
-              </button> */}
-              <Button cls="lg:h-10 h-9 w-24">
+              <Button cls="lg:h-10 h-9 w-24 bg-primary/10 text-primary">
                 <EditSVG className="w-4" />
                 <span className="font-medium pl-2 text-sm">Post</span>
               </Button>
@@ -111,7 +107,7 @@ const CampfireHomePage = () => {
             setNewPostModal={setNewPostModal}
           />
         </div>
-        <MeetNewPeople showNavbar={false} />
+        <MeetNewPeople />
       </div>
 
       {isLoggedIn && newPostModal && (

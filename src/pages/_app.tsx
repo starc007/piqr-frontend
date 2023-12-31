@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
 
 const MonaSans = localFont({
   src: [
@@ -56,6 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
         containerClassName="text-sm text-gray-700 font-medium font-poppins"
       />
       <Component {...pageProps} />
+      <Analytics />
     </main>
   );
 }

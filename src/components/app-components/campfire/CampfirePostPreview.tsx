@@ -31,9 +31,15 @@ import { urlify, formatText } from "../../../utils/index";
 import ShareContent from "./ShareContent";
 
 const cmnCls =
-  "w-7 h-7 flex justify-center items-center disabled:cursor-not-allowed disabled:opacity-50 border rounded-full ";
+  "w-7 h-7 flex justify-center items-center disabled:cursor-not-allowed disabled:opacity-50 border rounded-full";
 
-const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
+const CampfirePostPreview = ({
+  item,
+  shouldShowFullContent = false,
+}: {
+  item: IdeaResponse;
+  shouldShowFullContent?: boolean;
+}) => {
   const router = useRouter();
   const [sendMessageModal, setSendMessageModal] = useState(false);
   const [enlargeImage, setEnlargeImage] = useState("");
@@ -59,8 +65,6 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
 
   const isSameUser = user?._id === item?.user?._id;
   const isFollowing = item?.user?.folowId?.followers?.includes(user?._id!);
-
-  const isEitherPresent = (isSameUser || isFollowing) && isLoggedIn;
   const isUpvoted = item?.upvotes?.includes(user?._id!);
 
   const handleUpvoteClick = () => {
@@ -90,7 +94,7 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
         >
           <Image
             src={item?.user?.avatar!}
-            alt={"profile-pic"}
+            alt={item.user.name}
             className="rounded-full object-cover w-10 h-10"
           />
         </Link>
@@ -114,99 +118,108 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
                 {formatText(item?.user?.title!, 65)}
               </p>
             </Link>
-            <div className="flex items-center gap-2">
-              {/* <p className="text-gray-500 text-xs  italic">
+            {isLoggedIn ? (
+              <div className="flex items-center gap-2">
+                {/* <p className="text-gray-500 text-xs  italic">
                 {moment(item?.createdAt).fromNow()}
               </p> */}
-              <Dropdown>
-                <DropdownButton cls="w-full">
-                  <ThreeDotsSVG className="w-4" />
-                </DropdownButton>
-                <DropdownContent cls="w-40 space-y-1 py-1.5 h-min text-sm z-10 top-4 bg-white shadow-xl">
-                  {isSameUser ? (
-                    <DropdownItem
-                      className="flex items-center gap-2 hover:bg-gray-100"
-                      onClick={() =>
-                        toast.promise(
-                          deleteIdea({
-                            id: item?._id!,
-                          }),
-                          {
-                            loading: "Deleting...",
-                            success: "Deleted",
-                            error: "Error deleting",
-                          }
-                        )
-                      }
-                    >
-                      <Image src={deleteIcon.src} className="w-5" alt="del" />
-                      Delete
-                    </DropdownItem>
-                  ) : null}
-                  {isFollowing ? (
-                    <DropdownItem
-                      className="flex items-center gap-2 hover:bg-gray-100"
-                      onClick={() => {
-                        // setToggle(!toggle);
-                        unfollowUser(item?.user?._id!).then(() =>
-                          console.log("unfollowed")
-                        );
-                      }}
-                    >
-                      <DeleteSVG className="w-5" />
-                      Unfollow
-                    </DropdownItem>
-                  ) : null}
+                <Dropdown>
+                  <DropdownButton cls="w-full">
+                    <ThreeDotsSVG className="w-4" />
+                  </DropdownButton>
+                  <DropdownContent cls="w-40 space-y-1 py-1.5 h-min text-sm z-10 top-4 bg-white shadow-xl">
+                    {isSameUser ? (
+                      <DropdownItem
+                        className="flex items-center gap-2 hover:bg-gray-100"
+                        onClick={() =>
+                          toast.promise(
+                            deleteIdea({
+                              id: item?._id!,
+                            }),
+                            {
+                              loading: "Deleting...",
+                              success: "Deleted",
+                              error: "Error deleting",
+                            }
+                          )
+                        }
+                      >
+                        <Image src={deleteIcon.src} className="w-5" alt="del" />
+                        Delete
+                      </DropdownItem>
+                    ) : null}
+                    {isFollowing ? (
+                      <DropdownItem
+                        className="flex items-center gap-2 hover:bg-gray-100"
+                        onClick={() => {
+                          // setToggle(!toggle);
+                          unfollowUser(item?.user?._id!).then(() =>
+                            console.log("unfollowed")
+                          );
+                        }}
+                      >
+                        <DeleteSVG className="w-5" />
+                        Unfollow
+                      </DropdownItem>
+                    ) : null}
 
-                  {!isSameUser && !isFollowing ? (
-                    <DropdownItem
-                      className="flex items-center gap-2 hover:bg-gray-100"
-                      onClick={() => {
-                        if (!isLoggedIn)
-                          return toast.error("Please login First!!");
-                        // setToggle(!toggle);
-                        followUser(item?.user?._id).then(() =>
-                          console.log("followed")
-                        );
-                      }}
-                    >
-                      <AvatarSVG className="w-5" />
-                      Follow
-                    </DropdownItem>
-                  ) : null}
+                    {!isSameUser && !isFollowing ? (
+                      <DropdownItem
+                        className="flex items-center gap-2 hover:bg-gray-100"
+                        onClick={() => {
+                          if (!isLoggedIn)
+                            return toast.error("Please login First!!");
+                          // setToggle(!toggle);
+                          followUser(item?.user?._id).then(() =>
+                            console.log("followed")
+                          );
+                        }}
+                      >
+                        <AvatarSVG className="w-5" />
+                        Follow
+                      </DropdownItem>
+                    ) : null}
 
-                  {/* <DropdownItem
+                    {/* <DropdownItem
                   className="flex items-center gap-2"
                   // onClick={() => copyProfile(item.username as string)}
                 >
                   <ReportSVG className="w-5" />
                   Report
                 </DropdownItem> */}
-                </DropdownContent>
-              </Dropdown>
-            </div>
+                  </DropdownContent>
+                </Dropdown>
+              </div>
+            ) : null}
           </div>
 
           {/* Content */}
           <div className="">
             <p
               onClick={() => {
+                if (shouldShowFullContent) return;
                 setSelectPost(item);
                 router.push(`/feed/${item?._id}`, undefined, {
                   scroll: false,
                   shallow: true,
                 });
               }}
-              className="text-gray-900  md:text-[15px] text-sm whitespace-pre-line break-all md:break-normal font-sans cursor-pointer"
+              className={`text-gray-900  md:text-[15px] text-sm whitespace-pre-line break-all md:break-normal font-sans ${
+                shouldShowFullContent ? "cursor-auto" : "cursor-pointer"
+              }`}
               id="editor-text"
               dangerouslySetInnerHTML={{
                 __html:
-                  item?.description?.length > 300 && !isReadMore
+                  item?.description?.length > 300 &&
+                  !isReadMore &&
+                  !shouldShowFullContent
                     ? urlify(item?.description?.substring(0, 300)) + "..."
                     : urlify(item?.description),
               }}
             />
-            {item?.description?.length > 300 && !isReadMore ? (
+            {item?.description?.length > 300 &&
+            !isReadMore &&
+            !shouldShowFullContent ? (
               <button
                 onClick={() => {
                   setIsReadMore(true);
@@ -228,14 +241,17 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
             )}
 
             {item.imgUrl?.length > 0 ? (
-              <div className="flex justify-center gap-2 overflow-hidden px-2 mt-2">
+              <div className="flex justify-center overflow-hidden mt-2 border rounded-xl">
                 {item.imgUrl.slice(0, 2).map((img, i) => (
                   <Image
                     src={img}
                     alt="img"
-                    className={`object-contain object-center border rounded-lg sm:max-h-[500px] h-auto  ${
-                      item.imgUrl?.length > 1 ? "w-1/2" : "w-full"
-                    }`}
+                    className={`object-cover object-center border  h-auto  ${
+                      item.imgUrl?.length > 1
+                        ? "w-1/2 sm:h-[300px]"
+                        : "w-full max-h-[400px] rounded-xl"
+                    }
+                    `}
                     key={i}
                     onClick={() => {
                       setEnlargeImage(img);
@@ -298,7 +314,7 @@ const CampfirePostPreview = ({ item }: { item: IdeaResponse }) => {
                     ? "bg-primary text-white hover:bg-primary hover:text-white hover:border-primary border-primary"
                     : "hover__effect text-gray-600"
                 }`}
-                disabled={!user || item?.user?._id === user?._id}
+                disabled={!isLoggedIn}
                 onClick={handleUpvoteClick}
               >
                 <ArrowSVG className="w-4" />

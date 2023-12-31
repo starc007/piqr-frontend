@@ -1,5 +1,5 @@
 import { ChevronDownSVG, FilterSVG } from "@assets/index";
-import { CustomButton, Select } from "@components";
+import { Button, CustomButton, Select } from "@components";
 import { Disclosure, Popover } from "@headlessui/react";
 import { useAppBoundStore } from "@store/mainStore";
 import { AVAILABLE_FOR, CATEGORY, LOCATIONS } from "@utils";
@@ -16,19 +16,13 @@ const Category = CATEGORY.map((item) => ({
 }));
 
 const FilterOptions = () => {
-  const {
-    getUsersByCategory,
-    setUsersLoading,
-    usersLoading,
-    setFilteredUsers,
-    allUsers,
-  } = useAppBoundStore((state) => ({
-    setFilteredUsers: state.setFilteredUsers,
-    getUsersByCategory: state.getUsersByCategory,
-    setUsersLoading: state.setUsersLoading,
-    usersLoading: state.usersLoading,
-    allUsers: state.allUsers,
-  }));
+  const { usersLoading, setFilteredUsers, allUsers } = useAppBoundStore(
+    (state) => ({
+      setFilteredUsers: state.setFilteredUsers,
+      usersLoading: state.usersLoading,
+      allUsers: state.allUsers,
+    })
+  );
 
   const [filterData, setFilterData] = useState({
     availableFor: "",
@@ -93,7 +87,7 @@ const FilterOptions = () => {
       <button
         onClick={clearFilters}
         disabled={usersLoading}
-        className="text-xs bg-gray-50 px-3 h-8 rounded-full font-semibold text-gray-600 hover:bg-gray-100 transition-all duration-200"
+        className="text-xs bg-gray-50 px-3 h-8 rounded-xl font-semibold text-gray-600 hover:bg-gray-100 transition-all duration-200"
       >
         Clear filter
       </button>
@@ -102,11 +96,11 @@ const FilterOptions = () => {
     <Popover className="relative">
       <Popover.Button
         className={
-          "text-primary bg-primary/10 flex gap-1 items-center rounded-full px-3 py-2 text-sm font-semibold focus:outline-none"
+          "text-dark bg-gray-100 flex gap-1 items-center rounded-lg px-3 py-2 text-sm font-semibold focus:outline-none"
         }
       >
         <FilterSVG />
-        <span className="ml-2">Filters</span>
+        <span className="ml-1">Filters</span>
       </Popover.Button>
       <Popover.Panel className="absolute mt-2 duration-200 z-10 w-64 right-0 bg-white border rounded-lg shadow-xl overflow-hidden">
         <Disclosure>
@@ -179,15 +173,15 @@ const FilterOptions = () => {
           </Disclosure.Panel>
         </Disclosure>
         <div className="p-2 border-t">
-          <CustomButton
+          <Button
             onClick={handleSubmit}
             disabled={usersLoading}
             isLoading={usersLoading}
-            variant="primaryNoOutline"
-            cls="text-sm w-full rounded-full px-2 h-10 "
+            variant="secondary"
+            cls="text-sm w-full rounded-lg px-2 h-10 "
           >
             Apply
-          </CustomButton>
+          </Button>
         </div>
       </Popover.Panel>
     </Popover>
