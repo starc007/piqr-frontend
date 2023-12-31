@@ -8,14 +8,15 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import useAnalyticsEventTracker from "@hooks/useAnalyticsEventTracker";
 import { toast } from "react-hot-toast";
+import { API_ENDPOINT_DEV, API_ENDPOINT_PROD } from "@utils";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const prod = process.env.NODE_ENV === "production";
 
   const urlToOpen = prod
-    ? "https://api.piqr.in/api/v1/auth/google"
-    : "http://localhost:6969/api/v1/auth/google";
+    ? `${API_ENDPOINT_PROD}/api/v1/auth/google`
+    : `${API_ENDPOINT_DEV}/api/v1/auth/google`;
 
   const { isLoggedIn, user, loginLoading, checkSession } = useAppBoundStore(
     (state) => ({
