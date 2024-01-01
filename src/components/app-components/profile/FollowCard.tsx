@@ -67,8 +67,8 @@ const FollowCard: FC<Props> = ({ name, username, avatar, title, id }) => {
             }}
             cls={`rounded-full group font-medium h-10 text-sm w-24 transition duration-300 ${
               isFollowing
-                ? "bg-dark/5  hover:text-red-500 hover:bg-red-100"
-                : "bg-dark  text-white hover:bg-dark/80"
+                ? "bg-secondary/5  hover:text-red-500 hover:bg-red-100"
+                : "bg-secondary  text-white hover:bg-secondary/80"
             }`}
             variant="default"
           >

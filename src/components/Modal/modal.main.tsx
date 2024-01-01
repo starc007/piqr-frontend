@@ -53,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({
               className={`inline-block bg-white text-left overflow-hidden shadow transform transition-all align-middle w-full rounded-xl font-poppins ${cls}`}
             >
               <div className="flex justify-between p-5">
-                <Dialog.Title className="font-medium text-dark capitalize">
+                <Dialog.Title className="font-medium text-secondary capitalize">
                   {title}
                 </Dialog.Title>
                 <CustomButton onClick={closeModal}>

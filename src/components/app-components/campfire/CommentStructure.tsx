@@ -85,7 +85,7 @@ const CommentStructure: FC<{
                 handleGetReplies(replyDetails._id);
               }}
               variant="tertiary"
-              cls="text-xs font-medium text-dark underline"
+              cls="text-xs font-medium text-secondary underline"
             >
               View {replyDetails?.repliesCount - 2} more replies
             </Button>
@@ -94,7 +94,7 @@ const CommentStructure: FC<{
 
         {replyLoading ? (
           <div className="flex justify-center mt-2">
-            <Loader col="text-dark" h="h-6" w="w-6" />
+            <Loader col="text-secondary" h="h-6" w="w-6" />
           </div>
         ) : null}
 

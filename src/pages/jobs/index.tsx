@@ -101,7 +101,7 @@ const Opp = () => {
   //         <>
   //           {loading && (
   //             <div className="flex justify-center mt-20">
-  //               <Loader col="text-dark" />
+  //               <Loader col="text-secondary" />
   //             </div>
   //           )}
   //           <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mt-5">
@@ -113,7 +113,7 @@ const Opp = () => {
   //           </div>
   //           {!loading && allOppurtunities.length === 0 && (
   //             <div className="flex justify-center mt-20">
-  //               <p className="text-dark font-medium">Nothing here for now</p>
+  //               <p className="text-secondary font-medium">Nothing here for now</p>
   //             </div>
   //           )}
   //         </>
@@ -122,7 +122,7 @@ const Opp = () => {
   //       if (!isLoggedIn) {
   //         return (
   //           <div className="flex justify-center mt-20">
-  //             <p className="text-dark font-medium">Login to view your jobs</p>
+  //             <p className="text-secondary font-medium">Login to view your jobs</p>
   //           </div>
   //         );
   //       }
@@ -131,7 +131,7 @@ const Opp = () => {
   //         <>
   //           {loading && (
   //             <div className="flex justify-center mt-20">
-  //               <Loader col="text-dark" />
+  //               <Loader col="text-secondary" />
   //             </div>
   //           )}
   //           <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mt-5">
@@ -143,7 +143,7 @@ const Opp = () => {
   //           </div>
   //           {!loading && myOpportunities.length === 0 && (
   //             <div className="flex justify-center mt-20">
-  //               <p className="text-dark font-medium">
+  //               <p className="text-secondary font-medium">
   //                 You haven&apos;t posted any Opportunity
   //               </p>
   //             </div>
@@ -155,7 +155,7 @@ const Opp = () => {
   //         <>
   //           {singleOppLoading && (
   //             <div className="flex justify-center mt-20">
-  //               <Loader col="text-dark" />
+  //               <Loader col="text-secondary" />
   //             </div>
   //           )}
   //           {!singleOppLoading && selectedOpportunity && (
@@ -168,7 +168,7 @@ const Opp = () => {
   //         <>
   //           {loading && (
   //             <div className="flex justify-center mt-20">
-  //               <Loader col="text-dark" />
+  //               <Loader col="text-secondary" />
   //             </div>
   //           )}
   //           <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mt-5">
@@ -180,7 +180,7 @@ const Opp = () => {
   //           </div>
   //           {!loading && allOppurtunities.length === 0 && (
   //             <div className="flex justify-center mt-20">
-  //               <p className="text-dark font-medium">Nothing here for now</p>
+  //               <p className="text-secondary font-medium">Nothing here for now</p>
   //             </div>
   //           )}
   //         </>

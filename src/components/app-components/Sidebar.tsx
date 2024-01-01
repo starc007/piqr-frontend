@@ -9,6 +9,7 @@ import { useAppBoundStore } from "@store";
 import React, { useEffect, useState } from "react";
 import { Link } from "..";
 import { useRouter } from "next/router";
+import { useDarkMode } from "@hooks/useDarkMode";
 // import FloatingProfileProgress from "./FloatingProfileProgress";
 
 const SideMenu = [
@@ -215,10 +216,10 @@ const Sidebar = () => {
         !isLoggedIn && item.isPrivate ? null : (
           <Link
             href={item.path}
-            className={`flex items-center justify-center hover:bg-dark/5 rounded-full h-11 w-11 relative transition-all duration-300 ${
+            className={`flex items-center justify-center hover:bg-secondary/5 rounded-full h-11 w-11 relative transition-all duration-300 ${
               pathname === item.slug || pathname.includes(item.path)
-                ? "text-dark bg-dark/5"
-                : "text-dark hover:text-dark/80"
+                ? "text-secondary bg-secondary/5"
+                : "text-secondary hover:text-secondary/80"
             }`}
             key={item.id}
           >
@@ -229,7 +230,7 @@ const Sidebar = () => {
               <span
                 className={`rounded-full w-5 h-5 flex justify-center items-center text-xs font-semibold md:relative absolute  md:top-0 -top-1 md:-right-1 -right-2 ${
                   pathname === item.path || pathname.includes(item.path)
-                    ? "bg-dark text-white"
+                    ? "bg-secondary text-white"
                     : "bg-primary text-white"
                 }`}
               >

@@ -16,7 +16,7 @@ const Hero = () => {
 
       {/* </div> */}
       <div className="container mx-auto">
-        <div className="flex justify-between text-dark">
+        <div className="flex justify-between text-secondary">
           <Link href="/" className="text-4xl font-bold">
             Piqr
           </Link>
@@ -34,11 +34,11 @@ const Hero = () => {
         </div>
         <div className="relative md:pt-36 pt-20">
           <div className=" text-center mx-auto max-w-6xl">
-            <p className="text-gray-500 font-semibold border rounded-full w-44 py-1 text-sm mx-auto cursor-pointer hover:text-dark/90 hover:border-dark/80 transition-colors duration-300">
+            <p className="text-gray-500 font-semibold border rounded-full w-44 py-1 text-sm mx-auto cursor-pointer hover:text-secondary/90 hover:border-dark/80 transition-colors duration-300">
               Connect. Learn. Earn.
             </p>
             <h1
-              className="text-dark font-bold text-4xl md:text-7xl mt-5"
+              className="text-secondary font-bold text-4xl md:text-7xl mt-5"
               style={{
                 lineHeight: 1.3,
                 letterSpacing: -0.03,

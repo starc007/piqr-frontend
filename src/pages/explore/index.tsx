@@ -260,7 +260,7 @@ const Explore = () => {
                 <div className="flex flex-wrap gap-3">
                   {filterCategories.map((category) => (
                     <Button
-                      cls={`border text-xs font-medium !rounded-lg  px-3 h-9 text-dark/90 hover:bg-gray-100 transition duration-300 ease-out ${
+                      cls={`border text-xs font-medium !rounded-lg  px-3 h-9 text-secondary/90 hover:bg-gray-100 transition duration-300 ease-out ${
                         categoryObj.category === category.value
                           ? "bg-gray-100"
                           : "bg-transparent"

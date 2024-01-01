@@ -85,7 +85,7 @@ const CampfireHomePage = () => {
                   </p>
                 </div>
               </div>
-              <Button cls="lg:h-10 h-9 w-24 bg-primary/10 text-primary">
+              <Button cls="lg:h-10 h-9 w-24 bg-primary/10 !text-primary">
                 <EditSVG className="w-4" />
                 <span className="font-medium pl-2 text-sm">Post</span>
               </Button>

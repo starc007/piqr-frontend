@@ -26,7 +26,7 @@ const ProposalCard = ({
           <div className="flex flex-col">
             <Link
               href={`/${appliedByDetails?.username}`}
-              className="font-medium text-dark"
+              className="font-medium text-secondary"
             >
               {appliedByDetails?.name}
             </Link>

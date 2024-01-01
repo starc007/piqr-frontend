@@ -220,7 +220,7 @@ export const FILTERED_CATEGORY = [
     subTitle: "Network",
     slug: "networking",
     bgCol: "bg-secondary",
-    txtCol: "text-dark border-dark",
+    txtCol: "text-secondary border-dark",
   },
   {
     id: 2,
@@ -228,7 +228,7 @@ export const FILTERED_CATEGORY = [
     title: "People are open to",
     subTitle: "Mentoring",
     slug: "mentorship",
-    bgCol: "bg-dark",
+    bgCol: "bg-secondary",
     txtCol: "text-white border-white",
   },
   {
@@ -247,7 +247,7 @@ export const FILTERED_CATEGORY = [
     subTitle: "Internship Roles",
     slug: "internship",
     bgCol: "bg-secondary",
-    txtCol: "text-dark border-dark",
+    txtCol: "text-secondary border-dark",
   },
 ];
 

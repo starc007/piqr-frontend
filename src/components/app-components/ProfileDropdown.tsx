@@ -9,7 +9,14 @@ import {
 } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
-import { EditSVG, logoutIcon, viewIcon } from "@assets/index";
+import {
+  EditSVG,
+  MoonIcon,
+  SunIcon,
+  logoutIcon,
+  viewIcon,
+} from "@assets/index";
+import { useDarkMode } from "@hooks/useDarkMode";
 
 type Props = {
   btnChildren?: React.ReactNode;
@@ -29,6 +36,11 @@ const ProfileDropdown: FC<Props> = ({
     logout: state.logout,
   }));
 
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
+  const text = isDarkMode ? "Light Mode" : "Dark Mode";
+  const icn = isDarkMode ? SunIcon : MoonIcon;
+
   return (
     <Dropdown cls={dropdownMainCls}>
       <DropdownButton cls="w-full">{btnChildren}</DropdownButton>
@@ -46,6 +58,15 @@ const ProfileDropdown: FC<Props> = ({
         >
           <Image src={viewIcon.src} alt="view" className="w-5 mr-2" />
           <span className="text-sm">View Profile</span>
+        </DropdownItem>
+        <DropdownItem
+          className="hover:bg-gray-100 flex items-center"
+          onClick={() => {
+            toggleDarkMode();
+          }}
+        >
+          <Image src={icn.src} alt="view" className="w-5 mr-2" />
+          <span className="text-sm">{text}</span>
         </DropdownItem>
         <DropdownItem
           className="hover:bg-gray-100 flex items-center"

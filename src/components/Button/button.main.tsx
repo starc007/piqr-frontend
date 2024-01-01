@@ -18,8 +18,8 @@ const Button: FC<ButtonProps> = ({
 }) => {
   const style = {
     primary: `${cmnCls} bg-primary text-white ${cls} `,
-    secondary: `${cmnCls} bg-dark text-white ${cls} `,
-    default: `${cmnCls} ${cls} text-dark bg-gray-100`,
+    secondary: `${cmnCls} bg-secondary text-white ${cls} `,
+    default: `${cmnCls} ${cls} text-secondary bg-gray-100`,
     tertiary: `${cmnCls} ${cls}`,
     primaryNoOutline: `${cmnCls} bg-primary text-white ${cls}`,
   };

@@ -96,7 +96,7 @@ const FilterOptions = () => {
     <Popover className="relative">
       <Popover.Button
         className={
-          "text-dark bg-gray-100 flex gap-1 items-center rounded-lg px-3 py-2 text-sm font-semibold focus:outline-none"
+          "text-secondary bg-gray-100 flex gap-1 items-center rounded-lg px-3 py-2 text-sm font-semibold focus:outline-none"
         }
       >
         <FilterSVG />

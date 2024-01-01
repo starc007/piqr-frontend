@@ -170,7 +170,7 @@ const InboxPage = () => {
                 <p className="relative">
                   {item}
                   {i === 1 && notifications?.length > 0 && (
-                    <span className="rounded-full w-4 h-4 flex justify-center items-center text-xs font-semibold absolute -top-2 right-6 bg-dark text-white">
+                    <span className="rounded-full w-4 h-4 flex justify-center items-center text-xs font-semibold absolute -top-2 right-6 bg-secondary text-white">
                       {filteredNotifications?.length}
                     </span>
                   )}

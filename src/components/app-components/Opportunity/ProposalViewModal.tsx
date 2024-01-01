@@ -59,7 +59,7 @@ const ProposalViewModal: FC<Props> = ({
             variant="tertiary"
             cls="w-36 text-sm font-medium h-11"
             isLoading={rejectLoading}
-            loaderColor="text-dark"
+            loaderColor="text-secondary"
             disabled={rejectLoading || loading}
           >
             Reject

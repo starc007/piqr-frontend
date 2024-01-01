@@ -63,8 +63,12 @@ import TimeSVG from "./svg/time.svg";
 
 import logoutIcon from "./icons/logout.png";
 import viewIcon from "./icons/view.png";
+import MoonIcon from "./icons/moon.png";
+import SunIcon from "./icons/sun.png";
 
 export {
+  MoonIcon,
+  SunIcon,
   viewIcon,
   logoutIcon,
   logo,

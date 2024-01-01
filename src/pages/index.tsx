@@ -91,15 +91,15 @@ const Home = () => {
         <HowItWorks />
       </section>
 
-      <section className="bg-dark  py-16 px-4 lg:px-0 overflow-hidden">
+      <section className="bg-secondary  py-16 px-4 lg:px-0 overflow-hidden">
         <div className="max-w-screen-xl mx-auto flex justify-center items-center lg:flex-row flex-col gap-6">
           <div className="flex flex-col w-full">
             <p className="font-semibold flex justify-center items-center rounded-full w-36 h-8 text-sm bg-secondary">
               Best Professionals
             </p>
             <h2 className="text-white font-semibold text-5xl lg:text-7xl lg:leading-[5rem] mt-4">
-              Connect with <span className="text-secondary">Best</span> Talented
-              minds across <span className="text-secondary">60+</span> different
+              Connect with <span className="text-tertiary">Best</span> Talented
+              minds across <span className="text-tertiary">60+</span> different
               fields.
             </h2>
           </div>

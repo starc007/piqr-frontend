@@ -13,9 +13,9 @@ const CustomButton: FC<ButtonProps> = ({
 }) => {
   const style = {
     primary: `flex justify-center items-center border border-dark rounded-full bg-primary text-white ${cls} buttonCustom `,
-    secondary: `flex justify-center items-center border-2 border-dark rounded-full bg-white text-dark ${cls} buttonCustom`,
+    secondary: `flex justify-center items-center border-2 border-dark rounded-full bg-white text-secondary ${cls} buttonCustom`,
     default: `flex justify-center items-center ${cls}`,
-    tertiary: `flex justify-center items-center border border-dark rounded-full text-dark ${cls}`,
+    tertiary: `flex justify-center items-center border border-dark rounded-full text-secondary ${cls}`,
     primaryNoOutline: `flex justify-center items-center rounded-full bg-primary text-white disabled:opacity-70 disabled:cursor-not-allowed ${cls}`,
   };
   return (

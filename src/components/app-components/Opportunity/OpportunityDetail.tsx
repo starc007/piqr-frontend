@@ -63,7 +63,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
         onClick={() => {
           router.back();
         }}
-        className="font-medium text-dark flex items-center gap-1"
+        className="font-medium text-secondary flex items-center gap-1"
       >
         <ArrowSVG className="-rotate-90 w-5" /> go back
       </button>
@@ -77,7 +77,9 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
                 className="rounded-xl h-11 w-11 object-cover object-center"
               />
               <div className="flex flex-col">
-                <p className="text-dark font-medium">{item?.user?.name} </p>
+                <p className="text-secondary font-medium">
+                  {item?.user?.name}{" "}
+                </p>
                 <p className="text-sm text-gray-500">@{item?.user?.username}</p>
                 {/* <p className="text-xs text-gray-500">
                   {moment(item?.createdAt).fromNow()}
@@ -85,7 +87,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
               </div>
             </Link>
           </div>
-          <p className="text-dark text-2xl font-medium">{item?.title} </p>
+          <p className="text-secondary text-2xl font-medium">{item?.title} </p>
           <p
             className="text-gray-500 font-medium mt-4 whitespace-pre-line"
             id="editor-text"
@@ -99,7 +101,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
               {item?.skills?.map((skill, index) => (
                 <p
                   key={index}
-                  className="bg-white text-dark rounded-full px-3 py-1 text-xs font-medium border"
+                  className="bg-white text-secondary rounded-full px-3 py-1 text-xs font-medium border"
                 >
                   {skill}
                 </p>
@@ -123,7 +125,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
                 fill="#374957"
               />
             </svg>
-            <p className="text-dark text-sm font-semibold pt-[1px]">
+            <p className="text-secondary text-sm font-semibold pt-[1px]">
               {item?.applicantId?.applicants?.length || 0}{" "}
               <span className="font-normal">applied</span>
             </p>
@@ -148,7 +150,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
                 </svg>
                 Budget
               </p>
-              <p className="text-dark font-medium mt-1">
+              <p className="text-secondary font-medium mt-1">
                 {/* {moneyFormatter(item?.budget)} / {item?.payType} */}
                 {item?.budget.includes(",") || item?.budget.includes("-")
                   ? item?.budget
@@ -157,14 +159,14 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
             </div>
             <div className="flex flex-col border px-4 py-3 rounded-2xl">
               <p className="text-sm text-gray-500 font-medium">Contract Type</p>
-              <p className="text-dark font-medium">
+              <p className="text-secondary font-medium">
                 {contractTypeDetails[item?.contractType]}
               </p>
             </div>
             {item?.duration && (
               <div className="flex flex-col border px-4 py-3 rounded-2xl">
                 <p className="text-sm text-gray-500 font-medium">Duration</p>
-                <p className="text-dark font-medium">{item?.duration}</p>
+                <p className="text-secondary font-medium">{item?.duration}</p>
               </div>
             )}
           </div>
@@ -192,7 +194,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
                     toast.error("You have already applied");
                   }
                 }}
-                cls={`bg-dark text-white w-56 py-3 rounded-full text-sm font-medium ${
+                cls={`bg-secondary text-white w-56 py-3 rounded-full text-sm font-medium ${
                   isApplied ? "opacity-60 cursor-not-allowed" : ""
                 }`}
               >
@@ -206,14 +208,14 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
           <>
             {loading && (
               <div className="flex justify-center">
-                <Loader col="text-dark" />
+                <Loader col="text-secondary" />
               </div>
             )}
             {!loading && applicantsOfOpp?.length > 0 && (
               <div className="lg:w-1/3 w-full rounded-3xl border h-min">
                 <div className="flex items-center justify-between p-4 border-b">
                   <p className="text-gray-600 ">Total Proposals </p>
-                  <p className="text-dark font-bold">
+                  <p className="text-secondary font-bold">
                     {applicantsOfOpp?.length || 0}
                   </p>
                 </div>

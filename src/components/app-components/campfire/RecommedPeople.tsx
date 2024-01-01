@@ -53,8 +53,8 @@ const RecommedPeople = (props: ProfileResponse) => {
             }}
             cls={`group font-medium h-9 text-sm px-4 transition duration-300 ${
               isFollowing
-                ? "bg-dark/10  hover:text-red-500 hover:bg-red-100"
-                : "bg-dark  text-white hover:bg-dark/80"
+                ? "bg-secondary/10  hover:text-red-500 hover:bg-red-100"
+                : "bg-secondary  text-white hover:bg-secondary/80"
             }`}
             variant="secondary"
           >

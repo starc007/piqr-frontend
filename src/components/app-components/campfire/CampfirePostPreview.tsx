@@ -109,7 +109,7 @@ const CampfirePostPreview = ({
                 {item?.user?.name}{" "}
                 {/* {item?.user?.isVerified ? <VerifiedSVG /> : null} */}
                 {isFollowing ? (
-                  <span className="text-xs text-gray-500 hover:text-dark">
+                  <span className="text-xs text-gray-500 hover:text-secondary">
                     · following
                   </span>
                 ) : null}

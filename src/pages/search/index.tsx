@@ -57,7 +57,8 @@ const Search = () => {
     <Layout>
       <div className="max-w-xl mx-auto p-4 font-poppins lg:mb-0 mb-10">
         <p className="font-bold md:text-4xl text-2xl text-gray-500">
-          Search result for &quot;<span className="text-dark">{q}</span>&quot;
+          Search result for &quot;<span className="text-secondary">{q}</span>
+          &quot;
         </p>
 
         {items?.users.length > 0 && (
@@ -90,7 +91,7 @@ const Search = () => {
         )}
         {loading && (
           <div className="flex justify-center mt-6">
-            <Loader col="text-dark" />
+            <Loader col="text-secondary" />
           </div>
         )}
         {!loading && items?.users.length == 0 && (

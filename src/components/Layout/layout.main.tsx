@@ -141,21 +141,23 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   }, [isSocketConnected, recieveResponse]);
 
   return (
-    <div className="max-w-screen-lg mx-auto">
-      <main className="w-full flex flex-col h-screen overflow-hidden">
-        <div
-          className={`${
-            isLoggedIn ? "md:w-96" : "md:w-60"
-          } w-full h-14 rounded-2xl md:bg-transparent bg-white fixed md:top-0 bottom-0 lg:left-[40%] md:left-[30%] z-50 flex justify-center`}
-        >
-          <Sidebar />
-        </div>
+    <div className="bg-background">
+      <div className="max-w-screen-lg mx-auto">
+        <main className="w-full flex flex-col h-screen overflow-hidden">
+          <div
+            className={`${
+              isLoggedIn ? "md:w-96" : "md:w-60"
+            } w-full h-14 rounded-2xl md:bg-transparent bg-white fixed md:top-0 bottom-0 lg:left-[40%] md:left-[30%] z-50 flex justify-center`}
+          >
+            <Sidebar />
+          </div>
 
-        <div className="w-full overflow-y-auto hide__scrollbar border-l min-h-screen">
-          <Navbar />
-          {children}
-        </div>
-      </main>
+          <div className="w-full overflow-y-auto hide__scrollbar border-l min-h-screen">
+            <Navbar />
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

@@ -50,7 +50,7 @@ const Search = () => {
           cls="h-14 !rounded-xl placeholder:text-base"
         />
         <div className="absolute right-2 rounded-xl p-3 bg-gray-100">
-          <SearchSVG className="text-dark w-5" />
+          <SearchSVG className="text-secondary w-5" />
         </div>
       </div>
       {loading && (
@@ -58,7 +58,7 @@ const Search = () => {
           className="absolute z-20 top-16 w-full px-5 py-2 border bg-white rounded-2xl flex justify-center"
           id="userDropdown"
         >
-          <Loader col="text-dark" />
+          <Loader col="text-secondary" />
         </div>
       )}
       {!loading && items?.length > 0 && (

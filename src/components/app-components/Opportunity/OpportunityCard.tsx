@@ -58,14 +58,14 @@ const OpportunityCard = ({
               </div>
             </Link>
             {/* {!postedByCurrentUser && !isMine && (
-              <CustomButton cls="text-dark">
+              <CustomButton cls="text-secondary">
                 <BookmarkSVG className="w-5" />
               </CustomButton>
             )} */}
 
             {isMine && (
               <CustomButton
-                cls="text-dark"
+                cls="text-secondary"
                 onClick={() =>
                   toast.promise(deleteOpportunity(item?._id as string), {
                     loading: "Deleting...",
@@ -82,7 +82,7 @@ const OpportunityCard = ({
             onClick={() => {
               router.push(`/jobs?type=open&id=${item?._id}`);
             }}
-            className="text-dark text-xl font-medium overflow-hidden h-14 text-left"
+            className="text-secondary text-xl font-medium overflow-hidden h-14 text-left"
           >
             {item?.title.length > 60
               ? item?.title.slice(0, 60) + "..."
@@ -105,7 +105,7 @@ const OpportunityCard = ({
                   strokeLinejoin="round"
                 />
               </svg>
-              <p className="text-dark sm:text-sm text-xs font-medium pt-[1px] whitespace-nowrap">
+              <p className="text-secondary sm:text-sm text-xs font-medium pt-[1px] whitespace-nowrap">
                 {item?.budget.includes(",") || item?.budget.includes("-")
                   ? item?.budget
                   : moneyFormatter(item?.budget)}
@@ -129,7 +129,7 @@ const OpportunityCard = ({
                   fill="#374957"
                 />
               </svg>
-              <p className="text-dark sm:text-sm text-xs font-semibold pt-[1px] whitespace-nowrap">
+              <p className="text-secondary sm:text-sm text-xs font-semibold pt-[1px] whitespace-nowrap">
                 {item?.applicantId?.applicants?.length || 0}{" "}
                 <span className="font-normal">applied</span>
               </p>
@@ -142,13 +142,13 @@ const OpportunityCard = ({
               {item?.skills.slice(0, 3).map((skill, index) => (
                 <p
                   key={index}
-                  className="bg-white text-dark rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap"
+                  className="bg-white text-secondary rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap"
                 >
                   {skill}
                 </p>
               ))}
               {item?.skills.length > 3 && (
-                <p className="bg-white text-dark rounded-full px-3 py-1 text-xs font-medium">
+                <p className="bg-white text-secondary rounded-full px-3 py-1 text-xs font-medium">
                   +{item?.skills.length - 3}
                 </p>
               )}
@@ -185,7 +185,7 @@ const OpportunityCard = ({
                   toast.error("You have already applied");
                 }
               }}
-              cls={`bg-dark text-white w-1/2 py-2 rounded-full text-sm ${
+              cls={`bg-secondary text-white w-1/2 py-2 rounded-full text-sm ${
                 isApplied && "opacity-60 cursor-not-allowed"
               }`}
             >

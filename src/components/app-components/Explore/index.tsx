@@ -198,7 +198,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
                   ? followUser(item._id!).then(() => console.log("followed"))
                   : toast.error("Please login!");
               }}
-              cls={`rounded-xl hover:bg-dark/80 font-medium h-11 w-2/5`}
+              cls={`rounded-xl hover:bg-secondary/80 font-medium h-11 w-2/5`}
               variant="secondary"
             >
               Follow
@@ -214,7 +214,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
             variant="default"
             cls={`rounded-xl border h-11 ${!isFollowing ? "w-2/5" : "w-3/4"}`}
           >
-            <MessageSVG className="text-dark w-5" />
+            <MessageSVG className="text-secondary w-5" />
             <span className="ml-2 font-medium">Get in Touch</span>
           </Button>
         </div>

@@ -79,11 +79,11 @@ const CreateOpportunity = () => {
           onClick={() => {
             router.back();
           }}
-          className="font-medium text-dark flex items-center gap-1 text-sm mt-4"
+          className="font-medium text-secondary flex items-center gap-1 text-sm mt-4"
         >
           <ArrowSVG className="-rotate-90 w-4" /> go back
         </button>
-        <p className="text-dark text-3xl font-semibold mt-4">Post Job</p>
+        <p className="text-secondary text-3xl font-semibold mt-4">Post Job</p>
         <p className="text-sm text-gray-500 mt-3">
           Start hiring the best talent for your project/product/company
         </p>

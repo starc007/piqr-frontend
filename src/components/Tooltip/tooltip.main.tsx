@@ -14,7 +14,7 @@ const ToolTip = ({
       place={position}
       id={id}
       noArrow
-      className="!text-sm !bg-dark !px-3 !py-1 !rounded-lg transition-all duration-300"
+      className="!text-sm !bg-secondary !px-3 !py-1 !rounded-lg transition-all duration-300"
     />
   );
 };

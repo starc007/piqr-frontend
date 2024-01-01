@@ -61,7 +61,7 @@ const MyNetwork = () => {
     <PrivateLayout title="My Network | Piqr">
       {loading ? (
         <div className="flex justify-center mt-10">
-          <Loader col="text-dark" />
+          <Loader col="text-secondary" />
         </div>
       ) : (
         <div className="border-r min-h-screen flex-flex-col">

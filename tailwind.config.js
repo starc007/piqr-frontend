@@ -17,9 +17,9 @@ module.exports = {
       },
 
       colors: {
-        primary: "#2E98FB",
-        secondary: "#2efb79",
-        dark: "#121212",
+        // primary: "#2E98FB",
+        // secondary: "#2efb79",
+        // dark: "#121212",
         lightYellow: "#FEE0AA",
         lightGray: "#F8F7F3",
         lightGray2: "#E4E2DE",
@@ -45,5 +45,24 @@ module.exports = {
   plugins: [
     require("@headlessui/tailwindcss"),
     require("@tailwindcss/typography"),
+    createThemes(
+      {
+        light: {
+          background: "#FFFFFF",
+          secondary: "#121212",
+          primary: "#2E98FB",
+          tertiary: "#2efb79",
+        },
+        dark: {
+          background: "#121212",
+          secondary: "#FFFFFF",
+          primary: "#2E98FB",
+          tertiary: "#2efb79",
+        },
+      },
+      {
+        defaultTheme: "light", // 'light' | 'dark'
+      }
+    ),
   ],
 };

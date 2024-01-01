@@ -21,7 +21,7 @@ const FilteredCategory = () => {
               </p>
               <ArrowDiagonalSVG
                 className={`mr-4 ${
-                  item.txtCol === "text-dark border-dark"
+                  item.txtCol === "text-secondary border-dark"
                     ? "fill-dark"
                     : "fill-white"
                 }`}

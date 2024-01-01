@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 // import mixpanel from "mixpanel-browser";
 
 export const useDarkMode = () => {
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("mode") === "dark"
-  );
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   function checkDarkMode() {
     return document.body.classList.contains("dark");
@@ -13,9 +11,9 @@ export const useDarkMode = () => {
   const toggleDarkMode = () => {
     document.body.classList.toggle("dark");
     if (document.body.classList.contains("dark")) {
-      localStorage.setItem("mode", "dark");
+      localStorage.setItem("piqrMode", "dark");
     } else {
-      localStorage.setItem("mode", "light");
+      localStorage.setItem("piqrMode", "light");
     }
     // mixpanel.track("Switched Mode", {
     //   mode: localStorage.getItem("mode"),
@@ -25,6 +23,12 @@ export const useDarkMode = () => {
     // });
     setIsDarkMode(!isDarkMode); // Toggle the state directly
   };
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("piqrMode") === "dark") {
+  //     setIsDarkMode(true);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (isDarkMode && !checkDarkMode()) {

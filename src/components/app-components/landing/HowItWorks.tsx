@@ -55,7 +55,7 @@ const HowItWorks = () => {
               <p className="mt-3 font-medium">{item.description}</p>
               <Link
                 href={item.url}
-                className="relative mt-5 flex h-12 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-dark before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+                className="relative mt-5 flex h-12 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-secondary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
               >
                 <span className="relative text-base font-semibold text-white">
                   {item?.id === 2 ? "Browse Now" : "Get Started"}
@@ -107,7 +107,7 @@ export const HireOrGetHired = () => {
           </p>
           <Link
             href={item?.id === 1 ? "/jobs?type=all" : "/explore?type=all"}
-            className="relative mt-6 flex h-12 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-dark before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+            className="relative mt-6 flex h-12 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-secondary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
           >
             <span className="relative text-base font-semibold text-white">
               {item?.id === 1 ? "Find Work" : "Find Professionals"}
