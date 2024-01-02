@@ -67,7 +67,6 @@ const Login = () => {
       <div className="flex">
         <div className="lg:w-1/2 w-full flex flex-col h-screen p-5">
           <Link href="/" className="text-4xl font-bold">
-            {/* <Image src={logo} className="w-36" alt="logo" /> */}
             Piqr
           </Link>
           <div className="w-full flex items-center justify-center div__height">
@@ -86,9 +85,9 @@ const Login = () => {
                 }}
                 isLoading={loading}
                 disabled={loading}
-                // variant="secondary"
+                variant="tertiaryOutline"
                 loaderColor="text-gray-800"
-                cls="h-14 mt-8 md:text-lg font-medium gap-2 md:w-96 px-6 w-72 rounded-xl"
+                cls="h-14 mt-8 font-medium gap-2 md:w-96 px-6 w-72 rounded-lg"
               >
                 <GoogleSVG /> Sign in with Google
               </Button>

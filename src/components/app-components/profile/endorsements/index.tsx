@@ -1,6 +1,6 @@
 import { useAppBoundStore } from "@store/mainStore";
 import EndorsementItem from "./EndorsementItem";
-import { CustomButton } from "@components";
+import { Button, CustomButton } from "@components";
 import { MedalSVG } from "@assets/index";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -32,18 +32,25 @@ const Endorsements = (props: Props) => {
   return (
     <div className="space-y-4">
       {!isEndorsed && !isSameUser && isLoggedIn ? (
-        <div className="flex justify-end">
-          <CustomButton
+        <div className="flex w-full">
+          <Button
+            variant="tertiary"
             onClick={() => {
               isLoggedIn ? setEndorseModal(true) : toast.error("Please login!");
             }}
-            cls="px-6 border border-dark rounded-full h-12 text-gray-700 font-medium"
+            cls="px-4 w-full !justify-between rounded-xl py-3 text-primary font-medium hover:bg-primary/10 bg-primary/5"
           >
-            <MedalSVG />
-            <span className="ml-1 text-sm">
-              Endorse {userDetailsByUsername?.profile?.name}
-            </span>
-          </CustomButton>
+            <div className="flex flex-col items-start">
+              <span className="text-sm">
+                Endorse {userDetailsByUsername?.profile?.name}
+              </span>
+              <p className="text-sm font-normal text-primary/70 mt-1">
+                Let {userDetailsByUsername?.profile?.name} know what you think
+                of their work.
+              </p>
+            </div>
+            <MedalSVG className="w-10 text-primary" />
+          </Button>
         </div>
       ) : null}
       <div className="grid lg:grid-cols-2 gap-4">

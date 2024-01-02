@@ -22,6 +22,7 @@ const Button: FC<ButtonProps> = ({
     default: `${cmnCls} ${cls} text-dark bg-gray-100`,
     tertiary: `${cmnCls} ${cls}`,
     primaryNoOutline: `${cmnCls} bg-primary text-white ${cls}`,
+    tertiaryOutline: `${cmnCls} ${cls} border border-gray-300`,
   };
   return (
     <button {...props} disabled={disabled} className={style[variant]}>

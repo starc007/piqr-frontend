@@ -72,23 +72,6 @@ const Navbar = ({
       `}
     >
       <div className="flex items-center gap-3">
-        {/* {isHero ? (
-          <Link
-            href={isLoggedIn ? "/feed" : "/"}
-            className="sm:text-2xl text-xl font-bold"
-          >
-            Piqr
-          </Link>
-        ) : !isMobile ? (
-          <p className="text-xl font-semibold px-5">{subTitle}</p>
-        ) : (
-          <Link
-            href={isLoggedIn ? "/feed" : "/"}
-            className="text-xl font-semibold lg:px-5 px-2"
-          >
-            Piqr
-          </Link>
-        )} */}
         <Link
           href={isLoggedIn ? "/feed" : "/"}
           className="text-xl font-semibold lg:px-5 px-2"

@@ -10,5 +10,6 @@ export interface ButtonProps
     | "secondary"
     | "default"
     | "tertiary"
-    | "primaryNoOutline";
+    | "primaryNoOutline"
+    | "tertiaryOutline";
 }

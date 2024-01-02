@@ -14,35 +14,33 @@ import SendMessageModal from "@components/app-components/Explore/SendMessageModa
 import Head from "next/head";
 import ProfileCard from "@components/app-components/profile/ProfileCard";
 import NotFound from "@components/app-components/NotFound";
-import { urlify } from "@utils";
-// import Feed from "@components/app-components/Feed";
+import MeetNewPeople from "@components/app-components/MeetNewPeople";
+import About from "@components/app-components/profile/about";
+
 const Feed = dynamic(() => import("@components/app-components/Feed"), {
   ssr: false,
 });
 
-const skillCls =
-  "py-1.5 px-4 text-sm font-medium text-gray-800 border border-gray-200 duration-200 ease-out rounded-full cursor-pointer";
-
 const tabCmnClass =
-  "flex items-center justify-center focus:outline-none text-sm text-gray-700 gap-2 pb-3 w-full text-center border-b ui-selected:border-primary ui-selected:fill-primary  ui-selected:text-primary font-semibold";
+  "flex items-center justify-center focus:outline-none text-sm text-gray-700 gap-2 pb-3 w-20 text-center ui-selected:border-b-2 ui-selected:border-primary ui-selected:fill-primary ui-selected:text-primary font-medium";
 
-const tabs = ["projects", "experience", "endorsements", "posts"];
+const tabs = ["about", "projects", "experience", "posts"];
 
 const TabsObj = [
+  {
+    name: "About",
+    slug: "about",
+    icon: <WorkSVG />,
+  },
   {
     name: "Projects",
     slug: "projects",
     icon: <WorkSVG />,
   },
   {
-    name: "Experience",
+    name: "Resume",
     slug: "experience",
     icon: <SuitcaseSVG />,
-  },
-  {
-    name: "Endorsements",
-    slug: "endorsements",
-    icon: <MedalSVG />,
   },
   {
     name: "Posts",
@@ -154,21 +152,85 @@ const ProfilePage = () => {
           <Loader col="text-gray-800" />
         </div>
       )}
-
       {!loading && userDetailsByUsername === null && <NotFound />}
-
+      {/* flex py-4 flex-col md:flex-row gap-4 md:px-4 */}
       {!loading && userDetailsByUsername !== null && (
-        <div className="flex py-4 flex-col md:flex-row gap-4 font-poppins md:px-4 min-h-screen border-r">
-          <ProfileCard setSendMessageModal={setSendMessageModal} />
-          <div className="p-4 lg:w-[calc(100%-20rem)] w-full">
+        <div className="flex gap-5 min-h-screen">
+          <div className="md:w-5/6 border-r">
+            <ProfileCard setSendMessageModal={setSendMessageModal} />
+            <div className="sm:mb-12 mb-20 mt-3">
+              <Tab.Group
+                selectedIndex={
+                  isValidTab ? tabs.indexOf(currentTab as string) : 0
+                }
+              >
+                <Tab.List className="flex items-center justify-around pt-2 w-full border-b">
+                  {TabsObj.map((item) => {
+                    return (
+                      <Tab
+                        key={item.slug}
+                        className={tabCmnClass}
+                        onClick={() => {
+                          router.query.tab = item.slug;
+                          router.push(router, undefined, {
+                            shallow: true,
+                            scroll: false,
+                          });
+                        }}
+                      >
+                        {item.name}
+                      </Tab>
+                    );
+                  })}
+                </Tab.List>
+                <Tab.Panels className={"mt-3 px-4"}>
+                  <Tab.Panel>
+                    <About
+                      bio={userDetailsByUsername?.profile?.bio as string}
+                      availableFor={
+                        userDetailsByUsername?.profile?.availableFor as string[]
+                      }
+                      skills={
+                        userDetailsByUsername?.profile?.skills as string[]
+                      }
+                      endorsements={
+                        userDetailsByUsername?.profile?.endorsements
+                      }
+                    />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <Works
+                      isEditable={false}
+                      activity={userDetailsByUsername?.activities}
+                    />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <Positions
+                      isEditable={false}
+                      workExp={userDetailsByUsername?.experience}
+                      education={userDetailsByUsername?.education}
+                    />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <Feed
+                      loading={postLoading}
+                      allPosts={userPosts}
+                      totalPages={totalUserPostPages}
+                      currentPage={currentPostPage}
+                      nextPost={nextPost}
+                      setPage={setCurrentPostPage}
+                    />
+                  </Tab.Panel>
+                </Tab.Panels>
+              </Tab.Group>
+            </div>
+          </div>
+          {/* <div className="p-4 lg:w-[calc(100%-20rem)] w-full">
             <div className="flex justify-between">
               <h6 className="font-semibold text-xl text-gray-700">
                 About {userDetailsByUsername?.profile?.name}
               </h6>
             </div>
-            {/* <p className="text-gray-600 mt-4 text-sm font-medium whitespace-pre-line">
-              {userDetailsByUsername?.profile?.bio}
-            </p> */}
             <p
               className="text-gray-600 mt-4 text-sm font-medium whitespace-pre-line"
               id="editor-text"
@@ -202,7 +264,6 @@ const ProfilePage = () => {
               </>
             ) : null}
 
-            {/* Tabs */}
             <div className="mb-12 mt-8">
               <Tab.Group
                 selectedIndex={
@@ -263,10 +324,10 @@ const ProfilePage = () => {
                 </Tab.Panels>
               </Tab.Group>
             </div>
-          </div>
+          </div> */}
+          <MeetNewPeople />
         </div>
       )}
-
       {sendMessageModal && (
         <SendMessageModal
           isOpen={sendMessageModal}

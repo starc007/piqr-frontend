@@ -1,19 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 import {
   DribbleSVG,
+  EditSVG,
   FuelerSVG,
   GithubSVG,
-  GlobeSVG,
+  InboxSVG,
   InstagramSVG,
+  LinkTilted,
   LinkedinSVG,
   MediumSVG,
-  MessageSVG,
   TwitterSVG,
   YoutubeSVG,
   locationIcon,
-  pinIcon,
 } from "@assets/index";
-import { Link, CustomTooltip, Button, Image } from "@components";
+import {
+  Link,
+  Button,
+  Image,
+  Dropdown,
+  DropdownButton,
+  DropdownContent,
+  DropdownItem,
+} from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { formatURL } from "@utils";
 import { useRouter } from "next/router";
@@ -24,14 +32,11 @@ type Props = {
   setSendMessageModal: Dispatch<SetStateAction<boolean>>;
 };
 
-const socialCls =
-  "h-11 w-11 flex justify-center items-center border hover:bg-gray-50 duration-200 ease-out rounded-full cursor-pointer";
-
 const Icons: Record<string, React.ReactElement> = {
   twitter: <TwitterSVG />,
   github: <GithubSVG />,
   linkedin: <LinkedinSVG className="text-gray-500 w-6" />,
-  website: <GlobeSVG />,
+  website: <LinkTilted className="w-6" />,
   medium: <MediumSVG className="w-6 text-gray-500" />,
   youtube: <YoutubeSVG />,
   instagram: <InstagramSVG />,
@@ -105,30 +110,137 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
     : [];
 
   return (
-    <div className="rounded-2xl p-4 flex flex-col gap-3 sm:border  border-gray-200 lg:w-80 w-full h-min md:sticky md:top-20">
-      <CustomTooltip id="msg-tooltip" />
-      {/* Profile Picture */}
-      <div className="flex justify-center">
+    <div className="w-full">
+      <div className="flex w-full bg-gray-100 sm:h-36 h-28" />
+      <div className="flex justify-between md:px-6 px-4">
         <Image
-          className="rounded-full sm:w-40 sm:h-40 w-28 h-28  object-cover object-center"
+          className="rounded-full sm:w-36 sm:h-36 w-28 h-28 sm:-mt-16 -mt-12 object-cover object-center"
           src={userDetailsByUsername?.profile?.avatar as string}
           alt="profile-picture"
         />
+
+        <div className="mt-4">
+          {user?._id !== userDetailsByUsername?.profile?._id ? (
+            <div className="flex items-center gap-3">
+              <Button
+                variant="tertiary"
+                data-tooltip-id="msg-tooltip"
+                data-tooltip-content="Message"
+                onClick={() =>
+                  isLoggedIn ? setSendMessageModal(true) : router.push("/login")
+                }
+                cls={`border font-medium h-11 w-11 gap-2 hover:bg-gray-100`}
+              >
+                <InboxSVG className="w-5" />
+              </Button>
+              <Button
+                onClick={() => {
+                  isLoggedIn ? FollowUnfollow() : toast.error("Please login!");
+                }}
+                cls={`group font-medium h-11 text-sm transition duration-300 ${
+                  isFollowing
+                    ? "hover:text-red-500 hover:bg-red-100 w-28"
+                    : "sm:w-28 w-24"
+                }`}
+                variant={isFollowing ? "default" : "primary"}
+              >
+                <span className={isFollowing ? "group-hover:hidden block" : ""}>
+                  {isFollowing ? "Following" : "Follow"}
+                </span>
+                {isFollowing ? (
+                  <span className="group-hover:block hidden">Unfollow</span>
+                ) : null}
+              </Button>
+            </div>
+          ) : (
+            <Button
+              variant="tertiaryOutline"
+              data-tooltip-id="msg-tooltip"
+              data-tooltip-content="Message"
+              onClick={() =>
+                isLoggedIn ? setSendMessageModal(true) : router.push("/login")
+              }
+              cls={`h-10 px-4 font-medium text-sm gap-2 hover:bg-gray-100`}
+            >
+              <EditSVG className="w-4" />
+              <span>Edit Profile</span>
+            </Button>
+          )}
+        </div>
       </div>
-      <div>
-        <p className="text-center gap-1 z-20 font-bold text-lg">
+      <div className="flex flex-col md:px-6 px-4">
+        <p className="font-semibold text-2xl mt-4">
           {userDetailsByUsername?.profile?.name}{" "}
-          {/* {userDetailsByUsername?.profile?.isVerified && (
-            // <Image src={VerifiedSVG} alt="Verified" width={18} height={18} />
-            <VerifiedSVG />
-          )} */}
         </p>
-        <p className="text-gray-500 text-center mt-1">
-          @{userDetailsByUsername?.profile?.username}
+
+        <p className="text-dark mt-1">
+          {userDetailsByUsername?.profile?.title}
         </p>
-      </div>
-      <div className="flex flex-col items-center">
-        <div className="flex items-center justify-center gap-2 text-sm text-gray-800 font-medium">
+
+        <div className="flex items-center gap-5 mt-2">
+          <p className="text-gray-500 text-sm">
+            @{userDetailsByUsername?.profile?.username}
+          </p>
+
+          <div className="flex items-center gap-1.5 ">
+            <Image src={locationIcon.src} alt="pin" className="w-3" />
+            <p className="text-sm text-gray-500">
+              {userDetailsByUsername?.profile?.location?.city} ,{" "}
+              {userDetailsByUsername?.profile?.location?.country}
+            </p>
+          </div>
+
+          {socialLinks.length > 0 ? (
+            <Dropdown>
+              <DropdownButton cls="z-0 flex items-center text-sm text-gray-500">
+                <LinkTilted className="w-5 mr-1" /> <span>Social</span>
+              </DropdownButton>
+              <DropdownContent cls="w-36 py-2 mt-4 z-10 top-3 !left-0 bg-white shadow-xl">
+                {socialLinks.map((it) => {
+                  if (
+                    !Object.keys(Icons).includes(
+                      Object.keys(socials).find(
+                        (key) => formatURL(socials[key]) === it
+                      )!
+                    )
+                  ) {
+                    return null;
+                  }
+
+                  return (
+                    <DropdownItem
+                      key={it}
+                      className="hover:bg-gray-100 w-full text-sm "
+                    >
+                      <Link
+                        href={it as string}
+                        target="_blank"
+                        className="flex items-center capitalize"
+                      >
+                        {
+                          Icons[
+                            Object.keys(socials).find(
+                              (key) => formatURL(socials[key]) === it
+                            )!
+                          ]
+                        }
+
+                        {/* name */}
+                        <span className="ml-2">
+                          {Object.keys(socials).find(
+                            (key) => formatURL(socials[key]) === it
+                          )}
+                        </span>
+                      </Link>
+                    </DropdownItem>
+                  );
+                })}
+              </DropdownContent>
+            </Dropdown>
+          ) : null}
+        </div>
+
+        <div className="flex items-center mt-3 gap-2 text-sm text-gray-500 font-medium">
           <Button
             disabled={!isLoggedIn}
             variant="tertiary"
@@ -151,86 +263,6 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
             {followData.followers?.length} followers
           </Button>
         </div>
-      </div>
-      <hr className="my-2" />
-      <div className="flex items-center gap-2 w-full">
-        <Image src={pinIcon.src} alt="pin" width={18} height={18} />
-        <p className="text-sm w-11/12">
-          {userDetailsByUsername?.profile?.title}
-        </p>
-      </div>
-      {userDetailsByUsername?.profile?.location?.city ? (
-        <p className="flex items-center gap-2 text-gray-600 font-medium text-sm">
-          <Image src={locationIcon.src} alt="location" width={18} height={18} />{" "}
-          {userDetailsByUsername?.profile?.location?.city} ,{" "}
-          {userDetailsByUsername?.profile?.location?.country}
-        </p>
-      ) : null}
-      {user?._id !== userDetailsByUsername?.profile?._id ? (
-        <div className="border-t pt-4 mt-2 w-full flex justify-center items-center gap-5">
-          <Button
-            variant="tertiary"
-            data-tooltip-id="msg-tooltip"
-            data-tooltip-content="Message"
-            onClick={() =>
-              isLoggedIn ? setSendMessageModal(true) : router.push("/login")
-            }
-            cls={`border font-medium rounded-full h-11 w-11 gap-2 hover:bg-gray-100`}
-          >
-            <MessageSVG className="w-5" />
-          </Button>
-          <Button
-            onClick={() => {
-              isLoggedIn ? FollowUnfollow() : toast.error("Please login!");
-            }}
-            cls={`rounded-full group font-medium h-11 text-sm w-40 transition duration-300 ${
-              isFollowing ? "hover:text-red-500 hover:bg-red-100" : ""
-            }`}
-            variant={isFollowing ? "default" : "secondary"}
-          >
-            <span className={isFollowing ? "group-hover:hidden block" : ""}>
-              {isFollowing ? "Following" : "+ Follow"}
-            </span>
-            {isFollowing ? (
-              <span className="group-hover:block hidden">Unfollow</span>
-            ) : null}
-          </Button>
-        </div>
-      ) : null}
-      <hr className="my-2" />
-      {/* Social Media Icons */}
-      <div className="flex flex-wrap gap-2">
-        {socialLinks.length > 0
-          ? socialLinks.map((it) => {
-              // if key is not present in Icons object then return null
-              if (
-                !Object.keys(Icons).includes(
-                  Object.keys(socials).find(
-                    (key) => formatURL(socials[key]) === it
-                  )!
-                )
-              ) {
-                return null;
-              }
-
-              return (
-                <Link
-                  key={it}
-                  href={it as string}
-                  target="_blank"
-                  className={socialCls}
-                >
-                  {
-                    Icons[
-                      Object.keys(socials).find(
-                        (key) => formatURL(socials[key]) === it
-                      )!
-                    ]
-                  }
-                </Link>
-              );
-            })
-          : null}
       </div>
     </div>
   );
