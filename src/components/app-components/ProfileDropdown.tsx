@@ -4,12 +4,11 @@ import {
   DropdownButton,
   DropdownContent,
   DropdownItem,
-  Button,
   Image,
 } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
-import { EditSVG, logoutIcon, viewIcon } from "@assets/index";
+import { logoutIcon, viewIcon } from "@assets/index";
 
 type Props = {
   btnChildren?: React.ReactNode;
@@ -33,13 +32,6 @@ const ProfileDropdown: FC<Props> = ({
     <Dropdown cls={dropdownMainCls}>
       <DropdownButton cls="w-full">{btnChildren}</DropdownButton>
       <DropdownContent cls={extraCls}>
-        <DropdownItem
-          className="hover:bg-gray-100 w-full flex items-center"
-          onClick={() => router.push("/user/profile")}
-        >
-          <EditSVG className="w-5 mr-2" />
-          <span className="text-sm">Edit Profile</span>
-        </DropdownItem>
         <DropdownItem
           className="hover:bg-gray-100 flex items-center"
           onClick={() => router.push(`/${user?.username}`)}

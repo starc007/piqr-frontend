@@ -1,6 +1,7 @@
 import { urlify } from "@utils";
 import React, { FC } from "react";
 import Endorsements from "../endorsements";
+import { Badge } from "@components";
 
 type Props = {
   bio: string;
@@ -23,11 +24,13 @@ const About: FC<Props> = ({ bio, availableFor, skills, endorsements }) => {
         }}
       ></p>
       <h6 className="font-medium text-gray-500 mt-6">Available for</h6>
-      <div className="flex gap-2 flex-wrap mt-4">
+      <div className="flex gap-2 flex-wrap mt-2">
         {availableFor?.map((item) => (
-          <p key={item} className={skillCls}>
-            {item}
-          </p>
+          <Badge
+            key={item}
+            text={item}
+            cls="rounded-full px-4 py-1.5 text-sm"
+          />
         ))}
       </div>
       {skills.length > 0 ? (

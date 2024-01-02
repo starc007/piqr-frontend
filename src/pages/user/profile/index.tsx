@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { CustomTooltip, Image, Loader, PrivateLayout } from "@components";
 import {
+  ArrowSVG,
   CameraSVG,
   EducationSVG,
   LinkTilted,
@@ -227,6 +228,14 @@ const AddProfile = () => {
     <PrivateLayout title="Edit Profile">
       <div className="lg:px-6 px-4 max-w-6xl mx-auto font-poppins min-h-screen border-r py-4">
         <CustomTooltip id="saveProfile" />
+        <Button
+          cls="w-10 h-10"
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          <ArrowSVG className="w-5 transform -rotate-90" />
+        </Button>
         <div className="flex justify-between items-center w-full">
           <div className="flex flex-col">
             <h6 className="font-bold lg:text-2xl text-lg text-gray-500">
@@ -406,7 +415,7 @@ const AddProfile = () => {
                   className="border w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 duration-200 ease-out border-primary/20  group"
                 >
                   <div className={boxStyle}>
-                    <SuitcaseSVG className="fill-primary" />
+                    <SuitcaseSVG className="fill-primary w-6" />
                   </div>
                   <div>
                     <p className={boxtitle}>Work Experience</p>
@@ -434,7 +443,7 @@ const AddProfile = () => {
                   className="border w-full flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 duration-200 ease-out hover:border-gray-300 mt-4 group"
                 >
                   <div className={boxStyle}>
-                    <LinkTilted className="fill-primary" />
+                    <LinkTilted className="text-primary w-6" />
                   </div>
                   <div>
                     <p className={boxtitle}>Proof of work</p>

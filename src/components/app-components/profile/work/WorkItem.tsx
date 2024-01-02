@@ -19,6 +19,13 @@ const WorkItem: React.FC<
 
   return (
     <div className=" border border-gray-300 p-4 gap-4 rounded-2xl">
+      {/* <LinkPreview
+        url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        width="400px"
+        height="200px"
+        
+        // className="flex items-center space-x-2"
+      /> */}
       <div className="flex-1">
         <div className="flex justify-between">
           {link ? (

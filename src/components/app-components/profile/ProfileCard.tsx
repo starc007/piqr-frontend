@@ -21,6 +21,7 @@ import {
   DropdownButton,
   DropdownContent,
   DropdownItem,
+  Badge,
 } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { formatURL } from "@utils";
@@ -109,6 +110,8 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
         .filter((it) => it)
     : [];
 
+  const isLocationAvailable = user?.location?.city || user?.location?.country;
+
   return (
     <div className="w-full">
       <div className="flex w-full bg-gray-100 sm:h-36 h-28" />
@@ -157,9 +160,7 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
               variant="tertiaryOutline"
               data-tooltip-id="msg-tooltip"
               data-tooltip-content="Message"
-              onClick={() =>
-                isLoggedIn ? setSendMessageModal(true) : router.push("/login")
-              }
+              onClick={() => router.push("/user/profile")}
               cls={`h-10 px-4 font-medium text-sm gap-2 hover:bg-gray-100`}
             >
               <EditSVG className="w-4" />
@@ -172,6 +173,12 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
         <p className="font-semibold text-2xl mt-4">
           {userDetailsByUsername?.profile?.name}{" "}
         </p>
+        <div>
+          <Badge
+            text={userDetailsByUsername?.profile?.category?.[0] as string}
+            cls="px-3 rounded-lg py-1 text-xs"
+          />
+        </div>
 
         <p className="text-dark mt-1">
           {userDetailsByUsername?.profile?.title}
@@ -182,13 +189,15 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
             @{userDetailsByUsername?.profile?.username}
           </p>
 
-          <div className="flex items-center gap-1.5 ">
-            <Image src={locationIcon.src} alt="pin" className="w-3" />
-            <p className="text-sm text-gray-500">
-              {userDetailsByUsername?.profile?.location?.city} ,{" "}
-              {userDetailsByUsername?.profile?.location?.country}
-            </p>
-          </div>
+          {isLocationAvailable ? (
+            <div className="flex items-center gap-1.5 ">
+              <Image src={locationIcon.src} alt="pin" className="w-3" />
+              <p className="text-sm text-gray-500">
+                {userDetailsByUsername?.profile?.location?.city} ,{" "}
+                {userDetailsByUsername?.profile?.location?.country}
+              </p>
+            </div>
+          ) : null}
 
           {socialLinks.length > 0 ? (
             <Dropdown>
