@@ -1,5 +1,5 @@
 import { PlusCircleSVG } from "@assets";
-import { Button, CustomButton } from "@components";
+import { Button } from "@components";
 import { useAppBoundStore } from "@store";
 import { arrayCompare } from "@utils";
 

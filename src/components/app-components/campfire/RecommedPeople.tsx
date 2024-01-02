@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, CustomButton, CustomTooltip, Image, Link } from "@components";
+import { Button, CustomTooltip, Image, Link } from "@components";
 import React from "react";
 
 import { toast } from "react-hot-toast";

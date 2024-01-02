@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, CustomButton, Image, Button } from "@components";
+import { Link, Button } from "@components";
 import LoginBackground from "@appComp/LoginBackground";
 
 import { GoogleSVG, logo } from "@assets";

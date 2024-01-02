@@ -1,4 +1,4 @@
-import { CustomButton, Modal, TextArea } from "@components";
+import { Button, Modal, TextArea } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import React, { FC, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -56,15 +56,15 @@ const SendProposalModal: FC<Props> = ({ closeModal, isOpen, name, oppId }) => {
         </div>
         <hr />
         <div className="flex justify-center gap-4 p-4">
-          <CustomButton
+          <Button
             onClick={closeModal}
             type="button"
             variant="tertiary"
             cls="w-36 text-sm font-medium h-11"
           >
             Back
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             isLoading={loading}
             disabled={loading}
             type="submit"
@@ -72,7 +72,7 @@ const SendProposalModal: FC<Props> = ({ closeModal, isOpen, name, oppId }) => {
             cls="w-40 text-sm font-medium h-11"
           >
             Apply
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </Modal>

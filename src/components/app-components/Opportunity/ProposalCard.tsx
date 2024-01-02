@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CustomButton, Image, Link } from "@components";
+import { Button, Image, Link } from "@components";
 import React from "react";
 import ProposalViewModal from "./ProposalViewModal";
 
@@ -35,12 +35,12 @@ const ProposalCard = ({
             </p>
           </div>
         </div>
-        <CustomButton
+        <Button
           onClick={() => setIsOpen(true)}
           cls="w-14 h-8 border rounded-lg text-sm font-medium"
         >
           view
-        </CustomButton>
+        </Button>
       </div>
       {isOpen && (
         <ProposalViewModal

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { CustomButton, Link, Image } from "@components";
+import { Link, Image, Button } from "@components";
 import { ArrowSVG, CommenetSVG, AvatarSVG, MedalSVG } from "@assets/index";
 import { NOTIFICATION_TYPES } from "@utils";
 import toast from "react-hot-toast";
@@ -149,7 +149,8 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
         }`}
       >
         {data.type === NOTIFICATION_TYPES.FOLLOW && (
-          <CustomButton
+          <Button
+            variant="default"
             onClick={handleFollowCLick}
             cls={`h-8 rounded-lg group text-sm px-3 font-medium  bg-gray-200 ${
               isFollowing
@@ -163,7 +164,7 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
             {isFollowing ? (
               <span className="group-hover:block hidden">Unfollow</span>
             ) : null}
-          </CustomButton>
+          </Button>
         )}
       </div>
     </Link>

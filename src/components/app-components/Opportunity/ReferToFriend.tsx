@@ -1,4 +1,4 @@
-import { CustomButton, Modal } from "@components";
+import { Button, Modal } from "@components";
 import {
   LinkedinIcon,
   LinkedinShareButton,
@@ -49,12 +49,12 @@ const ReferToFriend: FC<Props> = ({ text, oppId, isOpen, closeModal }) => {
         </div>
         <div className="flex items-center justify-between border rounded-xl px-3 py-2 mt-7 w-full">
           <p className="text-gray-500 font-semibold w-2/3 truncate">{url}</p>
-          <CustomButton
+          <Button
             onClick={copyLink}
             cls="ml-5 w-32 bg-primary/10 text-primary h-11 text-sm font-semibold rounded-2xl"
           >
             Copy Link
-          </CustomButton>
+          </Button>
         </div>
       </div>
     </Modal>

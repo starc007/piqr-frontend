@@ -1,4 +1,4 @@
-import { CustomButton, Modal } from "@components";
+import { Button, Modal } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { urlify } from "@utils";
 import React, { FC, useState } from "react";
@@ -53,7 +53,7 @@ const ProposalViewModal: FC<Props> = ({
         </div>
         <hr />
         <div className="flex justify-center gap-4 p-4">
-          <CustomButton
+          <Button
             onClick={() => handleSubmit("rejected")}
             type="button"
             variant="tertiary"
@@ -63,8 +63,8 @@ const ProposalViewModal: FC<Props> = ({
             disabled={rejectLoading || loading}
           >
             Reject
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             isLoading={loading}
             disabled={loading || rejectLoading}
             type="submit"
@@ -73,7 +73,7 @@ const ProposalViewModal: FC<Props> = ({
             onClick={() => handleSubmit("accepted")}
           >
             Accept
-          </CustomButton>
+          </Button>
         </div>
       </>
     </Modal>

@@ -1,4 +1,4 @@
-import { Button, CustomButton, Input, Modal } from "@components";
+import { Button, Input, Modal } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -221,15 +221,15 @@ const AddEducationModal = () => {
         </div>
         <hr />
         <div className="flex justify-center gap-4 p-4">
-          <CustomButton
+          <Button
             onClick={closeAddEducationModal}
             type="button"
-            variant="tertiary"
+            variant="default"
             cls="w-36 text-sm font-medium h-11"
           >
             Back
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             isLoading={loading}
             disabled={loading}
             variant="primaryNoOutline"
@@ -237,7 +237,7 @@ const AddEducationModal = () => {
             cls="w-40 text-sm font-medium h-11"
           >
             Add
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </Modal>

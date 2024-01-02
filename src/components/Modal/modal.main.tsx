@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 
 import { ModalProps } from "./typings";
 import { DeleteSVG } from "@assets/index";
-import { Button, CustomButton } from "..";
+import { Button } from "..";
 
 const Modal: React.FC<ModalProps> = ({
   isOpen,
@@ -56,9 +56,9 @@ const Modal: React.FC<ModalProps> = ({
                 <Dialog.Title className="font-medium text-dark capitalize">
                   {title}
                 </Dialog.Title>
-                <CustomButton onClick={closeModal}>
+                <Button variant="tertiaryOutline" onClick={closeModal}>
                   <DeleteSVG className="w-5" />
-                </CustomButton>
+                </Button>
               </div>
 
               {children}

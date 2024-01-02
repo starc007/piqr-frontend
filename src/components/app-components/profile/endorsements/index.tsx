@@ -1,6 +1,6 @@
 import { useAppBoundStore } from "@store/mainStore";
 import EndorsementItem from "./EndorsementItem";
-import { Button, CustomButton } from "@components";
+import { Button } from "@components";
 import { MedalSVG } from "@assets/index";
 import { useState } from "react";
 import toast from "react-hot-toast";

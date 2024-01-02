@@ -1,11 +1,5 @@
 import { ArrowSVG } from "@assets/index";
-import {
-  CustomButton,
-  Input,
-  PrivateLayout,
-  Select,
-  TextArea,
-} from "@components";
+import { Button, Input, PrivateLayout, Select, TextArea } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { SKILLS } from "@utils";
 import { useRouter } from "next/router";
@@ -212,15 +206,15 @@ const CreateOpportunity = () => {
               />
             </div>
           </div>
-          <CustomButton
+          <Button
             type="submit"
-            variant="primaryNoOutline"
+            variant="primary"
             cls="w-full h-12 font-medium"
             isLoading={loading}
             disabled={loading}
           >
             Submit
-          </CustomButton>
+          </Button>
         </form>
       </div>
     </PrivateLayout>

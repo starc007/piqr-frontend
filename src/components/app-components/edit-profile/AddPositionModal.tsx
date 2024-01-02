@@ -1,4 +1,4 @@
-import { Button, CustomButton, Input, Modal, TextArea } from "@components";
+import { Button, Input, Modal, TextArea } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -235,15 +235,15 @@ const AddPositionModal = () => {
         </div>
         <hr />
         <div className="flex justify-center gap-4 p-4">
-          <CustomButton
+          <Button
             onClick={closeAddPositionModal}
             type="button"
-            variant="tertiary"
+            variant="default"
             cls="w-36 text-sm font-medium h-11"
           >
             Back
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             isLoading={loading}
             disabled={loading}
             variant="primaryNoOutline"
@@ -251,7 +251,7 @@ const AddPositionModal = () => {
             cls="w-40 text-sm font-medium h-11"
           >
             Add
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </Modal>

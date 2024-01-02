@@ -1,5 +1,5 @@
 import { PlusCircleSVG } from "@assets";
-import { Button, CustomButton, Link } from "@components";
+import { Button, Link } from "@components";
 import { useAppBoundStore } from "@store";
 import { SOCIAL_LINKS } from "@utils";
 

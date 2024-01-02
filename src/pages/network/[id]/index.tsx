@@ -1,5 +1,5 @@
 import { ArrowSVG } from "@assets/index";
-import { CustomButton, Loader, PrivateLayout } from "@components";
+import { Button, Loader, PrivateLayout } from "@components";
 import FollowCard from "@components/app-components/profile/FollowCard";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
@@ -75,7 +75,7 @@ const MyNetwork = () => {
           </button>
           <div className="flex gap-5 p-3 border-b">
             {["followers", "following"].map((tab) => (
-              <CustomButton
+              <Button
                 key={tab}
                 onClick={() => {
                   router.push({
@@ -88,7 +88,7 @@ const MyNetwork = () => {
                 } px-4 py-2 rounded-full`}
               >
                 {tab}
-              </CustomButton>
+              </Button>
             ))}
           </div>
           <div className="px-4">{RenderComponent}</div>

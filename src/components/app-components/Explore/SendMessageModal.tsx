@@ -1,4 +1,4 @@
-import { Button, CustomButton, Modal, TextArea } from "@components";
+import { Button, Modal, TextArea } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { CHAT_CONST } from "@utils";
 import { useState } from "react";
@@ -54,15 +54,15 @@ const SendMessageModal = ({ isOpen, closeModal, name, userId }: Props) => {
         </div>
         <hr />
         <div className="flex justify-center gap-4 p-4">
-          <CustomButton
+          <Button
             onClick={closeModal}
             type="button"
-            variant="tertiary"
+            variant="default"
             cls="w-36 text-sm font-medium h-11"
           >
             Back
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             isLoading={loading}
             disabled={loading}
             type="submit"
@@ -70,7 +70,7 @@ const SendMessageModal = ({ isOpen, closeModal, name, userId }: Props) => {
             cls="w-40 text-sm font-medium h-11"
           >
             Send Message
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </Modal>

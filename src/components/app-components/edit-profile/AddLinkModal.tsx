@@ -1,4 +1,4 @@
-import { CustomButton, Input, Modal } from "@components";
+import { Button, Input, Modal } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useState } from "react";
 
@@ -129,15 +129,15 @@ const AddLinkModal = () => {
         </div>
 
         <div className="flex justify-center gap-4 p-4">
-          <CustomButton
+          <Button
             onClick={closeAddLinkModal}
             type="button"
-            variant="tertiary"
+            variant="default"
             cls="w-36 text-sm font-medium h-11"
           >
             Back
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             isLoading={loading}
             disabled={linkToUpdate.length === 0 || loading}
             type="submit"
@@ -145,7 +145,7 @@ const AddLinkModal = () => {
             cls="w-40 text-sm font-medium h-11"
           >
             Add
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </Modal>

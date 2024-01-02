@@ -2,7 +2,6 @@
 import { BookmarkSVG, MessageSVG, ShareSVG, VerifiedSVG } from "@assets";
 import {
   Button,
-  CustomButton,
   CustomTooltip,
   Dropdown,
   DropdownButton,

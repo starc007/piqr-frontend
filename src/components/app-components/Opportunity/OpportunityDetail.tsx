@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { ArrowSVG } from "@assets/index";
-import { CustomButton, Image, Link, Loader } from "@components";
+import { Button, Image, Link, Loader } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -171,13 +171,13 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
 
           {!postedByCurrentUser && (
             <div className="flex justify-center p-4 mt-8">
-              <CustomButton
+              <Button
                 onClick={() => setOpenReferalModal(true)}
                 cls="w-56 text-sm font-medium py-3"
               >
                 Refer to friend
-              </CustomButton>
-              <CustomButton
+              </Button>
+              <Button
                 onClick={() => {
                   if (!isLoggedIn) return toast.error("Please login first!!");
                   if (profilePercent < 90) {
@@ -197,7 +197,7 @@ const OpportunityDetail = ({ item }: { item: OpportunityProps }) => {
                 }`}
               >
                 {isApplied ? "Applied" : "Apply Now"}
-              </CustomButton>
+              </Button>
             </div>
           )}
         </div>

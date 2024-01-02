@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, CustomButton, Image } from "@components";
+import { Button, Image } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { useRouter } from "next/router";
 import React, { FC, memo, use } from "react";
@@ -61,7 +61,7 @@ const FollowCard: FC<Props> = ({ name, username, avatar, title, id }) => {
       </div>
       {isSameUser ? null : (
         <div className="flex items-center">
-          <CustomButton
+          <Button
             onClick={() => {
               FollowUnfollow();
             }}
@@ -78,7 +78,7 @@ const FollowCard: FC<Props> = ({ name, username, avatar, title, id }) => {
             {isFollowing ? (
               <span className="group-hover:block hidden">Unfollow</span>
             ) : null}
-          </CustomButton>
+          </Button>
         </div>
       )}
     </div>

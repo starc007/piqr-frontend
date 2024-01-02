@@ -1,5 +1,5 @@
 import { ChevronDownSVG, FilterSVG } from "@assets/index";
-import { Button, CustomButton, Select } from "@components";
+import { Button, Select } from "@components";
 import { Disclosure, Popover } from "@headlessui/react";
 import { useAppBoundStore } from "@store/mainStore";
 import { AVAILABLE_FOR, CATEGORY, LOCATIONS } from "@utils";

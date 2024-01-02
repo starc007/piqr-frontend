@@ -1,4 +1,4 @@
-import { Button, CustomButton, Modal, Select } from "@components";
+import { Button, Modal, Select } from "@components";
 import { SKILLS, AVAILABLE_FOR } from "@utils";
 import { useAppBoundStore } from "@store/mainStore";
 import { arrayCompare } from "@utils";
@@ -85,21 +85,21 @@ const SkillnAvailableForModal = () => {
       </div>
       <hr className="col-span-3" />
       <div className="flex justify-center gap-4 p-4">
-        <CustomButton
+        <Button
           onClick={closeSkillnAvailableForModal}
           type="button"
-          variant="tertiary"
+          variant="default"
           cls="w-36 text-sm font-medium h-11"
         >
           Back
-        </CustomButton>
-        <CustomButton
+        </Button>
+        <Button
           onClick={closeSkillnAvailableForModal}
           variant="primaryNoOutline"
           cls="w-40 text-sm font-medium h-11"
         >
           Add
-        </CustomButton>
+        </Button>
       </div>
     </Modal>
   );

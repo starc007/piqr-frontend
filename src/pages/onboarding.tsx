@@ -5,8 +5,8 @@ import {
   TextArea,
   Select,
   Loader,
-  CustomButton,
   Image,
+  Button,
 } from "@components";
 import React, { useEffect, useState } from "react";
 import {
@@ -350,15 +350,15 @@ const Onboarding = () => {
                     setFormData({ ...formData, bio: e.target.value })
                   }
                 />
-                <CustomButton
+                <Button
                   isLoading={loading}
                   disabled={loading}
                   type="submit"
-                  variant="primaryNoOutline"
+                  variant="primary"
                   cls="my-6 h-12"
                 >
                   Continue
-                </CustomButton>
+                </Button>
               </form>
             </div>
           </div>

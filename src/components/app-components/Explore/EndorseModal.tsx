@@ -1,4 +1,4 @@
-import { Button, CustomButton, Modal, TextArea } from "@components";
+import { Button, Modal, TextArea } from "@components";
 import { useAppBoundStore } from "@store";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -64,15 +64,15 @@ const EndorseModal = ({ isOpen, closeModal, name, userId }: Props) => {
           >
             Endorse
           </Button> */}
-          <CustomButton
+          <Button
             onClick={closeModal}
             type="button"
-            variant="tertiary"
+            variant="default"
             cls="w-36 text-sm font-medium h-11"
           >
             Back
-          </CustomButton>
-          <CustomButton
+          </Button>
+          <Button
             isLoading={loading}
             disabled={loading}
             type="submit"
@@ -80,7 +80,7 @@ const EndorseModal = ({ isOpen, closeModal, name, userId }: Props) => {
             cls="w-40 text-sm font-medium h-11"
           >
             Send Message
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </Modal>

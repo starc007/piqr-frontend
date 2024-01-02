@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, CustomButton, Image, Link } from "@components";
+import { Button, Image, Link } from "@components";
 import { useAppBoundStore } from "@store";
 import React, { useState } from "react";
 import SendProposalModal from "./SendProposalModal";
@@ -57,14 +57,9 @@ const OpportunityCard = ({
                 </p> */}
               </div>
             </Link>
-            {/* {!postedByCurrentUser && !isMine && (
-              <CustomButton cls="text-dark">
-                <BookmarkSVG className="w-5" />
-              </CustomButton>
-            )} */}
 
             {isMine && (
-              <CustomButton
+              <Button
                 cls="text-dark"
                 onClick={() =>
                   toast.promise(deleteOpportunity(item?._id as string), {
@@ -75,7 +70,7 @@ const OpportunityCard = ({
                 }
               >
                 <Image src={deleteIcon.src} className="w-6" alt="del" />
-              </CustomButton>
+              </Button>
             )}
           </div>
           <button
@@ -156,16 +151,16 @@ const OpportunityCard = ({
           </div>
         </div>
         <div className="flex justify-center gap-4 p-4">
-          <CustomButton
+          <Button
             onClick={() => {
               setOpenReferalModal(true);
             }}
             cls="w-1/2 text-sm font-medium border rounded-full py-2 bg-gray-50"
           >
             Refer to friend
-          </CustomButton>
+          </Button>
           {!postedByCurrentUser && (
-            <CustomButton
+            <Button
               disabled={isApplied}
               onClick={() => {
                 if (!isLoggedIn) return toast.error("Please login first!!");
@@ -191,7 +186,7 @@ const OpportunityCard = ({
             >
               {/* Apply Now */}
               {isApplied ? "Applied" : "Apply Now"}
-            </CustomButton>
+            </Button>
           )}
         </div>
       </div>

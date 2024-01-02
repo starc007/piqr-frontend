@@ -1,11 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  CustomButton,
-  CustomTooltip,
-  Image,
-  Loader,
-  PrivateLayout,
-} from "@components";
+import { CustomTooltip, Image, Loader, PrivateLayout } from "@components";
 import {
   CameraSVG,
   EducationSVG,
@@ -272,12 +266,12 @@ const AddProfile = () => {
                   accept="image/*"
                   onChange={handleFileUpload}
                 />
-                <CustomButton cls="py-2 gap-2 w-full border rounded-full">
+                <Button cls="py-2 gap-2 w-full border rounded-full">
                   <CameraSVG />
                   Edit
-                </CustomButton>
+                </Button>
               </div>
-              <CustomButton
+              <Button
                 onClick={updateProfilePic}
                 disabled={!imageToUpload}
                 data-tooltip-content="Save Profile"
@@ -289,7 +283,7 @@ const AddProfile = () => {
                 } py-2 gap-2 w-10 h-10 rounded-full border  duration-200 ease-out hover:border-gray-300`}
               >
                 <SaveSVG className="w-5" />
-              </CustomButton>
+              </Button>
             </div>
             <div className="relative">
               <Input

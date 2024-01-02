@@ -1,13 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import {
-  Button,
-  CustomButton,
-  Image,
-  Modal,
-  Select,
-  TextArea,
-} from "@components";
+import { Button, Image, Modal, Select, TextArea } from "@components";
 import { TAGS } from "@utils";
 import { toast } from "react-hot-toast";
 import { useAppBoundStore } from "@store";
