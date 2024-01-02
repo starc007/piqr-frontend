@@ -33,6 +33,8 @@ const Notifications: React.FC = () => {
     });
   };
 
+  // console.log(allNotifications);
+
   return (
     <PrivateLayout title="Notifications">
       <div className="w-full flex gap-5">

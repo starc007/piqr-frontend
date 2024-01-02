@@ -13,6 +13,12 @@ interface NotificationsRowProps {
 
 const IconsTOoSHow = {
   [NOTIFICATION_TYPES.UPVOTE]: <ArrowSVG className="w-full text-gray-600" />,
+  [NOTIFICATION_TYPES.UPVOTE_COMMENT]: (
+    <ArrowSVG className="w-full text-gray-600" />
+  ),
+  [NOTIFICATION_TYPES.UPVOTE_REPLY]: (
+    <ArrowSVG className="w-full text-gray-600" />
+  ),
   [NOTIFICATION_TYPES.COMMENT]: (
     <CommenetSVG className="w-full text-gray-600" />
   ),
@@ -79,7 +85,7 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
       }
       key={data._id}
       className={`flex items-center justify-between md:px-4 px-2 py-2.5 ${
-        data.read ? "" : "bg-gray-100"
+        data.read ? "" : "bg-gray-50"
       }`}
       onClick={() => handleNotificationClick(data._id)}
     >
@@ -120,8 +126,8 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
               {data?.sender.length > 1 ? (
                 <div className="flex">
                   <p className="text-sm mt-2">
-                    <span className="font-medium">{data?.sender[0].name}</span>{" "}
-                    & {data?.sender.length - 1} more people liked your
+                    <span className="font-bold">{data?.sender[0].name}</span> &{" "}
+                    {data?.sender.length - 1} more people liked your
                     post.&nbsp;&nbsp;
                     <span className="text-xs pr-5 text-gray-500">
                       {moment(data.updatedAt).fromNow()}
@@ -130,8 +136,11 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
                 </div>
               ) : (
                 <div className="flex">
-                  <p className="text-sm mt-2">
-                    {data?.sender[0].name} liked your post &nbsp;&nbsp;
+                  <p className="text-sm mt-2 ">
+                    <span className="font-semibold">
+                      {data?.sender[0].name}
+                    </span>{" "}
+                    liked your post &nbsp;&nbsp;
                     <span className="text-xs pr-5 text-gray-500">
                       {moment(data.updatedAt).fromNow()}
                     </span>
@@ -140,6 +149,12 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
               )}
             </>
           )}
+          <p
+            className="text-xs mt-2 text-gray-500 whitespace-pre-line"
+            dangerouslySetInnerHTML={{
+              __html: data?.data as string,
+            }}
+          />
         </div>
       </div>
 

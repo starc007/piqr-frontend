@@ -266,6 +266,8 @@ export declare global {
     updatedAt?: string;
     isNew?: boolean;
     postId?: string;
+    replyId?: string;
+    data?: string;
   }
 
   interface ICommentState {

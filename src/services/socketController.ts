@@ -61,7 +61,6 @@ export class SocketSDK {
   }
 
   static leaveRoom(chatId: string) {
-    // console.log(">>>leave chat", chatId);
     SocketSDK.socket?.emit(CHAT_CONST.LEAVE_CHAT, chatId);
   }
 
@@ -73,8 +72,6 @@ export class SocketSDK {
     SocketSDK.socket?.on(
       CHAT_CONST.NOTIFICATION_RECIEVED,
       (data: INotificationResponse) => {
-        console.log(">>>heree 123", data);
-
         const allNoti = useAppBoundStore.getState().allNotifications;
         const isNoti = allNoti.find((noti) => noti._id === data._id);
 
@@ -152,9 +149,5 @@ export class SocketSDK {
       SocketSDK.socket?.close();
       SocketSDK.socket = null;
     }
-  }
-
-  static dummy() {
-    SocketSDK.socket?.emit("helllooo");
   }
 }
