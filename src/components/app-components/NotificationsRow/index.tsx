@@ -35,14 +35,13 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
     followUser,
     unfollowUser,
     markNotificationsAsRead,
-    user,
     followingIds,
   } = useAppBoundStore((state) => ({
     isLoggedIn: state.isLoggedIn,
     followUser: state.followUser,
     unfollowUser: state.unfollowUser,
     markNotificationsAsRead: state.markNotificationsAsRead,
-    user: state.user,
+
     followingIds: state.followingIds,
   }));
 

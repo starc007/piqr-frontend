@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Button,
   Dropdown,
@@ -8,14 +8,7 @@ import {
   Image,
   Link,
 } from "@components";
-import {
-  ArrowSVG,
-  AvatarSVG,
-  CommenetSVG,
-  DeleteSVG,
-  ThreeDotsSVG,
-  deleteIcon,
-} from "@assets/index";
+import { ArrowSVG, CommenetSVG, ThreeDotsSVG, deleteIcon } from "@assets/index";
 import { useAppBoundStore } from "@store/mainStore";
 import { formatText } from "@utils";
 import toast from "react-hot-toast";
@@ -54,8 +47,13 @@ const CommentItem: FC<Props> = ({
       deleteReply: state.deleteReply,
     }));
 
+  const [upvoteState, setupvoteState] = useState({
+    isUpvoted: replyDetails?.isUpvoted as boolean,
+    upvoteCount: replyDetails?.upvoteCount as number,
+  });
+
   const isDeleteButtonVisible =
-    user?.username === userDetail?.username || user?.username === postUserId;
+    user?._id === userDetail?._id || user?._id === postUserId;
 
   const handleDelete = async () => {
     if (!id) return toast.error("Something went wrong");
@@ -69,25 +67,40 @@ const CommentItem: FC<Props> = ({
     }
   };
 
-  const isUpvoted = replyDetails?.upvotes?.includes(user?._id!);
-
   const handleUpvoteClick = async () => {
     if (!isLoggedIn) return toast.error("You need to login first");
 
     if (!id) return toast.error("Something went wrong");
+
+    if (upvoteState.isUpvoted) {
+      setupvoteState({
+        isUpvoted: false,
+        upvoteCount: upvoteState.upvoteCount - 1,
+      });
+    } else {
+      setupvoteState({
+        isUpvoted: true,
+        upvoteCount: upvoteState.upvoteCount + 1,
+      });
+    }
 
     if (isReply) {
       await upvoteReplyComment({
         replyId: id,
         commentId: commentId!,
         isReply: true,
+        setupvoteState,
       });
     } else {
-      console.log("id", id);
-      await upvoteReplyComment({ commentId: id, isReply: false });
+      await upvoteReplyComment({
+        commentId: id,
+        isReply: false,
+        setupvoteState,
+      });
     }
   };
-  // urlify(replyDetails.msg)
+
+  const isSameUser = userDetail?._id === user?._id;
   return (
     <>
       {/* User Info */}
@@ -163,24 +176,21 @@ const CommentItem: FC<Props> = ({
               shouldVisible: true,
               isReply: isReply,
               replyingTo: {
-                username: userDetail.username!,
-                name: userDetail.name!,
+                username: isSameUser ? "" : userDetail.username!,
+                name: isSameUser ? "" : userDetail.name!,
               },
             });
 
             const cmtDiv = document.getElementById(replyDetails._id!);
             if (cmtDiv) {
-              // scroll to the comment and focus on the input + scroll more 100px
               cmtDiv.scrollIntoView({ behavior: "smooth" });
               inputRef?.current?.focus();
             }
           }}
+          disabled={!isLoggedIn}
           variant="tertiary"
         >
           <CommenetSVG className="w-5 text-gray-600 hover:text-primary" />
-          {/* <p className="text-center pl-1 text-sm">
-            {replyDetails?.repliesCount || 0}{" "}
-          </p> */}
           <p className="text-center pl-1 text-sm">
             {("repliesCount" in replyDetails ? replyDetails.repliesCount : 0) ||
               0}{" "}
@@ -190,7 +200,7 @@ const CommentItem: FC<Props> = ({
         <div className="flex items-center">
           <Button
             cls={`${cmnCls} ${
-              isUpvoted
+              upvoteState.isUpvoted
                 ? "bg-primary text-white hover:bg-primary hover:text-white hover:border-primary border-primary"
                 : "hover__effect text-gray-600"
             }`}
@@ -201,7 +211,7 @@ const CommentItem: FC<Props> = ({
             <ArrowSVG className="w-3.5" />
           </Button>
           <p className="text-center pl-2 text-sm">
-            {replyDetails?.upvotes?.length || 0}{" "}
+            {upvoteState?.upvoteCount || 0}{" "}
           </p>
         </div>
       </div>

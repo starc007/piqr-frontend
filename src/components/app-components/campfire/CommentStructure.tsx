@@ -26,8 +26,9 @@ const CommentStructure: FC<{
     },
   });
 
-  const { getReplies } = useAppBoundStore((state) => ({
+  const { getReplies, isLoggedIn } = useAppBoundStore((state) => ({
     getReplies: state.getReplies,
+    isLoggedIn: state.isLoggedIn,
   }));
 
   const handleGetReplies = async (id: string) => {
@@ -99,7 +100,7 @@ const CommentStructure: FC<{
         ) : null}
 
         {/* Reply Input */}
-        {replyInput.shouldVisible ? (
+        {replyInput.shouldVisible && isLoggedIn ? (
           <ReplyInput
             replyRef={replyRef}
             postId={null}

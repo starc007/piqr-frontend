@@ -9,7 +9,7 @@ import ReplyInput from "@components/app-components/campfire/ReplyInput";
 import { useAppBoundStore } from "@store/mainStore";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CampfirePostPage = () => {
   const router = useRouter();
@@ -126,7 +126,7 @@ const CampfirePostPage = () => {
                         key={comment._id}
                         userDetail={comment.user}
                         replyDetails={comment}
-                        postUserId={selectedPost?.user?.username!}
+                        postUserId={selectedPost?.user?._id!}
                       />
                     );
                   })
@@ -188,4 +188,4 @@ const CampfirePostPage = () => {
   );
 };
 
-export default memo(CampfirePostPage);
+export default CampfirePostPage;

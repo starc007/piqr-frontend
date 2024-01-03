@@ -23,7 +23,6 @@ const ReplyInput: FC<Props> = ({
 }) => {
   const [replyMessage, setReplyMessage] = React.useState("");
   const [replying, setReplying] = React.useState(false);
-  const [replyingToUsername, setReplyingToUsername] = React.useState("");
 
   useAutosizeTextArea(replyRef.current, replyMessage);
 
@@ -68,7 +67,6 @@ const ReplyInput: FC<Props> = ({
         obj = {
           ...obj,
           replyingToUsername: replyInput?.replyingTo?.username,
-          //remove @username from the reply message
           text: replyMessage.replace(
             `@${replyInput?.replyingTo?.username} `,
             ""
@@ -102,7 +100,7 @@ const ReplyInput: FC<Props> = ({
       replyRef.current?.focus();
     }
 
-    if (replyInput?.isReply) {
+    if (replyInput?.isReply && replyInput?.replyingTo?.username) {
       setReplyMessage(`@${replyInput?.replyingTo?.username} `);
     }
   }, [replyInput]);

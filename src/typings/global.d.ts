@@ -193,6 +193,8 @@ export declare global {
     upvotes: string[];
     replyId?: string;
     replyingToUsername?: string;
+    upvoteCount: number;
+    isUpvoted?: boolean;
   }
 
   interface CommentResponse {
@@ -203,6 +205,8 @@ export declare global {
     upvotes: string[];
     firstTwoReplies: ReplyProps[];
     repliesCount: number;
+    upvoteCount: number;
+    isUpvoted?: boolean;
   }
 
   interface IdeaResponse {
@@ -219,6 +223,9 @@ export declare global {
     updatedAt: number;
     imgUrl: string[];
     commentsCount: number;
+    upvoteCount: number;
+    isUpvoted?: boolean;
+    isFollowing?: boolean;
   }
 
   interface IdeaProps {

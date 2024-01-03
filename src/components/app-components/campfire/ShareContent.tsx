@@ -52,7 +52,7 @@ const ShareContent = ({ name, _id }: { name: string; _id: string }) => {
           onClick={copyLink}
           className="hover:bg-gray-100 w-full text-sm flex items-center gap-2"
         >
-          <LinkTilted />
+          <LinkTilted className="w-5" />
           <span>Copy URL</span>
         </DropdownItem>
       </DropdownContent>

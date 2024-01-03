@@ -23,7 +23,7 @@ import {
 import { useAppBoundStore } from "@store/mainStore";
 // import moment from "moment";
 import { useRouter } from "next/router";
-import React, { useState, memo, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import SendMessageModal from "../Explore/SendMessageModal";
 import { urlify, formatText } from "../../../utils/index";
@@ -63,16 +63,32 @@ const CampfirePostPreview = ({
   }));
 
   const isSameUser = user?._id === item?.user?._id;
-  const isFollowing = item?.user?.folowId?.followers?.includes(user?._id!);
-  const isUpvoted = item?.upvotes?.includes(user?._id!);
+  const isFollowing = item?.isFollowing;
+  const [upvoteState, setupvoteState] = useState({
+    isUpvoted: item?.isUpvoted as boolean,
+    upvoteCount: item?.upvoteCount as number,
+  });
 
   const handleUpvoteClick = () => {
+    const { isUpvoted, upvoteCount } = upvoteState;
+    if (isUpvoted) {
+      setupvoteState({
+        isUpvoted: false,
+        upvoteCount: upvoteCount - 1,
+      });
+    } else {
+      setupvoteState({
+        isUpvoted: true,
+        upvoteCount: upvoteCount + 1,
+      });
+    }
+
     if (isLoggedIn) {
       upvotePost({
         id: item?._id!,
+        setupvoteState,
       }).then((res) => {
         console.log("upvoted");
-        // socket?.emit("upvoted", item);
       });
     } else toast.error("Please login to upvote");
   };
@@ -308,7 +324,7 @@ const CampfirePostPreview = ({
             <div className="flex items-center">
               <button
                 className={`${cmnCls} ${
-                  isUpvoted
+                  upvoteState.isUpvoted
                     ? "bg-primary text-white hover:bg-primary hover:text-white hover:border-primary border-primary"
                     : "hover__effect text-gray-600"
                 }`}
@@ -317,7 +333,10 @@ const CampfirePostPreview = ({
               >
                 <ArrowSVG className="w-4" />
               </button>
-              <p className="text-center pl-2"> {item?.upvotes?.length || 0} </p>
+              <p className="text-center pl-2">
+                {" "}
+                {upvoteState.upvoteCount || 0}{" "}
+              </p>
             </div>
 
             <ShareContent name={item?.user?.name!} _id={item?._id!} />
