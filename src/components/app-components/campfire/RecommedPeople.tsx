@@ -17,7 +17,10 @@ const RecommedPeople = (props: ProfileResponse) => {
     })
   );
 
-  const isFollowing = item?.folowId?.followers?.includes(user?._id!);
+  const [isFollowing, setIsFollowing] = React.useState<boolean>(
+    item?.isFollowing || false
+  );
+  // const isFollowing = item?.folowId?.followers?.includes(user?._id!);
 
   return (
     <div className="p-3">
@@ -45,15 +48,13 @@ const RecommedPeople = (props: ProfileResponse) => {
               // isLoggedIn ? FollowUnfollow() : toast.error("Please login!");
               isLoggedIn
                 ? isFollowing
-                  ? unfollowUser(item._id!).then(() =>
-                      console.log("unfollowed")
-                    )
-                  : followUser(item._id!).then(() => console.log("followed"))
+                  ? unfollowUser(item._id!).then(() => setIsFollowing(false))
+                  : followUser(item._id!).then(() => setIsFollowing(true))
                 : toast.error("Please login!");
             }}
             cls={`group font-medium h-9 text-sm px-4 transition duration-300 ${
               isFollowing
-                ? "bg-dark/10  hover:text-red-500 hover:bg-red-100"
+                ? "bg-dark/40 hover:text-red-500 hover:bg-red-100"
                 : "bg-dark  text-white hover:bg-dark/80"
             }`}
             variant="secondary"

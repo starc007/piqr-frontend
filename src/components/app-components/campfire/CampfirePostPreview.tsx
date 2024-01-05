@@ -43,6 +43,9 @@ const CampfirePostPreview = ({
   const [sendMessageModal, setSendMessageModal] = useState(false);
   const [enlargeImage, setEnlargeImage] = useState("");
   const [isReadMore, setIsReadMore] = useState(false);
+  const [isFollowing, setIsFollowing] = useState<boolean>(
+    item?.isFollowing || false
+  );
 
   const {
     setSelectPost,
@@ -63,7 +66,6 @@ const CampfirePostPreview = ({
   }));
 
   const isSameUser = user?._id === item?.user?._id;
-  const isFollowing = item?.isFollowing;
   const [upvoteState, setupvoteState] = useState({
     isUpvoted: item?.isUpvoted as boolean,
     upvoteCount: item?.upvoteCount as number,
@@ -124,7 +126,7 @@ const CampfirePostPreview = ({
                 {item?.user?.name}{" "}
                 {/* {item?.user?.isVerified ? <VerifiedSVG /> : null} */}
                 {isFollowing ? (
-                  <span className="text-xs text-gray-500 hover:text-dark">
+                  <span className="text-xs text-gray-500 hover:text-dark pt-[1px]">
                     · following
                   </span>
                 ) : null}
@@ -168,9 +170,9 @@ const CampfirePostPreview = ({
                         className="flex items-center gap-2 hover:bg-gray-100"
                         onClick={() => {
                           // setToggle(!toggle);
-                          unfollowUser(item?.user?._id!).then(() =>
-                            console.log("unfollowed")
-                          );
+                          unfollowUser(item?.user?._id!).then(() => {
+                            setIsFollowing(false);
+                          });
                         }}
                       >
                         <DeleteSVG className="w-5" />
@@ -184,9 +186,8 @@ const CampfirePostPreview = ({
                         onClick={() => {
                           if (!isLoggedIn)
                             return toast.error("Please login First!!");
-                          // setToggle(!toggle);
                           followUser(item?.user?._id).then(() =>
-                            console.log("followed")
+                            setIsFollowing(true)
                           );
                         }}
                       >

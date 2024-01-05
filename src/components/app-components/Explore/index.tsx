@@ -23,7 +23,6 @@ interface ExploreCardProps {
 const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
   const [sendMessageModal, setSendMessageModal] = useState(false);
   const [endorseModal, setEndorseModal] = useState(false);
-  const [toggleState, setToggleState] = useState(false);
   const { user, isLoggedIn, saveUser, followUser } = useAppBoundStore(
     (state) => ({
       user: state.user,
@@ -33,10 +32,15 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
     })
   );
 
-  const isSameUser = user?._id === item?._id;
-  const isSavedUser = item?.savedBy?.includes(user?._id!);
+  const [isFollowing, setIsFollowing] = useState<boolean>(
+    item?.isFollowing || false
+  );
 
-  const isFollowing = item?.folowId?.followers?.includes(user?._id!);
+  const [isSavedUser, setIsSavedUser] = useState<boolean>(
+    item?.isProfileSaved || false
+  );
+
+  const isSameUser = user?._id === item?._id;
 
   const copyProfile = (username: string) => {
     const url = `https://www.piqr.in/${username}`;
@@ -74,35 +78,6 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
         </div>
         <div className="flex items-center gap-3">
           {!isSameUser ? (
-            // <div
-            //   data-tooltip-id="saveProfile"
-            //   data-tooltip-content={isSavedUser ? "Unsave" : "Save"}
-            //   // cls="transition duration-300"
-            //   onClick={() => {
-            //     setToggleState(!toggleState);
-            //     // isLoggedIn
-            //     //   ? saveUser(item._id!, !isSavedUser).then(() =>
-            //     //       console.log("saved")
-            //     //     )
-            //     //   : toast.error("Please login to save");
-            //   }}
-            //   className="ui-bookmark"
-            //   // variant="tertiary"
-            // >
-            //   <input type="checkbox" />
-            //   <div className="bookmark">
-            //     {/* <BookmarkSVG
-            //       className={`w-5 hover:fill-black ${
-            //         isSavedUser ? "fill-black" : "fill-none"
-            //       }`}
-            //     /> */}
-            //     <svg viewBox="0 0 32 32">
-            //       <g>
-            //         <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-            //       </g>
-            //     </svg>
-            //   </div>
-            // </div>
             <label
               className="ui-bookmark"
               data-tooltip-id="saveProfile"
@@ -112,10 +87,9 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
                 type="checkbox"
                 checked={isSavedUser}
                 onChange={() => {
-                  // setToggleState(!toggleState);
                   isLoggedIn
                     ? saveUser(item._id!, !isSavedUser).then(() =>
-                        console.log("saved")
+                        setIsSavedUser(!isSavedUser)
                       )
                     : toast.error("Please login to save");
                 }}
@@ -165,19 +139,22 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
           <>
             <p className="text-xs font-bold text-gray-600">Endorsed by</p>
             <div className="flex gap-1 mt-2 items-center">
-              {item?.endorsements?.slice(0, 5).map((endorse, i) => (
-                <Link
-                  key={endorse._id}
-                  href={`/${endorse.user?.username}`}
-                  className={`w-7 h-7 ${i !== 0 && "-ml-3"}`}
-                >
-                  <Image
-                    src={endorse.user?.avatar!}
-                    alt={endorse.user?.username!}
-                    className={`rounded-full w-full h-full object-center object-cover bg-white border`}
-                  />
-                </Link>
-              ))}
+              {item?.endorsements?.slice(0, 5).map((endorse, i) => {
+                if (Object.keys(endorse?.user || {}).length == 0) return null;
+                return (
+                  <Link
+                    key={endorse._id}
+                    href={`/${endorse.user?.username}`}
+                    className={`w-7 h-7 ${i !== 0 && "-ml-3"}`}
+                  >
+                    <Image
+                      src={endorse.user?.avatar!}
+                      alt={endorse.user?.username!}
+                      className={`rounded-full w-full h-full object-center object-cover bg-white border`}
+                    />
+                  </Link>
+                );
+              })}
               {item?.endorsements?.length > 5 && (
                 <span className="text-sm font-bold text-gray-500">
                   +{item?.endorsements?.length - 5} more
@@ -194,7 +171,7 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
             <Button
               onClick={() => {
                 isLoggedIn
-                  ? followUser(item._id!).then(() => console.log("followed"))
+                  ? followUser(item._id!).then(() => setIsFollowing(true))
                   : toast.error("Please login!");
               }}
               cls={`rounded-xl hover:bg-dark/80 font-medium h-11 w-2/5`}

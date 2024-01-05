@@ -28,22 +28,17 @@ const IconsTOoSHow = {
 };
 
 const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
-  const [isFollowing, setIsFollowing] = React.useState<boolean>(false);
+  const [isFollowing, setIsFollowing] = React.useState<boolean>(
+    data?.isFollowing || false
+  );
 
-  const {
-    isLoggedIn,
-    followUser,
-    unfollowUser,
-    markNotificationsAsRead,
-    followingIds,
-  } = useAppBoundStore((state) => ({
-    isLoggedIn: state.isLoggedIn,
-    followUser: state.followUser,
-    unfollowUser: state.unfollowUser,
-    markNotificationsAsRead: state.markNotificationsAsRead,
-
-    followingIds: state.followingIds,
-  }));
+  const { isLoggedIn, followUser, unfollowUser, markNotificationsAsRead } =
+    useAppBoundStore((state) => ({
+      isLoggedIn: state.isLoggedIn,
+      followUser: state.followUser,
+      unfollowUser: state.unfollowUser,
+      markNotificationsAsRead: state.markNotificationsAsRead,
+    }));
 
   const handleFollowCLick = (e: any) => {
     e.preventDefault();
@@ -61,19 +56,10 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
   };
 
   const handleNotificationClick = async (id: string | undefined) => {
-    if (id) {
+    if (id && !data.read) {
       await markNotificationsAsRead(id);
     }
   };
-
-  React.useEffect(() => {
-    if (data.type === NOTIFICATION_TYPES.FOLLOW) {
-      const isAlreadyFollowing = followingIds?.includes(
-        data?.sender[0]?._id as string
-      );
-      setIsFollowing(isAlreadyFollowing);
-    }
-  }, [followingIds, data]);
 
   return (
     <Link
@@ -126,8 +112,7 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
                 <div className="flex">
                   <p className="text-sm mt-2">
                     <span className="font-bold">{data?.sender[0].name}</span> &{" "}
-                    {data?.sender.length - 1} more people liked your
-                    post.&nbsp;&nbsp;
+                    {data?.senderCount} more people liked your post.&nbsp;&nbsp;
                     <span className="text-xs pr-5 text-gray-500">
                       {moment(data.updatedAt).fromNow()}
                     </span>
@@ -164,16 +149,16 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
       >
         {data.type === NOTIFICATION_TYPES.FOLLOW && (
           <Button
-            variant="default"
+            variant={isFollowing ? "default" : "secondary"}
             onClick={handleFollowCLick}
-            cls={`h-8 rounded-lg group text-sm px-3 font-medium  bg-gray-200 ${
+            cls={`h-8 group text-sm px-3 font-medium ${
               isFollowing
                 ? "hover:text-red-500 hover:bg-red-100"
                 : "hover:bg-gray-300 duration-300"
             }  transition`}
           >
             <span className={isFollowing ? "group-hover:hidden block" : ""}>
-              {isFollowing ? "Following" : "Follow"}
+              {isFollowing ? "Following" : "Follow Back"}
             </span>
             {isFollowing ? (
               <span className="group-hover:block hidden">Unfollow</span>

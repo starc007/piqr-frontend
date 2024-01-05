@@ -151,65 +151,6 @@ const Sidebar = () => {
   }, [allNotifications]);
 
   return (
-    // <div className="flex flex-col justify-between w-full h-full">
-
-    //   {/* <div className="flex flex-row justify-between w-full"> */}
-
-    //   {/* {isLoggedIn ? (
-    //       <Button
-    //         variant="secondary"
-    //         cls="w-full lg:flex hidden h-12 font-medium"
-    //         onClick={() => setNewPostModal(true)}
-    //       >
-    //         <EditSVG className="w-5" />
-    //         <span className="font-medium pl-3">Post</span>
-    //       </Button>
-    //     ) : (
-    //       <Button
-    //         variant="secondary"
-    //         cls="w-full lg:flex hidden h-12 font-medium"
-    //         onClick={() => router.push("/login")}
-    //       >
-    //         <span className="font-medium">Login</span>
-    //       </Button>
-    //     )} */}
-    //   {/* </div> */}
-    //   {/* {isLoggedIn && progress > 90 && (
-    //     <div className="w-full mt-7 py-4 lg:block hidden mb-5">
-    //       <FloatingProfileProgress data={dataTo} progress={progress} />
-    //     </div>
-    //   )} */}
-    //   {/* {isLoggedIn ? (
-    //     <div className="lg:flex hidden w-full">
-    //       <ProfileDropdown
-    //         dropdownMainCls="w-full"
-    //         extraCls="w-full py-2 bottom-full"
-    //         btnChildren={
-    //           <div className="flex w-full mb-7 border border-gray-200 rounded-xl py-2 px-3">
-    //             <Image
-    //               src={user?.avatar!}
-    //               className="rounded-full h-10 w-10 object-cover object-center"
-    //               alt="avatar"
-    //             />
-    //             <div className="flex flex-col items-start text-sm ml-1.5">
-    //               <span className="font-medium">{user?.name}</span>
-    //               <p className="text-gray-500 font-medium truncate w-32 text-left">
-    //                 {user?.title}
-    //               </p>
-    //             </div>
-    //           </div>
-    //         }
-    //       />
-    //     </div>
-    //   ) : null} */}
-
-    //   {/* // {isLoggedIn && newPostModal && (
-    //   //   <NewCampFirePostModal
-    //   //     isOpen={newPostModal}
-    //   //     closeModal={() => setNewPostModal(false)}
-    //   //   />
-    //   // )} */}
-    // </div>
     <div className="flex flex-row justify-between px-6 w-full h-12 my-1 md:my-2">
       {SideMenu.map((item) =>
         !isLoggedIn && item.isPrivate ? null : (

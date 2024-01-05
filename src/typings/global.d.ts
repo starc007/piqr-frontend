@@ -59,6 +59,8 @@ export declare global {
       followers?: string[];
       following?: string[];
     };
+    isFollowing?: boolean;
+    isProfileSaved?: boolean;
   }
 
   interface UpdateUserProps {
@@ -275,6 +277,8 @@ export declare global {
     postId?: string;
     replyId?: string;
     data?: string;
+    senderCount?: number;
+    isFollowing?: boolean;
   }
 
   interface ICommentState {
