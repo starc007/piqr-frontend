@@ -253,16 +253,16 @@ export const createUserSlice: StateCreator<AppState, [], [], UserState> = (
       const currentDate = new Date();
 
       //check if new day has started
-      // if (
-      //   prevDate.getDate() === currentDate.getDate() && // same day
-      //   prevDate.getMonth() === currentDate.getMonth() && // same month
-      //   prevDate.getFullYear() === currentDate.getFullYear() // same year
-      // ) {
-      //   set({
-      //     dailyNewUsers: JSON.parse(decrypted),
-      //   });
-      //   return;
-      // }
+      if (
+        prevDate.getDate() === currentDate.getDate() && // same day
+        prevDate.getMonth() === currentDate.getMonth() && // same month
+        prevDate.getFullYear() === currentDate.getFullYear() // same year
+      ) {
+        set({
+          dailyNewUsers: JSON.parse(decrypted),
+        });
+        return;
+      }
 
       const res = await __getNewPeoplDailyToMeet();
       if (res?.success) {

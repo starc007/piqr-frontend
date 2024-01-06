@@ -152,9 +152,7 @@ const NotificationsRow: React.FC<NotificationsRowProps> = ({ data }) => {
             variant={isFollowing ? "default" : "secondary"}
             onClick={handleFollowCLick}
             cls={`h-8 group text-sm px-3 font-medium ${
-              isFollowing
-                ? "hover:text-red-500 hover:bg-red-100"
-                : "hover:bg-gray-300 duration-300"
+              isFollowing ? "hover:text-red-500 hover:bg-red-100" : ""
             }  transition`}
           >
             <span className={isFollowing ? "group-hover:hidden block" : ""}>
