@@ -223,9 +223,12 @@ export const __saveUser = (
   postFetch(`/user/save/${params.id}`, params, config);
 
 export const __getSavedUsers = (
+  params: {
+    page?: number;
+  },
   config?: AxiosRequestConfig
 ): Promise<Types.FetchResponse<ProfileResponse[]>> =>
-  getFetch(`/user/saved/get`, undefined, config);
+  getFetch(`/user/saved/get?page=${params.page || 0}`, undefined, config);
 
 export const __getUsersByCategory = (
   params: {

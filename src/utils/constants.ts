@@ -282,7 +282,7 @@ export const CHAT_CONST = {
 };
 
 // export const API_ENDPOINT_PROD = "https://api-test.piqr.in";
-export const API_ENDPOINT_PROD = "https://api.piqr.in/";
+export const API_ENDPOINT_PROD = "https://api.piqr.in";
 export const API_ENDPOINT_DEV = "http://localhost:6969";
 
 export const NOTIFICATION_TYPES = {

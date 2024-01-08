@@ -30,7 +30,6 @@ import { NOT_ALLOWED_PEOPLE } from "@utils";
 
 export interface UserState {
   allUsers: ProfileResponse[];
-  allUsersPage: number;
   filteredUsers: ProfileResponse[];
   savedProfiles: ProfileResponse[];
   socialLinks: SocialsResponse | undefined;
@@ -95,7 +94,7 @@ export interface UserState {
   getNewUserDailyToMeet: () => Promise<void>;
   setProfilePercent: (percent: number) => void;
   saveUser: (id: string, shouldSave: boolean) => Promise<void>;
-  getSavedUsers: () => Promise<void>;
+  getSavedUsers: (page: number) => Promise<void>;
   setIsUserDetailsFetched: (isFetched: boolean) => void;
 }
 
@@ -118,7 +117,6 @@ export const initialUserState = {
   notifications: [],
   selectedChat: null,
   dailyNewUsers: [],
-  allUsersPage: 0,
   profilePercent: 0,
   isUserDetailsFetched: false,
 };
@@ -156,7 +154,6 @@ export const createUserSlice: StateCreator<AppState, [], [], UserState> = (
             usersLoading: false,
             totalPages: res?.data?.totalPages,
             filteredUsers: filterUser,
-            allUsersPage: res?.data?.totalPages,
             isProfilesFetched: true,
           });
         } else {
@@ -173,7 +170,6 @@ export const createUserSlice: StateCreator<AppState, [], [], UserState> = (
             usersLoading: false,
             totalPages: res?.data?.totalPages,
             filteredUsers: filterUser,
-            allUsersPage: res?.data?.totalPages,
             isProfilesFetched: true,
           });
         }
@@ -733,9 +729,11 @@ export const createUserSlice: StateCreator<AppState, [], [], UserState> = (
       console.log(error);
     }
   },
-  getSavedUsers: async () => {
+  getSavedUsers: async (page) => {
     try {
-      const res = await __getSavedUsers();
+      const res = await __getSavedUsers({
+        page,
+      });
       if (res.success) {
         set({
           savedProfiles: res.data,
