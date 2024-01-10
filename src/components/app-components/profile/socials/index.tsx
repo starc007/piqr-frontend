@@ -33,7 +33,7 @@ const Socials = () => {
           cls="px-4 py-2 text-sm gap-1"
           onClick={openAddLinkModal}
         >
-          <PlusCircleSVG /> Add
+          <PlusCircleSVG className="w-4" /> Add
         </Button>
       </div>
     </div>

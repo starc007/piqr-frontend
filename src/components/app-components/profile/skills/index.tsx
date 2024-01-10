@@ -33,7 +33,7 @@ const Skills = () => {
           cls="px-4 py-2 text-sm gap-1"
           onClick={openSkillnAvailableForModal}
         >
-          <PlusCircleSVG /> Add Skill
+          <PlusCircleSVG className="w-4" /> Add Skill
         </Button>
       </div>
     </div>

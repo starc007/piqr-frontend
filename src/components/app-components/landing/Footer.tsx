@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-[#121212] w-full text-white py-8 md:py-20  ">
       <div className="max-w-screen-xl mx-auto flex flex-col p-4">
@@ -88,7 +90,7 @@ const Footer = () => {
         </div>
         <hr className="border-[#262626] my-8" />
         <p className="text-center">
-          All rights reserved. Piqr © 2023. Made with ❤️ in Bharat.
+          All rights reserved. Piqr © {currentYear}. Made with ❤️ in Bharat.
         </p>
       </div>
     </footer>

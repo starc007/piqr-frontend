@@ -2,7 +2,7 @@ import { __getTopUsersToShow } from "@api/api";
 import { companies } from "@assets/companies";
 import { Chirp3SVG, Chirp4SVG } from "@assets/index";
 import { Button, Image } from "@components";
-import ShowProfile from "@components/app-components/ShowProfile";
+// import ShowProfile from "@components/app-components/ShowProfile";
 
 import Footer from "@components/app-components/landing/Footer";
 import Hero from "@components/app-components/landing/Hero";
@@ -130,6 +130,7 @@ const Home = () => {
           Join today and experience the future of networking.
         </h6>
         <Button
+          variant="primary"
           onClick={() => router.push("/login")}
           cls="w-44 h-14 mt-8 font-semibold"
         >

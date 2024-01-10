@@ -116,7 +116,8 @@ const Explore = () => {
             return;
           }
           setSaveProfileLoading(true);
-          getSavedUsers().then(() => {
+          //TODO: add dynamc page
+          getSavedUsers(0).then(() => {
             setSaveProfileLoading(false);
           });
         } else if (type === "all") {

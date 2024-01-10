@@ -34,7 +34,7 @@ const AvailableFor = () => {
           cls="px-4 py-2 text-sm gap-1"
           onClick={openSkillnAvailableForModal}
         >
-          <PlusCircleSVG /> Add Tag
+          <PlusCircleSVG className="w-4" /> Add Tag
         </Button>
       </div>
     </div>

@@ -60,11 +60,15 @@ import ThreeDotsSVG from "./svg/threeDots.svg";
 import ReportSVG from "./svg/report.svg";
 import AvatarSVG from "./svg/avatar.svg";
 import TimeSVG from "./svg/time.svg";
+import PostSvg from "./svg/post.svg";
+import CompanySVG from "./svg/company.svg";
 
 import logoutIcon from "./icons/logout.png";
 import viewIcon from "./icons/view.png";
 
 export {
+  PostSvg,
+  CompanySVG,
   viewIcon,
   logoutIcon,
   logo,
