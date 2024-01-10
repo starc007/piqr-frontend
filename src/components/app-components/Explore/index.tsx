@@ -10,7 +10,7 @@ import {
   Image,
   Link,
 } from "@components";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import SendMessageModal from "./SendMessageModal";
 import EndorseModal from "./EndorseModal";
 import { useAppBoundStore } from "@store/mainStore";
@@ -47,6 +47,13 @@ const ExploreCard: FC<ExploreCardProps> = ({ item }) => {
     navigator.clipboard.writeText(url);
     toast.success("Profile link Copied");
   };
+
+  useEffect(() => {
+    if (item) {
+      setIsFollowing(item?.isFollowing || false);
+      setIsSavedUser(item?.isProfileSaved || false);
+    }
+  }, [item]);
 
   return (
     <div className="border border-gray-300 rounded-xl md:px-5 py-4 px-3 flex flex-col transition duration-300 w-full font-poppins">

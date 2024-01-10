@@ -6,9 +6,7 @@ import FilterOptions from "@appComp/Explore/FilterOptions";
 import Head from "next/head";
 import Search from "@components/app-components/Search";
 import { useRouter } from "next/router";
-import Navbar from "@components/app-components/Navbar";
 import { BookmarkSVG, DiscoverSVG } from "@assets/index";
-import { useMediaQuery } from "src/utils/useMediaQuery";
 
 const navTabs = [
   {
@@ -70,7 +68,6 @@ const Explore = () => {
     resetAllUsers,
     getUsersByCategory,
     setFilteredUsers,
-    allUsersPage,
     getSavedUsers,
     savedProfiles,
     loginLoading,
@@ -86,7 +83,6 @@ const Explore = () => {
     resetAllUsers: state.resetAllUsers,
     getUsersByCategory: state.getUsersByCategory,
     setFilteredUsers: state.setFilteredUsers,
-    allUsersPage: state.allUsersPage,
     getSavedUsers: state.getSavedUsers,
     savedProfiles: state.savedProfiles,
     loginLoading: state.loginLoading,
@@ -94,7 +90,6 @@ const Explore = () => {
   }));
   const [page, setPage] = useState(0);
   const [saveProfileLoading, setSaveProfileLoading] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 1006px)");
   const router = useRouter();
   const { type, city, category, offering } = router.query;
 
@@ -116,7 +111,6 @@ const Explore = () => {
             return;
           }
           setSaveProfileLoading(true);
-          //TODO: add dynamc page
           getSavedUsers(0).then(() => {
             setSaveProfileLoading(false);
           });

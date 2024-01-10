@@ -120,8 +120,9 @@ const ReplyInput: FC<Props> = ({
           value={replyMessage}
           onChange={(e) => setReplyMessage(e.target.value)}
           cls="w-full resize-none border-none placeholder:text-gray-500 !px-0"
-          ref={replyRef}
+          // ref={replyRef}
           rows={1}
+          autoFocus
         />
         {replyMessage ? (
           <div className="flex justify-end">
