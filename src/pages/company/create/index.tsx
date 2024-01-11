@@ -87,9 +87,7 @@ const CreateCompany = () => {
             {image && (
               <Button
                 variant="tertiary"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log("heyyy");
+                onClick={() => {
                   setImage(null);
                 }}
                 cls="absolute top-7 right-1 w-10 h-10"
