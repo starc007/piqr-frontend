@@ -68,7 +68,7 @@ const CreateOpportunity = () => {
 
   return (
     <PrivateLayout title="Post Opportunity | Piqr">
-      <div className="px-4 lg:px-12 mb-20 font-poppins w-full mx-auto flex flex-col min-h-screen border-r">
+      <div className="px-4 lg:px-12 mb-20 w-full mx-auto flex flex-col min-h-screen border-r">
         <button
           onClick={() => {
             router.back();

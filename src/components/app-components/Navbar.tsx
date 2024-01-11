@@ -110,7 +110,7 @@ const Navbar = ({
                 <DropdownContent cls="w-48 py-2 mt-4 z-10 top-6 bg-white shadow-xl">
                   <DropdownItem
                     className="hover:bg-gray-100 flex items-center"
-                    onClick={() => router.push("/projects/create")}
+                    onClick={() => router.push("/company/create")}
                   >
                     <PostSvg className="w-5 mr-2" /> Post
                   </DropdownItem>
@@ -123,7 +123,7 @@ const Navbar = ({
 
                   <DropdownItem
                     className="hover:bg-gray-100 flex items-center"
-                    onClick={() => router.push("/projects/create")}
+                    onClick={() => router.push("/company/create")}
                   >
                     <CompanySVG className="w-5 mr-2" /> Company Page
                   </DropdownItem>
