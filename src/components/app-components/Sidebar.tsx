@@ -106,7 +106,6 @@ const Sidebar = () => {
     socialLinks,
     notifications,
     allNotifications,
-    setProfilePercent,
   } = useAppBoundStore((state) => ({
     isLoggedIn: state.isLoggedIn,
     user: state.user,
@@ -114,7 +113,6 @@ const Sidebar = () => {
     activity: state.activity,
     socialLinks: state.socialLinks,
     notifications: state.notifications,
-    setProfilePercent: state.setProfilePercent,
     allNotifications: state.allNotifications,
   }));
 

@@ -33,16 +33,16 @@ export const __getJobById = (
   },
   config?: AxiosRequestConfig
 ): Promise<Types.FetchResponse<OpportunityProps>> =>
-  getFetch(`/opp/getOpp/${params.id}`, undefined, config);
+  getFetch(`/job/${params.id}`, undefined, config);
 
-export const __applyForOpportunity = (
+export const __applyForJob = (
   params: {
-    opportunityId: string;
-    proposal: string;
+    jobId: string;
+    whyGoodFit: string;
   },
   config?: AxiosRequestConfig
 ): Promise<Types.FetchResponse<DefaultResponse>> =>
-  postFetch("/opp/apply", params, config);
+  postFetch("/job/apply", params, config);
 
 export const __fetchApplications = (
   params: {

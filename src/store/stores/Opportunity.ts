@@ -2,7 +2,6 @@ import { toast } from "react-hot-toast";
 import type { StateCreator } from "zustand";
 import type { AppState } from "../mainStore";
 import {
-  __applyForOpportunity,
   __createJob,
   __getJobs,
   __getJobById,
@@ -11,18 +10,22 @@ import {
   __getMyPostedJobs,
   __deleteJob,
   __createCompany,
+  __applyForJob,
 } from "@api";
 
 export interface IOpportunityStore {
   allJobs: OpportunityProps[];
   totalJobPages: number;
   myOpportunities: OpportunityProps[];
-  selectedOpportunity: OpportunityProps | null;
+
   applicantsOfOpp: ApplicationProps[];
   createJob: (data: OpportunityProps, router: any) => Promise<void>;
   getJobs: (type: number, page: number) => Promise<void>;
+  applyForJob: (
+    data: { jobId: string; whyGoodFit: string },
+    closeModal: () => void
+  ) => Promise<void>;
   getMyOpportunities: () => Promise<void>;
-  getJobById: (id: string) => Promise<void>;
   deleteOpportunity: (id: string) => Promise<void>;
 
   //companies
@@ -33,7 +36,6 @@ export const initialOpportunityState = {
   allJobs: [],
   totalJobPages: 0,
   myOpportunities: [],
-  selectedOpportunity: null,
   applicantsOfOpp: [],
 };
 
@@ -82,26 +84,26 @@ export const createOpportunitySlice: StateCreator<
       console.log(error);
     }
   },
+
+  applyForJob: async (data, closeModal) => {
+    try {
+      const res = await __applyForJob(data);
+      if (res.success) {
+        toast.success("Applied Successfully!!");
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  },
+
   getMyOpportunities: async () => {
     try {
       const res = await __getMyPostedJobs();
       if (res.success) {
         set({
           myOpportunities: res.data!,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  getJobById: async (id) => {
-    try {
-      const res = await __getJobById({
-        id: id,
-      });
-      if (res.success) {
-        set({
-          selectedOpportunity: res.data!,
         });
       }
     } catch (error) {

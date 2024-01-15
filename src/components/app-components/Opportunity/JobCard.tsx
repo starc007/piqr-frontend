@@ -24,13 +24,11 @@ const JobCard = ({ item }: { item: OpportunityProps }) => {
   const [openReferalModal, setOpenReferalModal] = useState(false);
   const router = useRouter();
 
-  const { user, deleteOpportunity, profilePercent, isLoggedIn } =
-    useAppBoundStore((state) => ({
-      user: state.user,
-      deleteOpportunity: state.deleteOpportunity,
-      profilePercent: state.profilePercent,
-      isLoggedIn: state.isLoggedIn,
-    }));
+  const { user, deleteOpportunity, isLoggedIn } = useAppBoundStore((state) => ({
+    user: state.user,
+    deleteOpportunity: state.deleteOpportunity,
+    isLoggedIn: state.isLoggedIn,
+  }));
 
   const postedByCurrentUser =
     user?._id.toString() === item?.user?._id.toString();
@@ -124,12 +122,24 @@ const JobCard = ({ item }: { item: OpportunityProps }) => {
         </div>
 
         <div className="flex justify-center mt-5 gap-4">
-          <Button cls="h-10 px-4 font-medium text-sm w-1/2 rounded-lg">
+          <Button
+            onClick={() => {
+              setOpenReferalModal(true);
+            }}
+            cls="h-10 px-4 font-medium text-sm w-1/2 rounded-lg"
+          >
             Share
           </Button>
           <Button
             variant="secondary"
             cls="h-10 px-4 font-medium text-sm w-1/2 rounded-lg"
+            onClick={() => {
+              if (!isLoggedIn) return toast.error("Please login to apply");
+
+              if (item.externalLink) {
+                window.open(item.externalLink, "_blank");
+              } else setIsOpen(true);
+            }}
           >
             Apply
           </Button>
@@ -140,8 +150,8 @@ const JobCard = ({ item }: { item: OpportunityProps }) => {
         <SendProposalModal
           isOpen={isOpen}
           closeModal={() => setIsOpen(false)}
-          name={item?.user?.name as string}
-          oppId={item?._id as string}
+          name={item?.company?.name as string}
+          jobId={item?._id as string}
         />
       )}
 

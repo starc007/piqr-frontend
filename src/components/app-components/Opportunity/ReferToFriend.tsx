@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ReferToFriend: FC<Props> = ({ text, oppId, isOpen, closeModal }) => {
-  const url = `www.piqr.in/jobs?type=open&id=${oppId}`;
+  const url = `https://piqr.in/jobs/${oppId}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(url);
@@ -28,7 +28,7 @@ const ReferToFriend: FC<Props> = ({ text, oppId, isOpen, closeModal }) => {
   const txt = `Hey,\nI just found this opportunity on Piqr 😉. Apply now!! @piqr_hq`;
 
   return (
-    <Modal isOpen={isOpen} closeModal={closeModal} title="Refer" cls="max-w-lg">
+    <Modal isOpen={isOpen} closeModal={closeModal} title="Share" cls="max-w-lg">
       <div className="flex flex-col items-center justify-center p-5">
         <div className="flex flex-col">
           <p>Share this opportunity with your friends</p>

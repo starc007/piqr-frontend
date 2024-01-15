@@ -50,7 +50,6 @@ export interface UserState {
     profile: ProfileResponse;
   } | null;
   dailyNewUsers: ProfileResponse[];
-  profilePercent: number;
   isUserDetailsFetched: boolean;
   getAllUsers: (page: number, type: string) => Promise<void>;
   updateUser: (data: Partial<UpdateUserProps>) => Promise<void>;
@@ -92,7 +91,7 @@ export interface UserState {
   ) => void;
   updateReadBy: (id: string) => Promise<void>;
   getNewUserDailyToMeet: () => Promise<void>;
-  setProfilePercent: (percent: number) => void;
+
   saveUser: (id: string, shouldSave: boolean) => Promise<void>;
   getSavedUsers: (page: number) => Promise<void>;
   setIsUserDetailsFetched: (isFetched: boolean) => void;
@@ -117,7 +116,6 @@ export const initialUserState = {
   notifications: [],
   selectedChat: null,
   dailyNewUsers: [],
-  profilePercent: 0,
   isUserDetailsFetched: false,
 };
 
@@ -609,7 +607,6 @@ export const createUserSlice: StateCreator<AppState, [], [], UserState> = (
       console.log("err", error);
     }
   },
-  setProfilePercent: (percent) => set({ profilePercent: percent }),
   saveUser: async (id, shouldSave) => {
     try {
       const { allUsers, filteredUsers, savedProfiles, user } = get();

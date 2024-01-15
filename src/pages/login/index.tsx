@@ -37,7 +37,8 @@ const Login = () => {
       }
     }
     if (!isLoggedIn && !loginLoading) {
-      router.push("/login");
+      console.log("not logged in");
+      // router.push("/login");
     }
     if (!isLoggedIn && loginLoading && !router.query.success) {
       checkSession();

@@ -3,7 +3,6 @@ import JobCard from "@appComp/Opportunity/JobCard";
 import { useAppBoundStore } from "@store/mainStore";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import OpportunityDetail from "@components/app-components/Opportunity/OpportunityDetail";
 import Head from "next/head";
 
 const cmnCls =
@@ -37,7 +36,6 @@ const Opp = () => {
   const { type, id } = router.query;
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(0);
-  const [singleOppLoading, setSingleOppLoading] = React.useState(false);
   const initialLoad = React.useRef(true);
 
   const { allJobs, getJobs, isLoggedIn } = useAppBoundStore((state) => ({
@@ -47,13 +45,13 @@ const Opp = () => {
   }));
 
   useEffect(() => {
-    if (initialLoad.current && isLoggedIn) {
+    if (initialLoad.current) {
       initialLoad.current = false;
       setLoading(true);
       const tp = tabs.find((tab) => tab.slug === type);
       getJobs(tp?.id || 1, page).then(() => setLoading(false));
     }
-  }, [isLoggedIn]);
+  }, []);
 
   // useEffect(() => {
   //   if (router.isReady) {

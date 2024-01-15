@@ -265,6 +265,7 @@ export declare global {
     applicantsCount?: number;
     companyId?: string;
     experience?: string;
+    accessIds?: string[];
   }
 
   interface INotificationResponse {

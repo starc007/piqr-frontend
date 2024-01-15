@@ -7,33 +7,32 @@ interface Props {
   closeModal: () => void;
   isOpen: boolean;
   name: string;
-  oppId: string;
+  jobId: string;
 }
 
-const SendProposalModal: FC<Props> = ({ closeModal, isOpen, name, oppId }) => {
+const SendProposalModal: FC<Props> = ({ closeModal, isOpen, name, jobId }) => {
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { applyOpportunity, profilePercent } = useAppBoundStore((state) => ({
-    applyOpportunity: state.applyOpportunity,
-    profilePercent: state.profilePercent,
+  const { applyForJob } = useAppBoundStore((state) => ({
+    applyForJob: state.applyForJob,
   }));
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (profilePercent < 90) {
-      return toast.error(
-        "Please complete your profile to apply for this opportunity.(90%)"
-      );
-    }
-
     if (!message) return toast.error("Please enter your proposal message. ");
-    if (!oppId)
+    if (!jobId)
       return toast.error("Something went wrong. Please try again later. ");
 
     setLoading(true);
-    await applyOpportunity(oppId, message, closeModal);
+    await applyForJob(
+      {
+        jobId,
+        whyGoodFit: message,
+      },
+      closeModal
+    );
     setLoading(false);
   };
 
@@ -42,7 +41,7 @@ const SendProposalModal: FC<Props> = ({ closeModal, isOpen, name, oppId }) => {
       isOpen={isOpen}
       closeModal={closeModal}
       cls="max-w-xl"
-      title={"Send proposal to " + name + ""}
+      title={"Apply to " + name + ""}
     >
       <form onSubmit={handleSubmit}>
         <div className="flex p-4 flex-col gap-4">
@@ -59,7 +58,6 @@ const SendProposalModal: FC<Props> = ({ closeModal, isOpen, name, oppId }) => {
           <Button
             onClick={closeModal}
             type="button"
-            variant="tertiary"
             cls="w-36 text-sm font-medium h-11"
           >
             Back
