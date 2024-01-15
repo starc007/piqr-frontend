@@ -69,7 +69,6 @@ const CommentStructure: FC<{
               <ReplyItem
                 it={it}
                 key={it._id}
-                replyRef={replyRef}
                 setReplyInput={setReplyInput}
                 commentId={replyDetails._id}
                 postUserId={postUserId}
@@ -102,7 +101,6 @@ const CommentStructure: FC<{
         {/* Reply Input */}
         {replyInput.shouldVisible && isLoggedIn ? (
           <ReplyInput
-            replyRef={replyRef}
             postId={null}
             selectedId={replyInput.id}
             replyInput={replyInput}

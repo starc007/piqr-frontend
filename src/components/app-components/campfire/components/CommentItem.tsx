@@ -34,7 +34,7 @@ const CommentItem: FC<Props> = ({
   id,
   isReply = false,
   replyDetails,
-  inputRef,
+
   setReplyInput,
   commentId,
 }) => {
@@ -184,7 +184,6 @@ const CommentItem: FC<Props> = ({
             const cmtDiv = document.getElementById(replyDetails._id!);
             if (cmtDiv) {
               cmtDiv.scrollIntoView({ behavior: "smooth" });
-              inputRef?.current?.focus();
             }
           }}
           disabled={!isLoggedIn}

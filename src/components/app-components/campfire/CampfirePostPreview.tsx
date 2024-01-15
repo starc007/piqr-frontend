@@ -104,7 +104,7 @@ const CampfirePostPreview = ({
   return (
     <>
       <CustomTooltip id="post-tooltip" />
-      <div className="flex justify-between w-full md:px-6 px-4 py-4">
+      <div className="flex justify-between w-full md:px-6 px-3 py-4">
         <Link
           href={`/${item?.user?.username}`}
           className="flex items-center gap-3 sm:w-auto w-10 h-10"
@@ -115,7 +115,7 @@ const CampfirePostPreview = ({
             className="rounded-full object-cover w-10 h-10"
           />
         </Link>
-        <div className="flex flex-col gap-3 w-[calc(100%-2.5rem)] ml-3">
+        <div className="flex flex-col gap-3 w-[calc(100%-2.5rem)] ml-2">
           {/* User Info */}
           <div className="flex items-center justify-between w-full">
             <Link

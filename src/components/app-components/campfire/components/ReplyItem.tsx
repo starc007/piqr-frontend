@@ -4,13 +4,12 @@ import CommentItem from "./CommentItem";
 
 const ReplyItem = ({
   it,
-  replyRef,
+
   setReplyInput,
   commentId,
   postUserId,
 }: {
   it: ReplyProps;
-  replyRef: React.RefObject<HTMLTextAreaElement>;
   setReplyInput: React.Dispatch<React.SetStateAction<ICommentState>>;
   commentId?: string;
   postUserId?: string;
@@ -33,7 +32,6 @@ const ReplyItem = ({
           replyDetails={it as ReplyProps}
           postUserId={postUserId!}
           isReply
-          inputRef={replyRef}
           id={it._id}
           setReplyInput={setReplyInput}
           commentId={commentId}

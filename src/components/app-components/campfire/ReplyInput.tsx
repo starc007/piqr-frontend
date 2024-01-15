@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import useAutosizeTextArea from "@hooks/useAutosizeTextArea";
 
 type Props = {
-  replyRef: React.RefObject<HTMLTextAreaElement>;
   postId: string | null;
   selectedId?: string;
   commentId?: string;
@@ -14,7 +13,6 @@ type Props = {
 };
 
 const ReplyInput: FC<Props> = ({
-  replyRef,
   postId,
   selectedId,
   commentId,
@@ -23,6 +21,7 @@ const ReplyInput: FC<Props> = ({
 }) => {
   const [replyMessage, setReplyMessage] = React.useState("");
   const [replying, setReplying] = React.useState(false);
+  const replyRef = React.useRef<HTMLTextAreaElement>(null);
 
   useAutosizeTextArea(replyRef.current, replyMessage);
 
@@ -114,13 +113,13 @@ const ReplyInput: FC<Props> = ({
           className={`rounded-full object-cover h-9 w-9`}
         />
       </Link>
-      <div className="flex flex-col w-[calc(100%-2.5rem)] border rounded-lg px-2">
+      <div className="flex flex-col w-[calc(100%-2.5rem)] border rounded-lg px-2 ml-1">
         <TextArea
           placeholder="Post your reply..."
           value={replyMessage}
           onChange={(e) => setReplyMessage(e.target.value)}
           cls="w-full resize-none border-none placeholder:text-gray-500 !px-0"
-          // ref={replyRef}
+          ref={replyRef}
           rows={1}
           autoFocus
         />

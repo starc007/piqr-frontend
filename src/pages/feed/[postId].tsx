@@ -21,8 +21,6 @@ const CampfirePostPage = () => {
 
   const inititalLoad = useRef(true);
 
-  const commentRef = React.useRef<HTMLTextAreaElement>(null);
-
   const {
     selectedPost,
     selectedPostComment,
@@ -108,10 +106,7 @@ const CampfirePostPage = () => {
             <div className="mt-4">
               {isLoggedIn ? (
                 <div className="px-3 ">
-                  <ReplyInput
-                    replyRef={commentRef}
-                    postId={selectedPost?._id!}
-                  />
+                  <ReplyInput postId={selectedPost?._id!} />
                 </div>
               ) : null}
 
