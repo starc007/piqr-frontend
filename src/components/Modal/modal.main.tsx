@@ -56,7 +56,7 @@ const Modal: React.FC<ModalProps> = ({
                 <Dialog.Title className="font-medium text-dark capitalize">
                   {title}
                 </Dialog.Title>
-                <Button variant="tertiaryOutline" onClick={closeModal}>
+                <Button variant="tertiary" onClick={closeModal}>
                   <DeleteSVG className="w-5" />
                 </Button>
               </div>

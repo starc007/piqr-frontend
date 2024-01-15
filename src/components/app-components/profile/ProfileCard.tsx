@@ -110,7 +110,9 @@ const ProfileCard = ({ setSendMessageModal }: Props) => {
         .filter((it) => it)
     : [];
 
-  const isLocationAvailable = user?.location?.city || user?.location?.country;
+  const isLocationAvailable =
+    userDetailsByUsername?.profile?.location?.city ||
+    userDetailsByUsername?.profile?.location?.country;
 
   return (
     <div className="w-full">

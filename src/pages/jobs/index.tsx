@@ -1,7 +1,7 @@
 import { Layout, Loader } from "@components";
-import OpportunityCard from "@appComp/Opportunity/OpportunityCard";
+import JobCard from "@appComp/Opportunity/JobCard";
 import { useAppBoundStore } from "@store/mainStore";
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import OpportunityDetail from "@components/app-components/Opportunity/OpportunityDetail";
 import Head from "next/head";
@@ -11,20 +11,20 @@ const cmnCls =
 
 const tabs = [
   {
-    name: "All",
-    slug: "all",
+    name: "Full Time",
+    slug: "full-time",
     id: 1,
   },
   {
     id: 2,
-    name: "My Jobs",
-    slug: "my-jobs",
+    name: "Internship",
+    slug: "internship",
   },
-  // {
-  //   id: 3,
-  //   name: "Applied",
-  //   slug: "applied",
-  // },
+  {
+    id: 3,
+    name: "Freelance",
+    slug: "freelance",
+  },
   // {
   //   id: 3,
   //   name: "Saved",
@@ -36,26 +36,24 @@ const Opp = () => {
   const router = useRouter();
   const { type, id } = router.query;
   const [loading, setLoading] = React.useState(false);
+  const [page, setPage] = React.useState(0);
   const [singleOppLoading, setSingleOppLoading] = React.useState(false);
-  // const initialLoad = React.useRef(true);
+  const initialLoad = React.useRef(true);
 
-  // const {
-  //   getAllOpportunities,
-  //   allOppurtunities,
-  //   getOpportunityById,
-  //   selectedOpportunity,
-  //   getMyOpportunities,
-  //   myOpportunities,
-  //   isLoggedIn,
-  // } = useAppBoundStore((state) => ({
-  //   getAllOpportunities: state.getAllOpportunities,
-  //   allOppurtunities: state.allOppurtunities,
-  //   getOpportunityById: state.getOpportunityById,
-  //   selectedOpportunity: state.selectedOpportunity,
-  //   getMyOpportunities: state.getMyOpportunities,
-  //   myOpportunities: state.myOpportunities,
-  //   isLoggedIn: state.isLoggedIn,
-  // }));
+  const { allJobs, getJobs, isLoggedIn } = useAppBoundStore((state) => ({
+    allJobs: state.allJobs,
+    getJobs: state.getJobs,
+    isLoggedIn: state.isLoggedIn,
+  }));
+
+  useEffect(() => {
+    if (initialLoad.current && isLoggedIn) {
+      initialLoad.current = false;
+      setLoading(true);
+      const tp = tabs.find((tab) => tab.slug === type);
+      getJobs(tp?.id || 1, page).then(() => setLoading(false));
+    }
+  }, [isLoggedIn]);
 
   // useEffect(() => {
   //   if (router.isReady) {
@@ -199,7 +197,7 @@ const Opp = () => {
   return (
     <Layout>
       <Head>
-        <title>Commission Free Opportunities | Piqr</title>
+        <title>Jobs | Piqr</title>
         <meta
           name="description"
           content="Find commission free opportunities on Piqr. Get access to opportunities based on your skills and interests."
@@ -211,13 +209,9 @@ const Opp = () => {
         <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className="px-4 h-screen flex flex-col justify-center items-center">
-        <p className="text-center text-2xl">
-          Work in progress, we are making it better for you
-        </p>
-        <p className="mt-4 text-gray-500">Be patient, Good things ahead </p>
-        {/* <div className="flex justify-between w-full">
-          <div className="flex md:w-1/4 w-2/3 bg-primary/10 rounded-full p-1">
+      <div className="px-4 pt-6 h-screen flex flex-col border-r">
+        <div className="flex justify-between w-full">
+          <div className="flex md:w-1/3 w-2/3 bg-primary/10 rounded-full p-1">
             {tabs.map((tab) => {
               return (
                 <button
@@ -238,8 +232,23 @@ const Opp = () => {
               );
             })}
           </div>
+          {/* Might need to add */}
         </div>
-        <div className="mt-5">{renderComponent()}</div> */}
+        <div className="mt-4">
+          {loading && (
+            <div className="flex justify-center mt-20">
+              <Loader col="text-dark" />
+            </div>
+          )}
+
+          {!loading && allJobs.length > 0 && (
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mt-5">
+              {allJobs.map((opp) => (
+                <JobCard key={opp._id} item={opp} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </Layout>
   );

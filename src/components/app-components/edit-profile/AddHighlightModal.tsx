@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 // @ts-nocheck
 import { __getUsersbyUsername } from "@api/api";
-import { Button, Input, Modal, TextArea } from "@components";
+import { Button, Input, Modal, Select, TextArea } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
 import { arrayCompare, debounce } from "@utils";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import AsyncSelect from "react-select/async";
 
 const AddHighlightModal = () => {
   const {
@@ -33,7 +32,6 @@ const AddHighlightModal = () => {
     link: "",
   });
   const [loading, setLoading] = useState(false);
-  const [searchUsers, setSearchUsers] = useState<any>([]);
 
   const data = activity?.find((item) => item._id === selectedId);
 
@@ -45,7 +43,7 @@ const AddHighlightModal = () => {
         collaborators:
           data?.collaborators.map((item) => ({
             value: item._id,
-            label: item.username,
+            label: item.name,
             image: item.avatar,
           })) || ([] as readonly any[]),
         date: data?.date || "",
@@ -60,7 +58,7 @@ const AddHighlightModal = () => {
     }).then((res) => {
       const dataFilter = res?.data?.users?.map((item: any) => ({
         value: item._id,
-        label: item.username,
+        label: item.name,
         image: item.avatar,
       }));
       callback(dataFilter);
@@ -157,62 +155,19 @@ const AddHighlightModal = () => {
             placeholder="Enter description"
           />
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-500">
-              Select Users
-            </label>
-            <AsyncSelect
+            <Select
+              label="Select Users"
+              isAsync
               isMulti
-              cacheOptions
+              value={formData.collaborators}
               placeholder="Type username..."
-              maxMenuHeight={150}
-              className="text-sm mt-1"
               loadOptions={debouncedLoadOptions}
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  border: "1px solid #e2e8f0",
-                  borderRadius: "0.375rem",
-                  "&:focus": {
-                    boxShadow: "none",
-                    outline: "none",
-                  },
-                  "&:hover": {
-                    border: "1px solid #e2e8f0",
-                  },
-                  minHeight: "40px",
-                  background: "none",
-                }),
-                indicatorSeparator: (state) => ({
-                  display: "none",
-                }),
-              }}
-              theme={(theme) => {
-                return {
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary: "#2E98FB",
-                    primary25: "#D8EAFF",
-                  },
-                };
-              }}
               onChange={(e) => {
                 setFormData({
                   ...formData,
                   collaborators: e,
                 });
               }}
-              formatOptionLabel={(option) => (
-                <div className="flex items-center">
-                  <Image
-                    className="w-6 h-6 rounded-full"
-                    src={option.image}
-                    alt="profile"
-                  />
-                  <p className="ml-2 text-sm">{option.label}</p>
-                </div>
-              )}
-              value={formData.collaborators}
             />
           </div>
           <Input

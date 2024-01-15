@@ -4,6 +4,8 @@ import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
+import { usePageLoading } from "@hooks/usePageLoading";
+import { Loader } from "@components/Loader";
 
 const MonaSans = localFont({
   src: [
@@ -35,6 +37,8 @@ const MonaSans = localFont({
 export default function App({ Component, pageProps }: AppProps) {
   const prod = process.env.NODE_ENV === "production";
 
+  const { isPageLoading } = usePageLoading();
+
   return (
     <main className={MonaSans.variable}>
       <Script
@@ -56,7 +60,13 @@ export default function App({ Component, pageProps }: AppProps) {
         position="top-center"
         containerClassName="text-sm text-gray-700 font-medium font-poppins"
       />
-      <Component {...pageProps} />
+      {isPageLoading ? (
+        <div className="flex justify-center mt-10">
+          <Loader col="text-dark" />
+        </div>
+      ) : (
+        <Component {...pageProps} />
+      )}
       <Analytics />
     </main>
   );

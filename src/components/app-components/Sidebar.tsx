@@ -32,7 +32,7 @@ const SideMenu = [
   {
     name: "Jobs",
     icon: <JobSVG className="w-6" />,
-    path: "/jobs?type=all",
+    path: "/jobs?type=full-time",
     slug: "/jobs",
     id: 4,
     isPrivate: false,

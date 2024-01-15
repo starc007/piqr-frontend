@@ -18,4 +18,5 @@ export interface SelectProps {
   isRequired?: boolean;
   isDisabled?: boolean;
   placement?: "top" | "bottom" | "auto";
+  isAsync?: boolean;
 }

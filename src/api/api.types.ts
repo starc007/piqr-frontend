@@ -20,4 +20,5 @@ export type Params =
   | MessageType
   | IdeaProps
   | OpportunityProps
-  | FormData;
+  | FormData
+  | CompanyParams;

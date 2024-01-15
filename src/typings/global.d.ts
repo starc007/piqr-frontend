@@ -249,18 +249,22 @@ export declare global {
     title: string;
     description: string;
     skills: string[];
-    budget: string;
-    contractType: string;
-    payType: string;
+    salaryRange: string;
+    company?: {
+      name: string;
+      logo: string;
+      _id: string;
+    };
+    jobType: string;
+    interval: string;
     duration?: string;
     createdAt?: string;
     workLocation?: "remote" | "office" | "hybrid";
     recieveApplicationsVia?: "piqr" | "website";
     externalLink?: string;
-    applicantId?: {
-      _id?: string;
-      applicants?: ApplicationProps[];
-    };
+    applicantsCount?: number;
+    companyId?: string;
+    experience?: string;
   }
 
   interface INotificationResponse {
@@ -289,5 +293,19 @@ export declare global {
       username: string;
       name: string;
     };
+  }
+
+  interface CompanyParams {
+    name: string;
+    website: string;
+    logo: string;
+    oneLiner: string;
+    description: string;
+    location: string;
+    founded?: string;
+    industry: string;
+    companySize: string;
+    admins?: string[];
+    createdBy?: string;
   }
 }

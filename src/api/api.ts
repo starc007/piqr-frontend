@@ -252,67 +252,6 @@ export const __getUsersByCategory = (
     config
   );
 
-//Opportunities
-
-export const __createOpportunity = (
-  params: OpportunityProps,
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<OpportunityProps>> =>
-  postFetch("/opp/create", params, config);
-
-export const __getOpportunities = (
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<OpportunityProps[]>> =>
-  getFetch("/opp/get-all", undefined, config);
-
-export const __getMyOpportunities = (
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<OpportunityProps[]>> =>
-  getFetch("/opp/get-all-by-user", undefined, config);
-
-export const __getOpportunityById = (
-  params: {
-    id: string;
-  },
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<OpportunityProps>> =>
-  getFetch(`/opp/getOpp/${params.id}`, undefined, config);
-
-export const __applyForOpportunity = (
-  params: {
-    opportunityId: string;
-    proposal: string;
-  },
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<DefaultResponse>> =>
-  postFetch("/opp/apply", params, config);
-
-export const __fetchApplications = (
-  params: {
-    opportunityId: string;
-  },
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<ApplicationProps[]>> =>
-  postFetch("/opp/get-applicants", params, config);
-
-export const __accepetOrReject = (
-  params: {
-    opportunityId: string;
-    applicantId: string;
-    status: string;
-  },
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<DefaultResponse>> =>
-  postFetch("/opp/accept-or-reject-applicant", params, config);
-
-export const __deleteOpportunity = (
-  params: {
-    id: string;
-  },
-  config?: AxiosRequestConfig
-): Promise<Types.FetchResponse<DefaultResponse>> =>
-  postFetch(`/opp/delete/${params.id}`, undefined, config);
-
 export const __followUnfollowUser = (
   params: {
     id: string;

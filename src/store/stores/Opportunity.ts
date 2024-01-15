@@ -3,41 +3,35 @@ import type { StateCreator } from "zustand";
 import type { AppState } from "../mainStore";
 import {
   __applyForOpportunity,
-  __createOpportunity,
-  __getOpportunities,
-  __getOpportunityById,
+  __createJob,
+  __getJobs,
+  __getJobById,
   __fetchApplications,
   __accepetOrReject,
-  __getMyOpportunities,
-  __deleteOpportunity,
-} from "@api/api";
+  __getMyPostedJobs,
+  __deleteJob,
+  __createCompany,
+} from "@api";
 
 export interface IOpportunityStore {
-  allOppurtunities: OpportunityProps[];
+  allJobs: OpportunityProps[];
+  totalJobPages: number;
   myOpportunities: OpportunityProps[];
   selectedOpportunity: OpportunityProps | null;
   applicantsOfOpp: ApplicationProps[];
-  createOpportunity: (data: OpportunityProps, router: any) => Promise<void>;
-  getAllOpportunities: () => Promise<void>;
+  createJob: (data: OpportunityProps, router: any) => Promise<void>;
+  getJobs: (type: number, page: number) => Promise<void>;
   getMyOpportunities: () => Promise<void>;
-  getOpportunityById: (id: string) => Promise<void>;
-  applyOpportunity: (
-    id: string,
-    proposal: string,
-    closeModal: () => void
-  ) => Promise<void>;
-  fetchApplications: (id: string) => Promise<void>;
-  acceptOrReject: (
-    oppId: string,
-    applicantId: string,
-    status: string,
-    closeModal: () => void
-  ) => Promise<void>;
+  getJobById: (id: string) => Promise<void>;
   deleteOpportunity: (id: string) => Promise<void>;
+
+  //companies
+  createACompany: (data: FormData, router: any) => Promise<void>;
 }
 
 export const initialOpportunityState = {
-  allOppurtunities: [],
+  allJobs: [],
+  totalJobPages: 0,
   myOpportunities: [],
   selectedOpportunity: null,
   applicantsOfOpp: [],
@@ -51,20 +45,20 @@ export const createOpportunitySlice: StateCreator<
 > = (set, get) => ({
   ...initialOpportunityState,
 
-  createOpportunity: async (data, router) => {
+  createJob: async (data, router) => {
     try {
-      const res = await __createOpportunity(data);
+      const res = await __createJob(data);
       if (res.success) {
         toast.success("Opportunity Created!!");
-        const { allOppurtunities, user } = get();
+        const { allJobs, user } = get();
         const newData: OpportunityProps = {
           ...res.data!,
           user: user as ProfileResponse,
         };
         set({
-          allOppurtunities: [newData, ...allOppurtunities],
+          allJobs: [newData, ...allJobs],
         });
-        router.push("/jobs?type=all");
+        router.push("/jobs?type=full-time");
       } else {
         toast.error("Something went wrong");
       }
@@ -72,12 +66,16 @@ export const createOpportunitySlice: StateCreator<
       console.log(error);
     }
   },
-  getAllOpportunities: async () => {
+  getJobs: async (type, page) => {
     try {
-      const res = await __getOpportunities();
+      const res = await __getJobs({
+        type,
+        page,
+      });
       if (res.success) {
         set({
-          allOppurtunities: res.data!,
+          allJobs: res.data?.jobs!,
+          totalJobPages: res.data?.totalPages!,
         });
       }
     } catch (error) {
@@ -86,7 +84,7 @@ export const createOpportunitySlice: StateCreator<
   },
   getMyOpportunities: async () => {
     try {
-      const res = await __getMyOpportunities();
+      const res = await __getMyPostedJobs();
       if (res.success) {
         set({
           myOpportunities: res.data!,
@@ -96,9 +94,9 @@ export const createOpportunitySlice: StateCreator<
       console.log(error);
     }
   },
-  getOpportunityById: async (id) => {
+  getJobById: async (id) => {
     try {
-      const res = await __getOpportunityById({
+      const res = await __getJobById({
         id: id,
       });
       if (res.success) {
@@ -110,99 +108,36 @@ export const createOpportunitySlice: StateCreator<
       console.log(error);
     }
   },
-  applyOpportunity: async (id, proposal, closeModal) => {
-    try {
-      const res = await __applyForOpportunity({
-        opportunityId: id,
-        proposal,
-      });
-      if (res.success) {
-        const { allOppurtunities, user } = get();
-        const getSelectedOpportunity = allOppurtunities.find(
-          (item) => item._id === id
-        );
-        const newApplicant = {
-          _id: Date.now().toString(),
-          appliedBy: user?._id,
-          proposal,
-          status: "pending",
-          appliedOn: Date.now().toString(),
-        };
-        if (getSelectedOpportunity?.applicantId) {
-          getSelectedOpportunity?.applicantId?.applicants?.push(newApplicant);
-        } else {
-          getSelectedOpportunity!.applicantId = {
-            _id: Date.now().toString(),
-            applicants: [newApplicant],
-          };
-        }
-        const index = allOppurtunities.findIndex((item) => item._id === id);
-        allOppurtunities[index] = getSelectedOpportunity!;
-        set({
-          allOppurtunities: [...allOppurtunities],
-        });
-        toast.success("Applied Successfully");
-        closeModal();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  fetchApplications: async (id) => {
-    try {
-      const res = await __fetchApplications({
-        opportunityId: id,
-      });
-      if (res.success) {
-        set({
-          applicantsOfOpp: res.data!,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  acceptOrReject: async (oppId, applicantId, status, closeModal) => {
-    try {
-      const res = await __accepetOrReject({
-        opportunityId: oppId,
-        applicantId,
-        status,
-      });
-      if (res.success) {
-        const { applicantsOfOpp } = get();
-        const filteredApplicants = applicantsOfOpp.filter(
-          (item) => item._id !== applicantId
-        );
-
-        set({
-          applicantsOfOpp: [...filteredApplicants],
-        });
-
-        closeModal();
-        toast.success("Success!!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  },
   deleteOpportunity: async (id) => {
     try {
-      const res = await __deleteOpportunity({
+      const res = await __deleteJob({
         id,
       });
       if (res.success) {
-        const { allOppurtunities, myOpportunities } = get();
-        const filteredOpportunities = allOppurtunities.filter(
-          (item) => item._id !== id
-        );
+        const { allJobs, myOpportunities } = get();
+        const filteredOpportunities = allJobs.filter((item) => item._id !== id);
         const filteredMyOpportunities = myOpportunities.filter(
           (item) => item._id !== id
         );
         set({
-          allOppurtunities: [...filteredOpportunities],
+          allJobs: [...filteredOpportunities],
           myOpportunities: [...filteredMyOpportunities],
         });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  //companies
+  createACompany: async (data, router) => {
+    try {
+      const res = await __createCompany(data);
+      if (res.success) {
+        toast.success("Page Created!!");
+        // router.push("/jobs?type=all"); //TODO: change this
+      } else {
+        toast.error("Something went wrong");
       }
     } catch (error) {
       console.log(error);

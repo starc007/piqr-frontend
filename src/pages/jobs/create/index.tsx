@@ -1,18 +1,11 @@
+import { __getCompaniesByName } from "@api";
 import { ArrowSVG } from "@assets/index";
 import { Button, Input, PrivateLayout, Select, TextArea } from "@components";
 import { useAppBoundStore } from "@store/mainStore";
-import { SKILLS } from "@utils";
+import { JOB_TYPE, SKILLS, debounce } from "@utils";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-
-const projectType = [
-  { label: "Full Time", value: "3" },
-  { label: "Freelance", value: "0" },
-  { label: "Internship", value: "4" },
-  { label: "Part Time", value: "1" },
-  { label: "Contract Based", value: "2" },
-];
 
 const Paytype = [
   { label: "Annually", value: "Annually" },
@@ -26,8 +19,8 @@ const Paytype = [
 const CreateOpportunity = () => {
   const [loading, setLoading] = useState(false);
 
-  const { createOpportunity } = useAppBoundStore((state) => ({
-    createOpportunity: state.createOpportunity,
+  const { createJob } = useAppBoundStore((state) => ({
+    createJob: state.createJob,
   }));
 
   const router = useRouter();
@@ -36,12 +29,14 @@ const CreateOpportunity = () => {
     title: "",
     description: "",
     skills: [],
-    payType: "",
-    budget: "",
-    contractType: "",
+    salaryRange: "",
+    interval: "",
+    companyId: "",
     workLocation: "remote",
     recieveApplicationsVia: "piqr",
     externalLink: "",
+    jobType: "",
+    experience: "",
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +45,7 @@ const CreateOpportunity = () => {
       formData.title === "" ||
       formData.description === "" ||
       formData.skills.length === 0 ||
-      formData.contractType === "" ||
+      formData.jobType === "" ||
       !formData.workLocation ||
       formData.recieveApplicationsVia === undefined ||
       (formData.recieveApplicationsVia === "website" &&
@@ -60,28 +55,46 @@ const CreateOpportunity = () => {
       return;
     }
     setLoading(true);
-    console.log(formData);
-    createOpportunity(formData, router).then(() => {
+    createJob(formData, router).then(() => {
       setLoading(false);
     });
   };
 
+  const getData = (inputValue: string, callback: any) => {
+    __getCompaniesByName({
+      name: inputValue,
+    }).then((res) => {
+      const dataFilter = res?.data?.map((item: any) => ({
+        value: item._id,
+        label: item.name,
+        image: item.logo,
+      }));
+      callback(dataFilter);
+    });
+  };
+
+  const debouncedLoadOptions = debounce(getData, 500);
+
+  const isCompanyRequired = formData.jobType === "1";
+  const isPartialyCompanyRequired = formData.jobType === "2";
+  const isShowCompany = isCompanyRequired || isPartialyCompanyRequired;
+
   return (
     <PrivateLayout title="Post Opportunity | Piqr">
       <div className="px-4 lg:px-12 mb-20 w-full mx-auto flex flex-col min-h-screen border-r">
-        <button
+        <Button
           onClick={() => {
             router.back();
           }}
-          className="font-medium text-dark flex items-center gap-1 text-sm mt-4"
+          cls="font-medium flex items-center px-4 py-1.5 w-28 mt-3"
         >
-          <ArrowSVG className="-rotate-90 w-4" /> go back
-        </button>
-        <p className="text-dark text-3xl font-semibold mt-4">Post Job</p>
+          <ArrowSVG className="-rotate-90 w-4 mr-1" /> go back
+        </Button>
+        <p className="text-dark text-3xl font-semibold mt-4">Post a Job</p>
         <p className="text-sm text-gray-500 mt-3">
           Start hiring the best talent for your project/product/company
         </p>
-        <form className="w-full mt-6 space-y-4" onSubmit={handleSubmit}>
+        <form className="w-2/3 mt-6 space-y-4" onSubmit={handleSubmit}>
           <Input
             label="Job Title"
             placeholder="Enter job title"
@@ -94,31 +107,26 @@ const CreateOpportunity = () => {
             label="Job Type"
             placeholder="Select Opportunity Type"
             isRequired
-            options={projectType}
+            options={JOB_TYPE}
             onChange={(e: any) =>
-              setFormData({ ...formData, contractType: e.value })
+              setFormData({ ...formData, jobType: e.value })
             }
           />
 
-          {/* <div className="flex md:flex-row flex-col gap-4">
-            
-
-            <Input
-              label="Company Website"
-              placeholder="Enter company website"
-              // isRequired
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
+          {isShowCompany && (
+            <Select
+              label="Select Company"
+              isAsync
+              isRequired={isCompanyRequired}
+              // @ts-ignore
+              loadOptions={debouncedLoadOptions}
+              placeholder="Type company name"
+              onChange={(e: any) => {
+                setFormData({ ...formData, companyId: e.value });
+              }}
             />
-          </div> */}
-          {/* <Input
-            label="Company Name"
-            placeholder="Enter company name"
-            onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
-            }
-          /> */}
+          )}
+
           <Select
             label="Work Location"
             placeholder="Select Location"
@@ -153,6 +161,14 @@ const CreateOpportunity = () => {
             isMulti
             onChange={(e: any) =>
               setFormData({ ...formData, skills: e.map((i: any) => i.value) })
+            }
+          />
+          <Input
+            label="Experience"
+            isRequired
+            placeholder="Enter Experience, e.g. 2-3 years"
+            onChange={(e) =>
+              setFormData({ ...formData, experience: e.target.value })
             }
           />
           <div className="flex flex-col space-y-4">
@@ -193,15 +209,15 @@ const CreateOpportunity = () => {
                 label="Pay Range (in Rupay)"
                 placeholder="100k - 200k"
                 onChange={(e) =>
-                  setFormData({ ...formData, budget: e.target.value })
+                  setFormData({ ...formData, salaryRange: e.target.value })
                 }
               />
               <Select
-                label="Pay Type "
+                label="Pay Interval"
                 placeholder="Select Pay Type"
                 options={Paytype}
                 onChange={(e: any) =>
-                  setFormData({ ...formData, payType: e.value })
+                  setFormData({ ...formData, interval: e.value })
                 }
               />
             </div>
