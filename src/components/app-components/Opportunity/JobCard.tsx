@@ -22,7 +22,6 @@ const JobCard = ({ item }: { item: OpportunityProps }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [openReferalModal, setOpenReferalModal] = useState(false);
-  const router = useRouter();
 
   const { user, deleteOpportunity, isLoggedIn } = useAppBoundStore((state) => ({
     user: state.user,
@@ -30,18 +29,17 @@ const JobCard = ({ item }: { item: OpportunityProps }) => {
     isLoggedIn: state.isLoggedIn,
   }));
 
-  const postedByCurrentUser =
-    user?._id.toString() === item?.user?._id.toString();
-
   const jobType = JOB_TYPE.find(
     (type) => type.value === item?.jobType.toString()
   );
 
   const isSalary = item?.salaryRange?.length > 0;
 
+  const hasAccessToApplicants = item?.accessIds?.includes(user?._id as string);
+
   return (
     <>
-      <div className="border rounded-lg px-4 py-5">
+      <div className="border rounded-2xl px-4 py-5">
         <div className="flex justify-between">
           <div className="flex">
             <Image
@@ -132,6 +130,7 @@ const JobCard = ({ item }: { item: OpportunityProps }) => {
           </Button>
           <Button
             variant="secondary"
+            disabled={hasAccessToApplicants}
             cls="h-10 px-4 font-medium text-sm w-1/2 rounded-lg"
             onClick={() => {
               if (!isLoggedIn) return toast.error("Please login to apply");

@@ -207,8 +207,8 @@ const Opp = () => {
         <meta name="author" content="Piqr" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className="px-4 pt-6 h-screen flex flex-col border-r">
-        <div className="flex justify-between w-full">
+      <div className="h-screen flex flex-col border-r">
+        <div className="flex justify-between w-full mt-3 px-3">
           <div className="flex md:w-1/3 w-2/3 bg-primary/10 rounded-full p-1">
             {tabs.map((tab) => {
               return (
@@ -232,7 +232,7 @@ const Opp = () => {
           </div>
           {/* Might need to add */}
         </div>
-        <div className="mt-4">
+        <div className="mt-4 px-4">
           {loading && (
             <div className="flex justify-center mt-20">
               <Loader col="text-dark" />

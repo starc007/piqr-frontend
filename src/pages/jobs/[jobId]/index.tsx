@@ -1,5 +1,5 @@
-import React from "react";
-import { Badge, Button, Image, Layout } from "@components";
+import React, { useEffect } from "react";
+import { Badge, Button, Image, Layout, Loader } from "@components";
 import { JOB_TYPE } from "@utils";
 import { TimeSVG, UsersSVG } from "@assets/index";
 import { formatDistance } from "date-fns";
@@ -8,6 +8,8 @@ import SendProposalModal from "@components/app-components/Opportunity/SendPropos
 import ReferToFriend from "@components/app-components/Opportunity/ReferToFriend";
 import toast from "react-hot-toast";
 import { __getJobById } from "@api/jobs.api";
+import { useRouter } from "next/router";
+import ProposalViewModal from "@components/app-components/Opportunity/ProposalViewModal";
 
 const jobLocation = {
   remote: "Remote",
@@ -31,32 +33,103 @@ export async function getServerSideProps({
   };
 }
 
-const ApplicationItem = () => {};
+const ApplicationItem = ({
+  item,
+  setViewProposalModal,
+}: {
+  item: ApplicationProps;
+  setViewProposalModal: React.Dispatch<
+    React.SetStateAction<{
+      isOpen: boolean;
+      applicantId: string;
+      proposalText: string;
+      jobId?: string;
+    }>
+  >;
+}) => {
+  const router = useRouter();
+
+  return (
+    <div className="flex items-center gap-2 border-b pb-3">
+      <Image
+        src={item?.appliedBy?.avatar}
+        alt="profile"
+        className="w-8 h-8 rounded-full"
+      />
+      <div className="flex flex-col">
+        <p className="font-semibold text-sm">{item?.appliedBy?.name}</p>
+        <div className="flex gap-3">
+          <Button
+            onClick={() =>
+              setViewProposalModal({
+                isOpen: true,
+                applicantId: item?.appliedBy?._id as string,
+                proposalText: item?.whyGoodFit as string,
+              })
+            }
+            variant="tertiary"
+            cls="text-xs font-medium text-primary"
+          >
+            View Message
+          </Button>
+          <Button
+            onClick={() => router.push(`/${item?.appliedBy?.username}`)}
+            variant="tertiary"
+            cls="text-xs font-medium text-primary"
+          >
+            View Profile
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const JobDetail = ({ jobData }: { jobData: OpportunityProps }) => {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
   const [shareModal, setShareModal] = React.useState<boolean>(false);
 
+  const [viewProposalModal, setViewProposalModal] = React.useState({
+    isOpen: false,
+    applicantId: "",
+    proposalText: "",
+  });
+
+  const [applicantsLoading, setApplicantsLoading] =
+    React.useState<boolean>(false);
+
   const jobType = JOB_TYPE.find(
     (type) => type.value === jobData?.jobType.toString()
   );
 
-  const { isLoggedIn, user } = useAppBoundStore((state) => ({
-    isLoggedIn: state.isLoggedIn,
-    user: state.user,
-  }));
-
-  const isSalary = jobData?.salaryRange?.length > 0;
+  const { isLoggedIn, user, getJobApplicants, jobApplicants } =
+    useAppBoundStore((state) => ({
+      isLoggedIn: state.isLoggedIn,
+      user: state.user,
+      getJobApplicants: state.getJobApplicants,
+      jobApplicants: state.jobApplicants,
+    }));
 
   const hasAccessToApplicants = jobData?.accessIds?.includes(user?._id!);
   const isSameUser = jobData.company?._id === user?._id;
+
+  const shoudlShowApplicants = hasAccessToApplicants || isSameUser;
+
+  useEffect(() => {
+    if (jobData?._id && shoudlShowApplicants) {
+      setApplicantsLoading(true);
+      getJobApplicants(jobData?._id).then(() => setApplicantsLoading(false));
+    }
+  }, [jobData?._id, shoudlShowApplicants]);
+
+  const isSalary = jobData?.salaryRange?.length > 0;
 
   return (
     <Layout>
       <div className="flex h-screen border-r">
         <div
           className={`md:px-6 px-4 py-6  overflow-y-auto hide__scrollbar  ${
-            hasAccessToApplicants ? `lg:w-2/3 w-full border-r` : "w-full"
+            shoudlShowApplicants ? `lg:w-2/3 w-full border-r` : "w-full"
           }`}
         >
           <div className="flex justify-between">
@@ -145,7 +218,7 @@ const JobDetail = ({ jobData }: { jobData: OpportunityProps }) => {
             <Button
               variant="secondary"
               cls="h-10 px-4 font-medium text-sm w-28"
-              disabled={hasAccessToApplicants || isSameUser}
+              disabled={shoudlShowApplicants}
               onClick={() => {
                 if (!isLoggedIn) return toast.error("Please login to apply");
                 if (jobData.externalLink) {
@@ -166,9 +239,36 @@ const JobDetail = ({ jobData }: { jobData: OpportunityProps }) => {
           </div>
         </div>
 
-        {hasAccessToApplicants && (
+        {shoudlShowApplicants && (
           <div className="flex flex-col p-4 lg:w-1/3">
-            <p className="font-semibold text-lg">Applicants</p>
+            <p className="font-semibold text-lg mb-3">
+              Applicants{" "}
+              <span className="text-sm text-gray-600">
+                ({jobApplicants.length || 0})
+              </span>
+            </p>
+
+            {applicantsLoading && (
+              <div className="flex justify-center mt-20">
+                <Loader col="text-dark" />
+              </div>
+            )}
+
+            {!applicantsLoading && jobApplicants.length > 0
+              ? jobApplicants.map((item) => (
+                  <ApplicationItem
+                    key={item._id}
+                    item={item}
+                    setViewProposalModal={setViewProposalModal}
+                  />
+                ))
+              : !applicantsLoading && (
+                  <div className="flex justify-center mt-20">
+                    <p className="text-dark font-medium text-sm">
+                      No applicants for now
+                    </p>
+                  </div>
+                )}
           </div>
         )}
       </div>
@@ -188,6 +288,18 @@ const JobDetail = ({ jobData }: { jobData: OpportunityProps }) => {
           isOpen={shareModal}
           closeModal={() => setShareModal(false)}
           oppId={jobData?._id as string}
+        />
+      )}
+
+      {viewProposalModal.isOpen && (
+        <ProposalViewModal
+          isOpen={viewProposalModal.isOpen}
+          closeModal={() =>
+            setViewProposalModal((prev) => ({ ...prev, isOpen: false }))
+          }
+          proposalText={viewProposalModal.proposalText}
+          jobId={jobData._id as string}
+          applicantId={viewProposalModal.applicantId}
         />
       )}
     </Layout>

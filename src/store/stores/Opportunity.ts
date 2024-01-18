@@ -5,7 +5,7 @@ import {
   __createJob,
   __getJobs,
   __getJobById,
-  __fetchApplications,
+  __fetchApplicants,
   __accepetOrReject,
   __getMyPostedJobs,
   __deleteJob,
@@ -18,13 +18,14 @@ export interface IOpportunityStore {
   totalJobPages: number;
   myOpportunities: OpportunityProps[];
 
-  applicantsOfOpp: ApplicationProps[];
+  jobApplicants: ApplicationProps[];
   createJob: (data: OpportunityProps, router: any) => Promise<void>;
   getJobs: (type: number, page: number) => Promise<void>;
   applyForJob: (
     data: { jobId: string; whyGoodFit: string },
     closeModal: () => void
   ) => Promise<void>;
+  getJobApplicants: (id: string) => Promise<void>;
   getMyOpportunities: () => Promise<void>;
   deleteOpportunity: (id: string) => Promise<void>;
 
@@ -36,7 +37,7 @@ export const initialOpportunityState = {
   allJobs: [],
   totalJobPages: 0,
   myOpportunities: [],
-  applicantsOfOpp: [],
+  jobApplicants: [],
 };
 
 export const createOpportunitySlice: StateCreator<
@@ -95,6 +96,21 @@ export const createOpportunitySlice: StateCreator<
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
+    }
+  },
+
+  getJobApplicants: async (id) => {
+    try {
+      const res = await __fetchApplicants({
+        jobId: id,
+      });
+      if (res.success) {
+        set({
+          jobApplicants: res.data!,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   },
 

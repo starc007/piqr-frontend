@@ -60,13 +60,14 @@ export default function App({ Component, pageProps }: AppProps) {
         position="top-center"
         containerClassName="text-sm text-gray-700 font-medium font-poppins"
       />
-      {isPageLoading ? (
+      {/* {isPageLoading ? (
         <div className="flex justify-center mt-10">
           <Loader col="text-dark" />
         </div>
       ) : (
         <Component {...pageProps} />
-      )}
+      )} */}
+      <Component {...pageProps} />
       <Analytics />
     </main>
   );

@@ -238,10 +238,10 @@ export declare global {
 
   interface ApplicationProps {
     _id?: string;
-    appliedBy?: ProfileResponse | string;
-    proposal?: string;
-    status?: string;
-    appliedOn?: string;
+    appliedBy: ProfileResponse;
+    whyGoodFit: string;
+    status: "accept" | "reject" | "pending";
+    appliedOn: string;
   }
   interface OpportunityProps {
     _id?: string;

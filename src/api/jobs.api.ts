@@ -44,13 +44,13 @@ export const __applyForJob = (
 ): Promise<Types.FetchResponse<DefaultResponse>> =>
   postFetch("/job/apply", params, config);
 
-export const __fetchApplications = (
+export const __fetchApplicants = (
   params: {
-    opportunityId: string;
+    jobId: string;
   },
   config?: AxiosRequestConfig
 ): Promise<Types.FetchResponse<ApplicationProps[]>> =>
-  postFetch("/opp/get-applicants", params, config);
+  getFetch(`/job/${params.jobId}/applicants`, undefined, config);
 
 export const __accepetOrReject = (
   params: {
